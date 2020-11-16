@@ -77,3 +77,13 @@
 0:0:0:0:0:0:0:1 - - [16/Nov/2020:16:14:36 +0900] "GET /JABA/css/html5_reset.css HTTP/1.1" 200 3734
 0:0:0:0:0:0:0:1 - - [16/Nov/2020:16:14:36 +0900] "GET /JABA/css/header.css HTTP/1.1" 200 801
 0:0:0:0:0:0:0:1 - - [16/Nov/2020:16:14:36 +0900] "GET /JABA/images/jaba_logo.png HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:17:19:53 +0900] "GET /JABA/adminClient.jsp HTTP/1.1" 200 12310
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:17:19:53 +0900] "GET /JABA/css/html5_reset.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:17:19:53 +0900] "GET /JABA/css/header.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:17:19:54 +0900] "GET /JABA/images/jaba_logo.png HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:17:19:57 +0900] "GET /JABA/adminStore.jsp HTTP/1.1" 200 12528
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:17:20:04 +0900] "GET /JABA/adminQna.jsp HTTP/1.1" 200 12537
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:17:20:26 +0900] "GET /JABA/adminQna.jsp HTTP/1.1" 200 12521
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:17:21:51 +0900] "GET /JABA/adminQna.jsp HTTP/1.1" 200 11881
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:17:21:56 +0900] "GET /JABA/adminStore.jsp HTTP/1.1" 200 12528
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:17:21:58 +0900] "GET /JABA/adminClient.jsp HTTP/1.1" 200 12310

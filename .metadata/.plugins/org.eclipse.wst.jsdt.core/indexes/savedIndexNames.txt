@@ -1,6 +1,4 @@
 INDEX VERSION 1.4+/Users/yst/JABA/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
 347720647.index
-3504178804.index
-347720647.index
 3285601511.index
-2449724376.index
+347720647.index
