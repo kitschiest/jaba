@@ -1,0 +1,12 @@
+127.0.0.1 - - [16/Nov/2020:09:34:49 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:09:34:50 +0900] "GET /JABA/adminMain_ex.jsp HTTP/1.1" 200 12437
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:09:34:50 +0900] "GET /JABA/css/html5_reset.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:09:34:50 +0900] "GET /JABA/css/header.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:09:34:50 +0900] "GET /JABA/css/section.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:09:34:50 +0900] "GET /JABA/css/footer.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:09:34:50 +0900] "GET /JABA/images/jaba_logo.png HTTP/1.1" 200 17141
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:09:34:50 +0900] "GET /JABA/images/jaba_english_white.png HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:09:34:50 +0900] "GET /favicon.ico HTTP/1.1" 404 818
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:10:07:39 +0900] "GET /JABA/adminMain_ex.jsp HTTP/1.1" 200 12437
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:10:54:39 +0900] "GET /JABA/index.jsp HTTP/1.1" 200 15319
+0:0:0:0:0:0:0:1 - - [16/Nov/2020:11:19:12 +0900] "GET /JABA/index.jsp HTTP/1.1" 200 15319

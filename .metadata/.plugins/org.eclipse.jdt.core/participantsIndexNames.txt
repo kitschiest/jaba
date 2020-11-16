@@ -1,0 +1,3 @@
+INDEX VERSION 1.131
+/Users/yst/JABA/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/347720647.index
+/JABA/src
