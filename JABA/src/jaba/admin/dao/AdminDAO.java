@@ -1,5 +1,7 @@
 package jaba.admin.dao;
 
+import static jaba.common.jdbcdriver.JDBCTemplate.close;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,6 +52,26 @@ public class AdminDAO {
 		return vo;
 	}
 
+	// admin_id 와도 중복되면 안되기 때문에 중복체크
+	public int selectIdCheck(Connection conn, String user_id) {
+		String sql = "select * from admin where admin_id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return 1;	// 1이면 중복된 아이디
+			}else {
+				return 2;	// 2이면 사용가능한 아이디
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return 0;
+	}
 	
 	
 

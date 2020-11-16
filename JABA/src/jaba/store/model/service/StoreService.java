@@ -6,6 +6,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import jaba.client.dao.ClientDAO;
 import jaba.store.dao.StoreDAO;
 import jaba.store.vo.StoreVO;
 
@@ -50,4 +51,18 @@ public class StoreService {
 		return vo;
 	}
 
+	// 아이디만 중복체크 store와 확인 (회원가입 할때 사용)
+	public int selectIdCheck(String user_id) {
+		int result = 0;
+		try {
+			Connection conn = getConnection();
+			StoreDAO dao = new StoreDAO();
+			result = dao.selectIdCheck(conn, user_id);
+			close(conn);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 3;	// 오류발생
+		}
+		return result;
+	}
 }

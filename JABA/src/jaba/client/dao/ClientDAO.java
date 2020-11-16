@@ -5,11 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
-
 import jaba.client.vo.ClientVO;
+import static jaba.common.jdbcdriver.JDBCTemplate.*;
 
 public class ClientDAO {
 	PreparedStatement pstmt = null;
@@ -37,19 +34,31 @@ public class ClientDAO {
 			e.printStackTrace();
 			System.out.println("sql 오류");
 		}finally{
-			try {
-				if(rs!=null) {
-					rs.close();
-				}
-				if(pstmt!=null) {
-					pstmt.close();
-				}
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}
+			close(rs);
+			close(pstmt);
 		}
 		return vo;
 	}
 	
+	
+	public int selectIdCheck(Connection conn, String user_id) {
+		String sql = "select * from client where user_id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return 1;	// 1이면 중복된 아이디
+			}else {
+				return 2;	// 2이면 사용가능한 아이디
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return 0;
+	}
 
 }

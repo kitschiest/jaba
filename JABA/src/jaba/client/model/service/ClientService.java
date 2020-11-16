@@ -2,10 +2,6 @@ package jaba.client.model.service;
 
 import java.sql.Connection;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
-
 import jaba.client.dao.ClientDAO;
 import jaba.client.vo.ClientVO;
 
@@ -17,7 +13,8 @@ public class ClientService {
 	public ClientService() {
 
 	}
-
+	
+	// client 로그인 메소드
 	public int selectLogin(String user_id, String user_pw) {
 		try {
 			Connection conn = getConnection();
@@ -36,5 +33,22 @@ public class ClientService {
 			return 3;
 		}
 	}
+	
+	// 아이디만 중복체크 (회원가입 할때 사용)
+	public int selectIdCheck(String user_id) {
+		int result = 0;
+		try {
+			Connection conn = getConnection();
+			ClientDAO dao = new ClientDAO();
+			result = dao.selectIdCheck(conn, user_id);
+			close(conn);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 3;	// 오류발생
+		}
+		return result;
+	}
+	
+	
 
 }
