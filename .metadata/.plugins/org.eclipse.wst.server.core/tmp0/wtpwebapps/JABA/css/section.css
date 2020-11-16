@@ -81,10 +81,14 @@ section#home .container h1 {
 	padding-bottom: 30px;
 	height: 200px;
 	background-color: white;
+	
 }
-
+#brands .container{
+	margin: 0 auto;
+}
 div .brands {
 	display: inline-block;
+	
 }
 
 #cities {

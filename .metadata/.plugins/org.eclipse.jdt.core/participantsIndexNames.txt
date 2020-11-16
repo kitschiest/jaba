@@ -1,3 +1,9 @@
 INDEX VERSION 1.131
+/Users/yst/JABA/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2036026812.index
+/Board_test/src
+/Users/yst/JABA/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2151528520.index
+/Board_test/src
+/Users/yst/JABA/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/117809038.index
+/Board_test/src
 /Users/yst/JABA/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/347720647.index
 /JABA/src

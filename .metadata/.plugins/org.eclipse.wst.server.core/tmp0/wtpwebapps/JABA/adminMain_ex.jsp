@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JABA</title>
+<title>JABA admin</title>
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,maximum-scale=1,minimal-ui" />
 <!-- <link rel="stylesheet" type="text/css" href="mainStyle.css" /> -->
@@ -336,9 +336,9 @@ main {
 			<div class="menu_bg">
 				<div class="menu_bar">
 					<div style="width: 96%; text-align: right" onclick="HideMenu()">&times;</div>
-					<div class="menu_bar_list">Client</div>
-					<div class="menu_bar_list">Biz. Partner</div>
-					<div class="menu_bar_list">Board</div>
+					<div class="menu_bar_list"><a href="./adminClient.jsp">Client</a></div>
+					<div class="menu_bar_list"><a href="./adminStore.jsp">Biz. Partner</a></div>
+					<div class="menu_bar_list"><a href="./adminQna.jsp">Q&A</a></div>
 				</div>
 			</div>
 
@@ -456,13 +456,14 @@ main {
 			<div class="main_title">
 				<h2>업데이트 요소</h2>
 			</div>
+			
 			<label for="tab1">
 			<input type="radio" value="CLIENT" name="tab" id="tab1"
 				checked="checked" /> <span>CLIENT</span></label>
 			<label for="tab2">
 			<input type="radio" value="STORE" name="tab" id="tab2" /> <span>STORE</span></label> 
 			<label for="tab3">
-			<input type="radio" value="BOARD" name="tab" id="tab3" /> <span>BOARD</span></label>
+			<input type="radio" value="QNA" name="tab" id="tab3" /> <span>Q&A</span></label>
 	
 
 			<div class="resultArea">

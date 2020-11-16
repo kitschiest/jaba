@@ -25,4 +25,10 @@
     <!--
     <Manager pathname="" />
     -->
+<Resource driverClassName="oracle.jdbc.OracleDriver"
+		auth="Container" 
+		name="jdbc/myoracle"
+		password="jaba" type="javax.sql.DataSource"  
+		url="jdbc:oracle:thin:@localhost:1521:xe" username="jaba" />
+
 </Context>

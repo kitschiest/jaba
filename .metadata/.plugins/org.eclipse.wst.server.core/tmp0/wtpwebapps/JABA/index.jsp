@@ -209,6 +209,7 @@ main {
 		data-target="#registerModal">
 				<span>SIGN UP</span>
 				</button>
+				<button id="logoutBtn">로그아웃</button>
 			</div>
 		</div>
 
@@ -256,10 +257,10 @@ main {
 
 					<div class="text-box">
 						<br> <span style="font-weight: bold;">
-							<p>Password
+							Password
 						</span> <span style="float: right"> <a href="#"
 							style="font-weight: normal;">Forgot&nbsp;password?</a>
-							</p>
+							
 
 						</span> <input type="text" class="signin-input" id="pwd" name="pwd">
 					</div>
@@ -328,7 +329,8 @@ main {
 							<br>
 							<div class="text-box" style="font-weight: bold; font-size: 13px;">
 								<p>Email address</p>
-								<input type="text" class="signin-input" id="email" name="email">
+								<input type="text" class="signin-input" id="emailRegister" name="emailRegister">
+								<span id="emailCheckResult"></span>
 							</div>
 
 							<div class="text-box">
@@ -336,8 +338,8 @@ main {
 								<div class="text-box"
 									style="font-weight: bold; font-size: 13px;">
 									<p>Password</p>
-									<input type="text" class="signin-input" id="password"
-										name="password"> <br>
+									<input type="text" class="signin-input" id="passwordRegister"
+										name="password"> <span id="passwordRegisterResult"></span><br>
 									<p
 										style="font-size: 11px; font-weight: normal; padding-top: 3px">Password
 										must be at least 8 characters</p>
@@ -348,8 +350,8 @@ main {
 							<!-- modal-footer -->
 							<div class="modal-footer">
 								<br>
-								<button type="button" class="btnChk" id="signin"
-									name="signin">Sign in</button>
+								<button type="button" class="btnChk" id="signup"
+									name="signup">Sign up</button>
 							</div>
 						</div>
 					</div>
@@ -573,8 +575,72 @@ main {
 	</div>
 	
 	</footer>
+	
+	<!--  로그인 스크립트 ajax 통신  -->
+	<script>
+	$("#signin").on("click",function(){
+		$.ajax({
+			url:"client/clientLogin.do",
+			data: { email: $("#email").val(),
+					pwd: $("#pwd").val()},
+			success: function(res1){
+				console.log(res1);
+				var biz = "BizPartner";
+				var admin = "Admin";
+				// res1 이 BizPartner 이면 BizPartner 페이지로 이동.
+				if(res1 == biz){
+					location.href="./BizMain.jsp";
+				}
+				if(res1 == admin){
+					location.href="./adminMain_ex.jsp";
+				}
+			}
+		});
+	});
+	
+	$("#logoutBtn").on("click",function(){
+		$.ajax({
+			url:"client/clientLogout.do",
+			data:	{},
+			success: function(){}
+		});
+	});
+	
+	$("#signup").on("click",function(){
+		// email 중복체크
+		$.ajax({
+			url:"client/clientCheckId.do",
+			data:{ emailRegister: $("#emailRegister").val()},
+			success: function(res1){
+				console.log(res1);
+				alert(res1);
+			}
+		});
+	});
+	$("#passwordRegister").change(function(){
+		var pw = $("#passwordRegister").val();
+		 var num = pw.search(/[0-9]/g);
+		 var eng = pw.search(/[a-z]/ig);
+		 var spe = pw.search(/[`~!@@#$%^&*]/gi);
 
-
+		 if(pw.length < 8 || pw.length > 20){
+		  alert("8자리 ~ 20자리 이내로 입력해주세요.");
+		  $("#passwordRegister").val("");
+		  return false;
+		 }else if(pw.search(/\s/) != -1){
+		  alert("비밀번호는 공백 없이 입력해주세요.");
+		  $("#passwordRegister").val("");
+		  return false;
+		 }else if(num < 0 || eng < 0 || spe < 0 ){
+		  alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+		  $("#passwordRegister").val("");
+		  return false;
+		 }else {
+			console.log("통과"); 
+		    return true;
+		 }
+	})
+	</script>
 
 </body>
 </html>
