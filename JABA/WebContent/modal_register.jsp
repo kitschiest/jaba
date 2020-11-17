@@ -6,6 +6,7 @@
 <title>Bootstrap Example</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- MODAL -->
 <link
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
    rel="stylesheet">
@@ -17,6 +18,8 @@
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- RESET -->
+<link href="./css/html5_reset.css" rel="stylesheet">
 
 <style type="text/css">
 
@@ -32,6 +35,11 @@ div {
 input {
    
 }
+
+p {
+    margin: 0 0 10px;
+}	
+
 .signup-input {
    width: 100%;
    height: 40px;
@@ -78,6 +86,7 @@ input {
    padding: 32px;
    display: flex;
    width: 100%;
+   height: 213px;
    flex-direction: column;
    justify-content: center;
    align-items: center;
@@ -159,10 +168,10 @@ input {
                      <path d="m30.666667 14.666667h-8"></path></g></svg>
                </div>
                <div class="header-title"
-                  style="font-weight: bold; font-size: 20px;">
+                  style="font-weight: bold; font-size: 20px; margin-bottom: 10px;">
                   <p>Sign up to JABA</p>
                </div>
-               <div class="header-subtitle">
+               <div class="header-subtitle" style="font-size: 14px;">
                   <p>
                      Already have an account?&nbsp;<a href="#" class="register">Sign
                         in here</a>
@@ -209,7 +218,7 @@ input {
                      <div class="modal-footer">
                         <br>
                         <button type="button" class="btnChk" id="signup"
-                           name="signup">Sign up</button>
+                           name="signup" style="font-size: 15px;">Sign up</button>
                      </div>
                   </div>
                </div>

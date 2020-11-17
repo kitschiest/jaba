@@ -20,43 +20,50 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- RESET -->
 <link href="./css/html5_reset.css" rel="stylesheet">
+<!-- 라디오버튼 CSS -->	
+<link href="icheck-material.css" rel="stylesheet" type="text/css">
+
 <style type="text/css">
 
 /* CSS 기본 세팅 */
 body {
 	font-family: 'Inter', 'Noto Sans KR', sans-serif;
-	
 }
 
 div {
 	display: block;
 }
 
-/* input 세팅 */
-.signin-input {
+p {
+    margin: 0 0 10px;
+}	
+ddsdsf
+
+/* input박스 전체 세팅 */
+input {
+	
+}
+
+.signin-input { /*Near 체크박스 */
    width: 100%;
    height: 40px;
    border-radius: 6px;
    font-weight: normal;
    border: 1px solid rgba(20, 23, 26, .2);
+   padding-left: 15px;
+	
 }
 
 /* 모달 전체 세팅 */
 .modal-dialog.modal-size {
-	width: 555px;
+	width: 444px;
 	height: auto;
 	margin: 0;
 	padding: 0;
 }
 
-
-.modal-content{
-	background-color: #f2f3f5;
-}
-
-
 .modal-content.modal-size {
-	height: 500px;
+	height: auto;
 	min-height: 100%;
 	border-radius: 16px;
 }
@@ -76,21 +83,27 @@ div {
 
 .modal-dialog.modal-size {
 	display: inline-block;
-	text-align: center;
+	text-align: left;
 	vertical-align: middle;
 }
 
 /* 모달 header 세팅 */
 .modal-header {
-	padding: 20px;
+	padding: 32px;
 	display: flex;
 	width: 100%;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border-bottom: 0;
+	border-bottom: 1px solid rgba(20, 23, 26, .08);
 	text-align: center;
-	
+}
+
+.header-icon {
+   display: inline-flex;
+   width: 100%;
+   padding: 15px 15px;
+   border-radius: 16px;
 }
 
 .close {
@@ -107,26 +120,11 @@ div {
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 	border-bottom: 0;
-	background-color: #f2f3f5;
+	font-size: 14px;
 }
 
-textarea {
-   width: 100%;
-   border-radius: 6px;
-   font-weight: normal;
-   border: 1px solid rgba(20, 23, 26, .2);
-}
-
-.text-box{
-	display: grid;
-	grid-template-columns: 1fr 3fr;
-}
-
-
-.text-content{
-	display: grid;
-	grid-template-columns: 4fr;
-	height: fit-content;
+.text-box {
+	border-bottom: 1px solid rgba(20, 23, 26, .08);
 }
 
 #main_form {
@@ -134,8 +132,9 @@ textarea {
 	height: 150px;
 	background: #f2f3f5;
 	border-radius: 12px;
-	padding: 40px 24px 16px 36px;
+	padding: 30px 24px 16px 36px;
 	margin-top: 20px;
+	font-size: 14px;
 }
 
 #main_form .asap {
@@ -152,32 +151,41 @@ textarea {
 	position: relative;
 }
 /* 모달 footer 세팅 */
-.board-modal-footer {
+.modal-footer {
 	/*  flex: 0 0 auto;
    display: flex;
    padding: 16px 32px 32px 32px;
    align-items: center;
    justify-content: center; */
-	flex-direction: row;
-	justify-content: flex-end;
+   flex-direction: row;
+   justify-content: flex-end;
+   
 	margin: 20px;
 	margin-bottom: -20px;
-	border-top: 0;
-	
+	border-top: 1px solid rgba(20, 23, 26, .08);
+	*/
 }
 
-.menu_btn{
-	display: inline-block;
-    justify-content: flex-end;
-    background-color: #36727C;
+.btnChk {
+	width: 100%;
+	height: 50px;
+	background-color: #36727C;
 	color: white;
 	border-radius: 12px;
 	border: 0;
-	padding: 10px 20px 10px 20px;
-	font-weight: normal;
-	text-align: center;
+	font-size: 1.5rem;
 }
 
+#btnChk_footer {
+	justify-content: flex-end;
+	width: 100px;
+	height: 40px;
+	background-color: #36727C;
+	color: white;
+	border-radius: 12px;
+	border: 0;
+	font-size: 15px;
+}
 </style>
 <script>
 	function setDisplay() {
@@ -207,55 +215,63 @@ textarea {
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
+
+					<div class="header-icon">
+						<button type="button" class="btnChk" id="btn_pickup" name="btn_pickup" style="font-size: 15px;">Pick
+							Up</button>
+					</div>
 				</div>
 
 				<!-- modal-body -->
 				<div class="modal-body">
-				<div class="text-box">
-					<div class="board-no">
-						<input type="text" class="signin-input" id="txt_no" name="txt_no"
-							 style="margin-right: 50px; width:75px; text-align: center;"placeholder="글번호">
-					</div>
-					<div class="board-title">
-						<input type="text" class="signin-input" id="txt_title" name="txt_title" 
-						 style="margin-bottom: 10px; margin-left: -18px; width:385px; padding-left: 10px;" placeholder="놓고가신 우산">
-					</div>
-				</div>
-					<div class="text-box">
-						<div></div>
-						<div class="board-writer">
-						<input type="text" class="signin-input" id="txt_main" name="txt_main"
-							 style="margin-bottom: 20px; width:385px; padding-left: 10px;" placeholder="김조이사장"><br>
-						</div>
-					</div>
-     
+				
+				
+				<div class="text-box" style="font-weight: bold;">
+                  <p>Near</p>
+                  <input type="text" class="signin-input" id="near" name="near" placeholder="Melbourne" ><br><br>
+               </div>
+				
+					<form id="main_form" action="#" method="get">
+						<table>
+							<tr>
+								<td>
+									<div class="asap icheck-material-teal">
+										<input type="radio" id="asap" name="teal" value="agree"
+											checked="checked" onchange="setDisplay()">
+										<label for="asap" style="font-weight: normal;">&nbsp;&nbsp;ASAP</label>
+									</div>
+									<div class="later icheck-material-teal">
+										<input type="radio" id="later" name="teal" value="denial"
+											onchange="setDisplay()" style="font-weight: 15px;">
+										<label for="later" style="font-weight: normal;">&nbsp;&nbsp;LATER</label>
+									</div>
+								</td>
+							</tr>
 
-					<div class="text-content">
-					
-  					<textarea cols="50" rows="10" style="resize: none; padding: 10px;" placeholder="자바는 자바칩을 올려서 챱챱챱챱챱챱챱 챱챱챱챱챠라챱챱챱chopchopchop챱챱챱챱챱챱"></textarea>
-					
-					</div>
-				</div>
+
+							<tr id="later_time">
+								<td><select name="pickup_time"
+									style="width: 177px; height: 21px;">
+										<option value="">Select Pick Up Time</option>
+										<option value="30">10:00</option>
+										<option value="31">10:30</option>
+										<option value="31">11:30</option>
+										<option value="31">11:30</option>
+										<option value="31">12:00</option>
+										<option value="31">12:30</option>
+								</select></td>
+							</tr>
+
+						</table>
+					</form>
+
 
 					<!-- modal-footer -->
-					<div class="board-modal-footer">
-						<div class="menu">
-							<button class="menu_btn" value="LOG IN" type="button"
-								class="btn btn-primary" data-toggle="modal"
-								data-target="#LoginModal" style="margin: 5px;">
-								<span>수정</span>
-							</button>
-
-							<button class="menu_btn" value="SIGN UP" class="btn btn-primary"
-								data-toggle="modal" data-target="#registerModal" style="margin: 5px;">
-								<span>확인</span>
-							</button>
-
-							<button class="menu_btn" value="SIGN UP" class="btn btn-primary"
-								data-toggle="modal" data-target="#registerModal" style="margin: 5px;">
-								<span>취소</span>
-							</button>
-						</div>
+					<div class="modal-footer">
+						<button type="button" class="btnChk" id="btnChk_footer"
+							name="btnChk_cancel">Cancel</button>
+						<button type="button" class="btnChk" id="btnChk_footer"
+							name="btnChk_confirm">Confirm</button>
 					</div>
 				</div>
 			</div>

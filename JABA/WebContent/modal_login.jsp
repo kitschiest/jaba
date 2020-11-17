@@ -6,6 +6,7 @@
 <title>Bootstrap Example</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- MODAL -->
 <link
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
    rel="stylesheet">
@@ -17,6 +18,8 @@
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- RESET -->
+<link href="./css/html5_reset.css" rel="stylesheet">
 
 <style type="text/css">
 
@@ -28,6 +31,11 @@ body {
 div {
    display: block;
 }
+
+p {
+    margin: 0 0 10px;
+}	
+
 
 /* input박스 세팅 */
 .signin-input {
@@ -76,6 +84,7 @@ div {
    padding: 32px;
    display: flex;
    width: 100%;
+   height: 219px;
    flex-direction: column;
    justify-content: center;
    align-items: center;
@@ -90,6 +99,11 @@ div {
    margin-bottom: 16px;
 }
 
+
+.header-subtitle {
+	font-size: 14px;
+}
+
 .close {
    color: rgba(0, 0, 0, 0.54);
    position: absolute !important;
@@ -100,6 +114,7 @@ div {
 /* 모달 body 세팅 */
 .modal-body {
    flex: 1 1 auto;
+   height: 208px;
    padding: 32px 32px 16px 32px;
    overflow-y: auto;
    -webkit-overflow-scrolling: touch;
@@ -125,6 +140,11 @@ div {
    font-weight: bold;
    font-size: 1.5rem;
 }
+
+#signin {
+	font-size: 15px;
+}
+
 </style>
 </head>
 <body>
@@ -157,7 +177,7 @@ div {
                   style="font-weight: bold; font-size: 24px;">
                   <p>Sign in to JABA</p>
                </div>
-               <div class="header-subtitle">
+               <div class="header-subtitle" style="margin-top: 5px;">
                   <p>
                      Don't have an account?&nbsp;<a href="#" class="register">Sign
                         up now</a>
@@ -167,19 +187,17 @@ div {
 
             <!-- modal-body -->
             <div class="modal-body">
-               <div class="text-box" style="font-weight: bold;">
+               <div class="text-box" style="font-weight: bold; font-size: 14px;">
                   <p>Email address</p>
-                  <input type="text" class="signin-input" id="email_login" name="email_login">
+                  <input type="text" class="signin-input" id="email_login" name="email_login" style="margin-bottom: 10px; padding-left: 10px;">
                </div>
 
-               <div class="text-box">
-                  <br> <span style="font-weight: bold;">
-                     <p>Password
-                  </span> <span style="float: right"> <a href="#"
-                     style="font-weight: normal;">Forgot&nbsp;password?</a>
-                     </p>
-
-                  </span> <input type="text" class="signin-input" id="pwd_login" name="pwd_login">
+               <div class="text-box" style="font-weight: bold; font-size: 14px;">
+                  <br> 
+                     <p style="float: left">Password </p>
+                  <span style="float: right"> <a href="#"
+                     style="font-weight: normal; font-size: 14px; text-decoration: none;">Forgot&nbsp;password?</a></span> 
+                  <input type="text" class="signin-input" id="pwd_login" name="pwd_login" style="padding-left: 10px;">
                </div>
             </div>
 

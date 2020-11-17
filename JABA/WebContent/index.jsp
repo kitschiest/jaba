@@ -209,7 +209,6 @@ main {
 		data-target="#registerModal">
 				<span>SIGN UP</span>
 				</button>
-				<button id="logoutBtn">로그아웃</button>
 			</div>
 		</div>
 
@@ -252,17 +251,17 @@ main {
 				<div class="modal-body">
 					<div class="text-box" style="font-weight: bold;">
 						<p>Email address</p>
-						<input type="text" class="signin-input" id="email" name="email">
+						<input type="text" class="signin-input" id="email_login" name="email_login">
 					</div>
 
 					<div class="text-box">
 						<br> <span style="font-weight: bold;">
-							Password
+							<p>Password
 						</span> <span style="float: right"> <a href="#"
 							style="font-weight: normal;">Forgot&nbsp;password?</a>
-							
+							</p>
 
-						</span> <input type="text" class="signin-input" id="pwd" name="pwd">
+						</span> <input type="text" class="signin-input" id="pwd_login" name="pwd_login">
 					</div>
 				</div>
 
@@ -315,22 +314,21 @@ main {
 				<div class="modal-body">
 					<div class="text-box" style="font-weight: bold; font-size: 13px;">
 						<p>Name</p>
-						<input type="text" class="signin-input" id="name" name="name">
+						<input type="text" class="signup-input" id="nameRegister" name="nameRegister">
 					</div>
 
 					<div class="text-box">
 						<br>
 						<div class="text-box" style="font-weight: bold; font-size: 13px;">
 							<p>Mobile number</p>
-							<input type="text" class="signin-input" id="mobile" name="mobile">
+							<input type="text" class="signup-input" id="mobileRegister" name="mobileRegister">
 						</div>
 
 						<div class="text-box">
 							<br>
 							<div class="text-box" style="font-weight: bold; font-size: 13px;">
 								<p>Email address</p>
-								<input type="text" class="signin-input" id="emailRegister" name="emailRegister">
-								<span id="emailCheckResult"></span>
+								<input type="text" class="signup-input" id="emailRegister" name="emailRegister">
 							</div>
 
 							<div class="text-box">
@@ -338,8 +336,8 @@ main {
 								<div class="text-box"
 									style="font-weight: bold; font-size: 13px;">
 									<p>Password</p>
-									<input type="text" class="signin-input" id="passwordRegister"
-										name="passwordRegister"> <span id="passwordRegisterResult"></span><br>
+									<input type="text" class="signup-input" id="passwordRegister"
+										name="passwordRegister"> <br>
 									<p
 										style="font-size: 11px; font-weight: normal; padding-top: 3px">Password
 										must be at least 8 characters</p>
@@ -575,92 +573,8 @@ main {
 	</div>
 	
 	</footer>
-	
-	<!--  로그인 스크립트 ajax 통신  -->
-	<script>
-	$("#signin").on("click",function(){
-		$.ajax({
-			url:"client/clientLogin.do",
-			data: { email: $("#email").val(),
-					pwd: $("#pwd").val()},
-			success: function(res1){
-				console.log(res1);
-				var biz = "BizPartner";
-				var admin = "Admin";
-				// res1 이 BizPartner 이면 BizPartner 페이지로 이동.
-				if(res1 == biz){
-					location.href="./BizMain.jsp";
-				}
-				if(res1 == admin){
-					location.href="./adminMain.jsp";
-				}
-			}
-		});
-	});
-	
-	$("#logoutBtn").on("click",function(){
-		$.ajax({
-			url:"client/clientLogout.do",
-			data:	{},
-			success: function(){}
-		});
-	});
-	
-	$("#signup").on("click",function(){
-		// email 중복체크 alter 에서 나중에 그냥 텍스트로 뜨는걸로 바꿔야함 
-		$.ajax({
-			url:"client/clientCheckId.do",
-			data:{ emailRegister: $("#emailRegister").val()},
-			success: function(res1){
-				console.log(res1);
-				if(res1 == 'no'){
-					console.log("아이디 중복");
-					return;
-				}
-				// alert(res1); 이메일 체크 확인하려고 넣었던 코드 
-			}
-		});
-		// 각종 유효성 체크 추가해야함 
-		// 
-		$.ajax({
-			url:"client/clientRegister.do",
-			data:{ user_name: $("#name").val(),
-					user_phone: $("#mobile").val(),
-					user_id: $("#emailRegister").val(),
-					user_pw: $("#passwordRegister").val()},
-			success: function(res){	// 회원가입 완료, 혹은 못했을때 작업 
-				console.log(res);	// 서블릿에서 가져온 메세지분석
-				var succ = "registerOk";
-				var fail = "registerFail";
-			}
-		});
-		
-	});
-	
-	$("#passwordRegister").change(function(){
-		var pw = $("#passwordRegister").val();
-		 var num = pw.search(/[0-9]/g);
-		 var eng = pw.search(/[a-z]/ig);
-		 var spe = pw.search(/[`~!@@#$%^&*]/gi);
 
-		 if(pw.length < 8 || pw.length > 20){
-		  alert("8자리 ~ 20자리 이내로 입력해주세요.");
-		  $("#passwordRegister").val("");
-		  return false;
-		 }else if(pw.search(/\s/) != -1){
-		  alert("비밀번호는 공백 없이 입력해주세요.");
-		  $("#passwordRegister").val("");
-		  return false;
-		 }else if(num < 0 || eng < 0 || spe < 0 ){
-		  alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
-		  $("#passwordRegister").val("");
-		  return false;
-		 }else {
-			console.log("통과"); 
-		    return true;
-		 }
-	})
-	</script>
+
 
 </body>
 </html>
