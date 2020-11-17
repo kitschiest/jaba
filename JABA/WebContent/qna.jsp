@@ -31,16 +31,29 @@
 			$(".hidden_term_close").click(function() {
 				$("#hidden_term").attr("style", "visibility:hidden")
 			})
-			
 
 		})
 	});
 </script>
 
 <!-- Q&A JS -->
-<script type="text/javascript">
-
+<script>
+    // html dom 이 다 로딩된 후 실행된다.
+    $(document).ready(function(){
+        // faq-item class를 클릭했을때
+        $(".faq-item").click(function(){
+            var a = $(this).find("div.answer");
+ 
+            // answer 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+            if( a.is(":visible") ){
+                a.slideUp();
+            }else{
+                a.slideDown();
+            }
+        });
+    });
 </script>
+
 <style>
 body {
 	margin: 0;
