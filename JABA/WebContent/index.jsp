@@ -339,7 +339,7 @@ main {
 									style="font-weight: bold; font-size: 13px;">
 									<p>Password</p>
 									<input type="text" class="signin-input" id="passwordRegister"
-										name="password"> <span id="passwordRegisterResult"></span><br>
+										name="passwordRegister"> <span id="passwordRegisterResult"></span><br>
 									<p
 										style="font-size: 11px; font-weight: normal; padding-top: 3px">Password
 										must be at least 8 characters</p>
@@ -592,7 +592,7 @@ main {
 					location.href="./BizMain.jsp";
 				}
 				if(res1 == admin){
-					location.href="./adminMain_ex.jsp";
+					location.href="./adminMain.jsp";
 				}
 			}
 		});
@@ -607,16 +607,36 @@ main {
 	});
 	
 	$("#signup").on("click",function(){
-		// email 중복체크
+		// email 중복체크 alter 에서 나중에 그냥 텍스트로 뜨는걸로 바꿔야함 
 		$.ajax({
 			url:"client/clientCheckId.do",
 			data:{ emailRegister: $("#emailRegister").val()},
 			success: function(res1){
 				console.log(res1);
-				alert(res1);
+				if(res1 == 'no'){
+					console.log("아이디 중복");
+					return;
+				}
+				// alert(res1); 이메일 체크 확인하려고 넣었던 코드 
 			}
 		});
+		// 각종 유효성 체크 추가해야함 
+		// 
+		$.ajax({
+			url:"client/clientRegister.do",
+			data:{ user_name: $("#name").val(),
+					user_phone: $("#mobile").val(),
+					user_id: $("#emailRegister").val(),
+					user_pw: $("#passwordRegister").val()},
+			success: function(res){	// 회원가입 완료, 혹은 못했을때 작업 
+				console.log(res);	// 서블릿에서 가져온 메세지분석
+				var succ = "registerOk";
+				var fail = "registerFail";
+			}
+		});
+		
 	});
+	
 	$("#passwordRegister").change(function(){
 		var pw = $("#passwordRegister").val();
 		 var num = pw.search(/[0-9]/g);
