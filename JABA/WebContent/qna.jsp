@@ -161,35 +161,33 @@ a {
 
 <!-- SECTION 3 -->
 <style>
-#qna {
-	width: 100%;
-}
-
-#qna .container {
-	width: 80%;
-	margin: 0 auto;
-	padding-top: 15px;
-}
 
 #faq {
-	padding: 10px 0 120px
+	padding: 10px 0 120px;
+	background: lightblue;
 }
 
 #faq .content {
-	border-top: 1px solid #262626;
-	border-bottom: 1px solid #262626;
-	padding: 0
+	color: #89BDBB;
+	border-top: 1px solid #89BDBB;
+	border-bottom: 1px solid #89BDBB;
+	padding: 0;
+	width: 700px;
 }
 
 #faq .faq-item .question, #faq .faq-item .answer {
-	padding: 15px
+	padding: 15px;
 }
+#faq .faq-item .answer p{
+ 	color: white;
+ }
 
 #faq .faq-item .question {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	cursor: pointer
+	cursor: pointer;
+	font-weight: bold;
 }
 
 #faq .faq-item .question .desc {
@@ -215,7 +213,7 @@ a {
 
 #faq .faq-item .answer {
 	display: none;
-	border-top: 1px solid #d6d6d6
+	border-top: 1px solid #89BDBB
 }
 
 #faq .faq-item.active {
