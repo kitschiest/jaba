@@ -18,7 +18,6 @@
 $(function(){
    $(window).scroll(function(){
    var navbar = $(this).scrollTop();
-   console.log(navbar);
    var $header = $('header');
    if(navbar > 0){
        $header.addClass('activated');
@@ -373,6 +372,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
+var center = map.getCenter();
 
 // 주소로 좌표를 검색합니다
 geocoder.addressSearch('<%= city%>', function(result, status) {
@@ -396,8 +396,51 @@ geocoder.addressSearch('<%= city%>', function(result, status) {
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
+        
+        center = map.getCenter();
+        console.log("검색 위치의 위도: " + center.getLat() + ", 검색 위치의 경도: " + center.getLng());
     } 
 });    
+
+if (navigator.geolocation) {
+    
+    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+    navigator.geolocation.getCurrentPosition(function(position) {
+        lat1 = center.getLat(),
+        lon1 = center.getLng(),
+        lat2 = position.coords.latitude, // 위도
+        lon2 = position.coords.longitude; // 경도
+       
+           console.log("현재 위치의 위도: "+lat2+", 경도: "+lon2);
+           console.log(lat1+", "+lon1+", " + lat2 + ", " +lon2);
+           function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
+        	   function deg2rad(deg) {
+        		   return deg * (Math.PI/180) ;
+        	}; 
+				   var R = 6371; // Radius of the earth in km 
+        		   var dLat = deg2rad(lat2-lat1); // deg2rad below 
+        		   var dLon = deg2rad(lng2-lng1); 
+        		   var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2); 
+        		   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        		   console.log(c);
+        		   var d = R * c; // Distance in km 
+        		   console.log(d);
+        		   return d;
+           }
+           console.log(getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2));
+           
+           
+      });
+    
+} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+    
+    var locPosition = new kakao.maps.LatLng(0, 0),    
+        message = 'geolocation을 사용할수 없어요..'
+        
+    displayMarker(locPosition, message);
+}
+
+	
 </script>
 
 

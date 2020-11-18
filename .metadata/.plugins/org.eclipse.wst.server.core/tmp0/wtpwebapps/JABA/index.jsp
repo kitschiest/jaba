@@ -30,7 +30,7 @@
 $(function(){
    $(window).scroll(function(){
    var navbar = $(this).scrollTop();
-   console.log(navbar);
+  
    var $header = $('header');
    if(navbar > 0){
        $header.addClass('activated');
@@ -500,7 +500,7 @@ if (navigator.geolocation) {
     
 } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
     
-    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+    var locPosition = new kakao.maps.LatLng(0, 0),    
         message = 'geolocation을 사용할수 없어요..'
         
     displayMarker(locPosition, message);
@@ -529,6 +529,10 @@ function displayMarker(locPosition, message) {
     
     // 지도 중심좌표를 접속위치로 변경합니다
     map.setCenter(locPosition);      
+    
+    // 지도 정보 콘솔창에 띄워보자
+    var center = map.getCenter();
+    console.log("현재 위치의 위도: " + center.getLat() + ", 현재 위치의 경도: " + center.getLng());
 }    
 </script>
 
