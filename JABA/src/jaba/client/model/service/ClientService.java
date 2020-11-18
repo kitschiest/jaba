@@ -49,6 +49,22 @@ public class ClientService {
 		return result;
 	}
 	
+	// 아이디 register 회원가입 
+	public int insertClient(String user_id, String user_pw, String user_name, String user_phone) {
+		int result = 0;
+		try {
+			Connection conn = getConnection();
+			ClientDAO dao = new ClientDAO();
+			result = dao.insertClient(conn, user_id, user_pw, user_name, user_phone);
+			close(conn);
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("회원가입 insert 오류");
+			return 3;	// 오류발생
+		}
+		return result;
+	}
+	
 	
 
 }

@@ -7,8 +7,9 @@ public class StoreVO {
 	private String store_name;
 	private String store_phone;
 	private String stroe_addr;
-	private int store_time;
+	private String store_time;
 	private String store_img;
+	
 	public String getStore_id() {
 		return store_id;
 	}
@@ -39,10 +40,10 @@ public class StoreVO {
 	public void setStroe_addr(String stroe_addr) {
 		this.stroe_addr = stroe_addr;
 	}
-	public int getStore_time() {
+	public String getStore_time() {
 		return store_time;
 	}
-	public void setStore_time(int store_time) {
+	public void setStore_time(String store_time) {
 		this.store_time = store_time;
 	}
 	public String getStore_img() {

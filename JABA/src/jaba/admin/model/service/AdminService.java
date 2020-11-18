@@ -4,13 +4,12 @@ import java.sql.Connection;
 
 import jaba.admin.dao.AdminDAO;
 import jaba.admin.vo.AdminVO;
-import jaba.store.dao.StoreDAO;
 
 import static jaba.common.jdbcdriver.JDBCTemplate.*;
 public class AdminService {
 	
 	public AdminService() {
-
+		
 	}
 	
 	public int selectLogin(String admin_id, String admin_pw) {

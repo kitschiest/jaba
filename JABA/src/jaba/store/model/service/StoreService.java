@@ -1,6 +1,7 @@
 package jaba.store.model.service;
 
 import java.sql.Connection;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -65,4 +66,18 @@ public class StoreService {
 		}
 		return result;
 	}
+	
+	   // store 리스트 정보를 긁어오는 메소드
+	   public List<StoreVO> selectList(String store_name) {
+	      List<StoreVO> list = null;
+	      Connection conn = getConnection();
+	      try {
+	         StoreDAO dao = new StoreDAO();
+	         list = dao.selectList(conn, store_name);
+	         close(conn);
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }
+	      return list;
+	   }
 }

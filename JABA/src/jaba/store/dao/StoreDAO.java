@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import jaba.store.vo.StoreVO;
 
@@ -71,5 +73,32 @@ public class StoreDAO {
 		}
 		return 0;
 	}
+	
+	   // 배너 클릭시 해당하는 store 리스트 출력하는 메소드 작성
+	   public List<StoreVO> selectList(Connection conn, String store_name) {
+	      List<StoreVO> list = null;
+	      String sql = "select * from store where store_name like ?";
+	      try {
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, "%" + store_name + "%");
+	         rs = pstmt.executeQuery();
+	         if (rs.next()) {
+	            do {
+	               list = new ArrayList<StoreVO>();
+	               StoreVO vo = new StoreVO();
+	               vo.setStore_id(rs.getString("store_id"));
+	               vo.setStore_pw(rs.getString("store_pw"));
+	               vo.setStore_name(rs.getString("store_name"));
+	               vo.setStroe_addr(rs.getString("store_addr"));
+	               vo.setStore_time(rs.getString("store_time"));
+	               vo.setStore_img(rs.getString("store_img"));
+	               list.add(vo);
+	            } while (rs.next());
+	         }
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }
+	      return list;
+	   }
 
 }
