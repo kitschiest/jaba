@@ -40,7 +40,14 @@ $(function(){
  })
 })
 </script>
-
+<!-- SEARCH BTN JS -->
+<script>
+ $(".searchBtn").on("click", function(){
+	 var addr = $("#addr_search").val();
+	 
+	 
+ })
+</script>
 
 <style>
 body {
@@ -192,7 +199,7 @@ main {
 	<header>
 		<div class="header_container">
 			<div class="logo">
-				<img src="./images/jaba_english_white.png">
+				<a href="index.jsp"><img src="./images/jaba_english_white.png"></a>
 			</div>
 			<div class="menu">
 				<button class="menu_btn" value="LOG IN" type="button" class="btn btn-primary" data-toggle="modal" data-target="#LoginModal">
@@ -342,15 +349,17 @@ main {
 				GRAB whatever<br> you want<br>
 			</h1>
 			<p>order from amazing cafes.</p>
+			<form action="store/storeSearch.do" method="GET">
 			<div class="search-bar">
 				<div class="jss38">
-					<input type="text" class="search_text">
+					<input type="text" class="search_text" id="addr_search" name="city">
 				</div>
 			</div>
 
 			<div class="search-button">
-				<button name="searchBtn" value="search">SEARCH</button>
+				<button name="searchBtn" value="search" type="submit">SEARCH</button>
 			</div>
+			</form>
 		</div>
 
 	</section>
@@ -416,42 +425,42 @@ main {
 			<div data-index="0" class="cities" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
 				<div>
 					<div class="city-badge">
-						<a href="#">JongRo</a>
+						<a href="store/storeSearch.do?city=종로구">JongRo</a>
 					</div>
 				</div>
 			</div>
 			<div data-index="1" class="cities" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
 				<div>
 					<div class="city-badge">
-						<a href="#">YeonNam</a>
+						<a href="store/storeSearch.do?city=연남동">YeonNam</a>
 					</div>
 				</div>
 			</div>
 			<div data-index="2" class="cities" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
 				<div>
 					<div class="city-badge">
-						<a href="#">HongDae</a>
+						<a href="store/storeSearch.do?city=서교동">HongDae</a>
 					</div>
 				</div>
 			</div>
 			<div data-index="3" class="cities" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
 				<div>
 					<div class="city-badge">
-						<a href="#">Paris</a>
+						<a href="store/storeSearch.do?city=강남구">Paris</a>
 					</div>
 				</div>
 			</div>
 			<div data-index="4" class="cities" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
 				<div>
 					<div class="city-badge">
-						<a href="#">GangSeo</a>
+						<a href="store/storeSearch.do?city=강서구">GangSeo</a>
 					</div>
 				</div>
 			</div>
 			<div data-index="5" class="cities" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
 				<div>
 					<div class="city-badge">
-						<a href="#">Incheon</a>
+						<a href="store/storeSearch.do?city=인천시">Incheon</a>
 					</div>
 				</div>
 			</div>
