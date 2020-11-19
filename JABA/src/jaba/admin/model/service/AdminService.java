@@ -1,9 +1,12 @@
 package jaba.admin.model.service;
 
 import java.sql.Connection;
+import java.util.List;
 
 import jaba.admin.dao.AdminDAO;
 import jaba.admin.vo.AdminVO;
+import jaba.client.vo.ClientVO;
+import jaba.store.vo.StoreVO;
 
 import static jaba.common.jdbcdriver.JDBCTemplate.*;
 public class AdminService {
@@ -42,6 +45,34 @@ public class AdminService {
 		}catch(Exception e) {
 			e.printStackTrace();
 			return 3;	// 오류발생
+		}
+		return result;
+	}
+	
+	//DAO에서 실행한거 여기 result에 담기
+	public List<ClientVO> selectAllClient() {
+		List<ClientVO> result = null;
+		try {
+			Connection conn = getConnection();
+			AdminDAO dao = new AdminDAO();
+			result = dao.selectAllClient(conn);
+			close(conn);
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}
+		return result;
+	}
+	
+	public List<StoreVO> selectAllStore(){
+		List<StoreVO> result= null;
+		try {
+			Connection conn = getConnection();
+			AdminDAO dao = new AdminDAO();
+			result = dao.selectAllStore(conn);
+			close(conn);
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 		return result;
 	}

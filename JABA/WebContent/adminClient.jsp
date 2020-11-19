@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,13 +39,23 @@
 	$(function() {
 		$(window).scroll(function() {
 			var navbar = $(this).scrollTop();
-			console.log(navbar);
 			var $header = $('header');
 			if (navbar > 0) {
 				$header.addClass('activated');
 			} else {
 				$header.removeClass('activated');
 			}
+		})
+		
+	
+		$(window).ready(function(){
+			$.ajax({
+				url:"admin/selectAllClient.do",
+				success: function(res1){
+					console.log(res1);
+					
+				}
+			})
 		})
 	})
 </script>
@@ -180,6 +191,17 @@ main {
 	height: 300px;
 	background: grey;
 }
+.resultArea table{
+	margin: 0 auto;
+
+}
+.resultArea tr, td, th{
+	border: 1px solid black;
+	width: 15%;
+	text-align: center;
+}
+
+
 
 .client_details {
 	padding: 20px;
@@ -459,7 +481,42 @@ main {
 			
 
 			<div class="resultArea">
-				<div data-index="0" class="client_main"></div>
+				<div data-index="0" class="client_main">
+				<table>
+				<tr>
+					<th>ID
+					</th>
+					<th>NAME
+					</th>
+					<th>ADDR
+					</th>
+					<th>GENDER
+					</th>
+					<th>STATUS
+					</th>
+					<th>YELLOW
+					</th>
+				</tr>
+				 <c:forEach items="${clientList}" var="client">
+				<tr>
+					<td><a href="#">${client.user_id }</a>
+					</td>
+					<td>${client.user_name }
+					</td>
+					<td>${client.user_phone }
+					</td>
+					<td>${client.user_gender }
+					</td>
+					<td>${client.user_status }
+					</td>
+					<td>${client.user_yellow }
+					</td>
+				</tr>
+				</c:forEach>
+				</table>
+				
+        
+				</div>
 				<div data-index="0" class="client_details"></div>
 				<div data-index="0" class="main_table_board"></div>
 			</div>

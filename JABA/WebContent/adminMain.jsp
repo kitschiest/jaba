@@ -38,7 +38,7 @@
 	$(function() {
 		$(window).scroll(function() {
 			var navbar = $(this).scrollTop();
-			console.log(navbar);
+			
 			var $header = $('header');
 			if (navbar > 0) {
 				$header.addClass('activated');

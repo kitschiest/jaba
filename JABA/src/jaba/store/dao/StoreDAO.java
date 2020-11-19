@@ -89,7 +89,7 @@ public class StoreDAO {
 	               vo.setStore_id(rs.getString("store_id"));
 	               vo.setStore_pw(rs.getString("store_pw"));
 	               vo.setStore_name(rs.getString("store_name"));
-	               vo.setStroe_addr(rs.getString("store_addr"));
+	               vo.setStore_addr(rs.getString("store_addr"));
 	               vo.setStore_time(rs.getString("store_time"));
 	               vo.setStore_img(rs.getString("store_img"));
 	               list.add(vo);

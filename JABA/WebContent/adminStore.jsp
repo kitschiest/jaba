@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,13 +39,22 @@
 	$(function() {
 		$(window).scroll(function() {
 			var navbar = $(this).scrollTop();
-			console.log(navbar);
 			var $header = $('header');
 			if (navbar > 0) {
 				$header.addClass('activated');
 			} else {
 				$header.removeClass('activated');
 			}
+		})
+		$(window).ready(function(){
+			$.ajax({
+				url:"admin/selectAllStore.do",
+				success: function(res1){
+					console.log(res1);
+					
+					
+				}
+			})
 		})
 	})
 </script>
@@ -179,6 +189,15 @@ main {
 	width: 100%;
 	height: 300px;
 	background: grey;
+}
+.resultArea table{
+	margin: 0 auto;
+
+}
+.resultArea tr, td, th{
+	border: 1px solid black;
+	width: 15%;
+	text-align: center;
 }
 
 .main_table_store {
@@ -467,7 +486,39 @@ main {
 	
 
 			<div class="resultArea">
-				<div data-index="0" class="main_table_client"></div>
+				<div data-index="0" class="main_table_client">
+				<table>
+				<tr>
+					<th>ID
+					</th>
+					<th>NAME
+					</th>
+					<th>ADDR
+					</th>
+					<th>TIME
+					</th>
+					<th>IMG
+					</th>
+					
+				</tr>
+				 <c:forEach items="${storeList}" var="store">
+				<tr>
+					<td>${store.store_id }
+					</td>
+					<td>${store.store_name }
+					</td>
+					<td>${store.store_addr }
+					</td>
+					<td>${store.store_time }
+					</td>
+					<td>${store.store_img }
+					</td>
+					
+				</tr>
+				</c:forEach>
+				</table>
+		
+				</div>
 				<div data-index="0" class="main_table_store"></div>
 				<div data-index="0" class="main_table_board"></div>
 			</div>

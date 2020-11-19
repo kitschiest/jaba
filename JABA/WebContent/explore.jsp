@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% String ctxPath=request.getContextPath(); %>
+<% String avenue = request.getParameter("city"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +34,96 @@ $(function(){
    
  })
 })
+</script>
+<script>
+<%
+	String city = request.getParameter("city");
+%>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+var center = map.getCenter();
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch('<%= city%>', function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">검색한 위치</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+        
+        center = map.getCenter();
+        console.log("검색 위치의 위도: " + center.getLat() + ", 검색 위치의 경도: " + center.getLng());
+    } 
+});    
+
+if (navigator.geolocation) {
+    
+    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+    navigator.geolocation.getCurrentPosition(function(position) {
+        lat1 = center.getLat(),
+        lon1 = center.getLng(),
+        lat2 = position.coords.latitude, // 위도
+        lon2 = position.coords.longitude; // 경도
+       
+           console.log("현재 위치의 위도: "+lat2+", 경도: "+lon2);
+           console.log(lat1+", "+lon1+", " + lat2 + ", " +lon2);
+           function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
+        	   function deg2rad(deg) {
+        		   return deg * (Math.PI/180) ;
+        	}; 
+				   var R = 6371; // Radius of the earth in km 
+        		   var dLat = deg2rad(lat2-lat1); // deg2rad below 
+        		   var dLon = deg2rad(lng2-lng1); 
+        		   var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2); 
+        		   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        		   console.log(c);
+        		   var d = R * c; // Distance in km 
+        		   console.log(d);
+        		   return d;
+           }
+          var d = Math.round(getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2)*10)/10.0;
+           console.log(getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2));
+           $("window").ready(function(){
+        	   $(".distance").append(d).append("km");
+        	   $("#avenue").append()
+           })
+           
+           
+      });
+    
+} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+    
+    var locPosition = new kakao.maps.LatLng(26.5566775, 126.445544),    
+        message = 'geolocation을 사용할수 없어요..'
+        
+    displayMarker(locPosition, message);
+}
+
+	
 </script>
 <style>
 body {
@@ -216,7 +307,7 @@ section .container .store_list_grid {
 					<button>Pick up, ASAP</button>
 				</div>
 				<div class="search_loc">
-					<button>AVENUE</button>
+					<button id="avenue"><%= avenue %></button>
 				</div>
 				<div class="search-term">
 					<button class="MuiButtonBase-root MuiIconButton-root search-term__icon  MuiIconButton-sizeSmall jss263" tabindex="0" type="button">
@@ -263,7 +354,7 @@ section .container .store_list_grid {
 									<h3>STORE NAME</h3>
 								</div>
 								<div class="store_card_info_addr">
-									<span>distance from here</span> <span>OPEN TIME</span>
+									<span class="distance"> </span> <span>OPEN TIME</span>
 								</div>
 							</div>
 						</div>
@@ -278,7 +369,7 @@ section .container .store_list_grid {
 									<h3>STORE NAME</h3>
 								</div>
 								<div class="store_card_info_addr">
-									<span>distance from here</span> <span>OPEN TIME</span>
+									<span class="distance"> </span> <span>OPEN TIME</span>
 								</div>
 							</div>
 						</div>
@@ -293,7 +384,7 @@ section .container .store_list_grid {
 									<h3>STORE NAME</h3>
 								</div>
 								<div class="store_card_info_addr">
-									<span>distance from here</span> <span>OPEN TIME</span>
+									<span class="distance"> </span> <span>OPEN TIME</span>
 								</div>
 							</div>
 						</div>
@@ -308,7 +399,7 @@ section .container .store_list_grid {
 									<h3>STORE NAME</h3>
 								</div>
 								<div class="store_card_info_addr">
-									<span>distance from here</span> <span>OPEN TIME</span>
+									<span class="distance"> </span> <span>OPEN TIME</span>
 								</div>
 							</div>
 						</div>
@@ -323,7 +414,7 @@ section .container .store_list_grid {
 									<h3>STORE NAME</h3>
 								</div>
 								<div class="store_card_info_addr">
-									<span>distance from here</span> <span>OPEN TIME</span>
+									<span class="distance"> </span> <span>OPEN TIME</span>
 								</div>
 							</div>
 						</div>
@@ -338,7 +429,7 @@ section .container .store_list_grid {
 									<h3>STORE NAME</h3>
 								</div>
 								<div class="store_card_info_addr">
-									<span>distance from here</span> <span>OPEN TIME</span>
+									<span class="distance"> </span> <span>OPEN TIME</span>
 								</div>
 							</div>
 						</div>
@@ -357,91 +448,7 @@ section .container .store_list_grid {
 <div id="map" style="width:100%;height:350px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7e6cd41f87d7529ffb39adb770099e29&libraries=services"></script>
-<script>
-<%
-	String city = request.getParameter("city");
-%>
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };  
 
-// 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-// 주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
-var center = map.getCenter();
-
-// 주소로 좌표를 검색합니다
-geocoder.addressSearch('<%= city%>', function(result, status) {
-
-    // 정상적으로 검색이 완료됐으면 
-     if (status === kakao.maps.services.Status.OK) {
-
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
-
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">검색한 위치</div>'
-        });
-        infowindow.open(map, marker);
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-        
-        center = map.getCenter();
-        console.log("검색 위치의 위도: " + center.getLat() + ", 검색 위치의 경도: " + center.getLng());
-    } 
-});    
-
-if (navigator.geolocation) {
-    
-    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-    navigator.geolocation.getCurrentPosition(function(position) {
-        lat1 = center.getLat(),
-        lon1 = center.getLng(),
-        lat2 = position.coords.latitude, // 위도
-        lon2 = position.coords.longitude; // 경도
-       
-           console.log("현재 위치의 위도: "+lat2+", 경도: "+lon2);
-           console.log(lat1+", "+lon1+", " + lat2 + ", " +lon2);
-           function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
-        	   function deg2rad(deg) {
-        		   return deg * (Math.PI/180) ;
-        	}; 
-				   var R = 6371; // Radius of the earth in km 
-        		   var dLat = deg2rad(lat2-lat1); // deg2rad below 
-        		   var dLon = deg2rad(lng2-lng1); 
-        		   var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2); 
-        		   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-        		   console.log(c);
-        		   var d = R * c; // Distance in km 
-        		   console.log(d);
-        		   return d;
-           }
-           console.log(getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2));
-           
-           
-      });
-    
-} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-    
-    var locPosition = new kakao.maps.LatLng(0, 0),    
-        message = 'geolocation을 사용할수 없어요..'
-        
-    displayMarker(locPosition, message);
-}
-
-	
-</script>
 
 
 	<!-- FOOTER -->
