@@ -61,6 +61,9 @@
 		$(".clientId").click(function(){
 			$("#tab2").prop("checked", true);
 			$("#tab1").prop("checked", false);
+			var radioContent = $(".resultArea > div");
+			radioContent.hide();
+			radioContent.eq(1).show();
 		})
 	})
 </script>
