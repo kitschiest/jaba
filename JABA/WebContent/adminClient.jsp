@@ -45,7 +45,7 @@
 			} else {
 				$header.removeClass('activated');
 			}
-		})
+		});
 		
 	
 		$(window).ready(function(){
@@ -56,6 +56,11 @@
 					
 				}
 			})
+		});
+		
+		$(".clientId").click(function(){
+			$("#tab2").prop("checked", true);
+			$("#tab1").prop("checked", false);
 		})
 	})
 </script>
@@ -499,7 +504,7 @@ main {
 				</tr>
 				 <c:forEach items="${clientList}" var="client">
 				<tr>
-					<td><a href="#">${client.user_id }</a>
+					<td class="clientId">${client.user_id }
 					</td>
 					<td>${client.user_name }
 					</td>

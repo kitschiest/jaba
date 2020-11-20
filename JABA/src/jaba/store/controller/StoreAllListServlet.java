@@ -55,21 +55,6 @@ public class StoreAllListServlet extends HttpServlet {
 //			RequestDispatcher disp = request.getRequestDispatcher("./explore.jsp/?brand=" + brand);
 			disp.forward(request, response);
 		}
-		
-		if(city != null) {
-			System.out.println(city);
-			System.out.println("storeList--explore 연결 서블릿 : city명 검색");
-			StoreService sService = new StoreService();	// StoreService 생성
-			List<StoreVO> storeList = sService.selectList(city);	// 와 같은 작업을 해줌 
-			request.getSession().setAttribute("storeList", storeList);	// StoreList를 세션으로 넘김 
-			 // 라고치고 해당 url로 forward로 이동~~~ 
-			System.out.println("city부분 작동");
-			RequestDispatcher disp = request.getRequestDispatcher("/explore.jsp");
-//			RequestDispatcher disp = request.getRequestDispatcher("./explore.jsp/?brand=" + brand);
-			disp.forward(request, response);
-		}
-		
-		
 	
 		out.flush();
 		out.close();

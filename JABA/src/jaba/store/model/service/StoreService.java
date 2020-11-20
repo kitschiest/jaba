@@ -37,7 +37,7 @@ public class StoreService {
 		}
 	}
 	
-	// store 정보를 긁어오는 메소드
+	// store id & pwd를 긁어오는 메소드
 	public StoreVO selectStore(String store_id, String store_pw) {
 		StoreVO vo = null;
 		Connection conn = getConnection();
@@ -80,4 +80,19 @@ public class StoreService {
 	      }
 	      return list;
 	   }
+	   
+		// 선택한 store 정보를 긁어오는 메소드 (explore -> menu로 이동하기 위함)
+		public StoreVO selectStoreName(String store_name) {
+			StoreVO vo = null;
+			Connection conn = getConnection();
+			try {
+				StoreDAO dao = new StoreDAO();
+		         vo = dao.selectStore(conn, store_name);
+		         close(conn);
+			} catch (Exception e) {
+				System.out.println("Store 오류발생 return 3");
+
+			}
+			return vo;
+		}
 }

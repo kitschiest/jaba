@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="&lt;%"/>
+		<item key="selection" value="map"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="map"/>
+			<item value="clientId"/>
+			<item value="answer"/>
+			<item value="a"/>
+			<item value="modal"/>
+			<item value="th"/>
+			<item value="td"/>
+			<item value="avenue"/>
+			<item value="distance from here"/>
+			<item value="htmla"/>
+			<item value="html"/>
 			<item value="&lt;%"/>
 			<item value="홍대"/>
 			<item value="active"/>
 			<item value="gtag"/>
-			<item value="fbq"/>
-			<item value="passorder"/>
-			<item value="gm"/>
-			<item value="click"/>
-			<item value="src"/>
-			<item value="faq-item"/>
-			<item value="activ"/>
-			<item value="control"/>
-			<item value="sth"/>
-			<item value="boardQ"/>
-			<item value="board"/>
 		</list>
 		<list key="replacehistory">
+			<item value="td"/>
+			<item value="th"/>
+			<item value=" "/>
 			<item value="store"/>
 		</list>
 	</section>
