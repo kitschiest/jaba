@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jaba.menu.vo.CustomVO;
 import jaba.menu.vo.MenuVO;
 
 public class MenuDAO {
@@ -114,10 +115,95 @@ public class MenuDAO {
 		return list;
 	}
 
-	//
+	   // 해당 메뉴의 id를 참고하여 해당메뉴의 커스텀을 불러오고 List<customVO> 를 return 하는 메소드
+	   public List<CustomVO> selectCustomList(Connection conn, String menu_id){
+	      List<CustomVO> list = null;
+	      String sql = "select * from custom where menu_id=?";
+	      try {
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, menu_id);
+	         rs = pstmt.executeQuery();
+	         if (rs.next()) {
+	            list = new ArrayList<CustomVO>();
+	            do {
+	               CustomVO vo = new CustomVO();
 
-	//
+	               vo.setCustom_id(rs.getString("custom_id"));
+	               vo.setMenu_id(rs.getString("menu_id"));
+	               vo.setCustom_name(rs.getString("custom_name"));
+	               vo.setCustom_price(rs.getInt("custom_price"));
+	               vo.setCustom_category(rs.getString("custom_category"));
 
-	//
+	               list.add(vo);
+	            } while (rs.next());
+	         }
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }
+	      close(rs);
+	      close(pstmt);
+	      return list;
+	   }
+
+	
+	// 해당 메뉴의 커스텀 목록 이름을 List<String> 형태로 가져오는 메소드 
+	public List<String> selectCustomCategoryList(Connection conn, String menu_id) {
+		List<String> customList = null;
+		String sql = "SELECT DISTINCT CUSTOM_CATEGORY FROM CUSTOM WHERE menu_id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, menu_id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				customList = new ArrayList<String>();
+				do {
+				String custom_category = rs.getString("CUSTOM_CATEGORY");
+				customList.add(custom_category);
+				}while(rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		// 테스트
+		String a = customList.get(0);
+		String b = customList.get(1);
+		System.out.println(a + "           " + b);
+		// 
+		close(rs);
+		close(pstmt);
+		return customList;
+	}
+	
+	
+	   // menu_id 와 커스텀 카테고리 이름으로 category_ListVo를 불러오는 메소드
+	   public List<CustomVO> selectListByCustomCategory(Connection conn, String menu_id, String custom_category) {
+	      List<CustomVO> list = null;
+	      String sql = "select * from menu where menu_id=? and CUSTOM_CATEGORY=?"; // 외래키로 가져와야 한다!
+	      try {
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, menu_id);
+	         pstmt.setString(2, custom_category);
+	         rs = pstmt.executeQuery();
+	         if (rs.next()) {
+	            list = new ArrayList<CustomVO>();
+	            do {
+	               CustomVO vo = new CustomVO();
+
+	               vo.setCustom_id(rs.getString("custom_id"));
+	               vo.setMenu_id(rs.getString("menu_id"));
+	               vo.setCustom_name(rs.getString("custom_name"));
+	               vo.setCustom_price(rs.getInt("custom_price"));
+	               vo.setCustom_category(rs.getString("custom_category"));
+
+	               list.add(vo);
+	            } while (rs.next());
+	         }
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }
+	      close(rs);
+	      close(pstmt);
+	      return list;
+	   }
 
 }
