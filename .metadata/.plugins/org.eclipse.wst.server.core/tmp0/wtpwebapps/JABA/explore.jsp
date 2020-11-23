@@ -193,7 +193,7 @@ section .container .store_list_grid {
 	<header>
 		<div class="header_container">
 			<div class="logo">
-				<a href="index.jsp"><img
+				<a href="../index.jsp"><img
 					src="<%=ctxPath%>/images/jaba_english_white.png"></a>
 			</div>
 			<div class="menu">
@@ -266,7 +266,7 @@ section .container .store_list_grid {
 			</div>
 			<div class="container">
 				<div class="store_list_grid" id="store_grid">
-					<c:if test="${not empty storeList }">
+					<c:if test="${not empty storeList}">
 						<c:forEach items="${storeList}" var="storeVO" varStatus="s">
 							<!--  주소부분 정확하게 확인하고 수정해야함 -->
 							<a href="<%=ctxPath%>/menu/explore.do?storename=${storeVO.store_name}">
@@ -279,7 +279,9 @@ section .container .store_list_grid {
 											<h3>${storeVO.store_name}</h3>
 										</div>
 										<div class="store_card_info_addr">
-											<span class="distance"> </span> <span>OPEN TIME</span>
+											<span class="distance">
+											
+											 </span> <span>OPEN TIME</span>
 										</div>
 									</div>
 								</div>
@@ -296,11 +298,15 @@ section .container .store_list_grid {
 
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7e6cd41f87d7529ffb39adb770099e29&libraries=services"></script>
+		
 	<script>
-<%String city = request.getParameter("city");%>
+<%
+	String city = request.getParameter("city");
+%>
+
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(37.5679211797976, 126.98303579767857), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
 
@@ -310,27 +316,69 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 var center = map.getCenter();
+//마커를 표시할 위치와 title 객체 배열입니다 
+var positions = [
+    {
+        title: '스타벅스 종각점', 
+        latlng: new kakao.maps.LatLng(37.56985666465185, 126.98454355557789)
+    },
+    {
+        title: '스타벅스 신촌점', 
+        latlng: new kakao.maps.LatLng(37.55641463189617, 126.93725540373616)
+    },
+    {
+        title: '스타벅스 이대점', 
+        latlng: new kakao.maps.LatLng(37.558410923984724, 126.94592495804483)
+    },
+    {
+        title: '스타벅스 종로점',
+        latlng: new kakao.maps.LatLng(37.5706560164611, 126.98350285823555)
+    },
+    {
+        title: '스타벅스 선릉점',
+        latlng: new kakao.maps.LatLng(37.60185244395668, 127.02537263525235)
+    }
+];
 
-// 주소로 좌표를 검색합니다
+// 마커 이미지의 이미지 주소입니다
+var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+    
+for (var i = 0; i < positions.length; i ++) {
+    
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new kakao.maps.Size(24, 35); 
+    
+    // 마커 이미지를 생성합니다    
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+    
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng, // 마커를 표시할 위치
+        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image : markerImage // 마커 이미지 
+    });
+    var latlng = positions[i].latlng;
+    console.log(latlng.La +", "+latlng.Ma);
+    
+}
+
+
+//주소로 좌표를 검색합니다
 geocoder.addressSearch('<%=city%>', function(result, status) {
-
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
-
         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
         // 결과값으로 받은 위치를 마커로 표시합니다
         var marker = new kakao.maps.Marker({
             map: map,
             position: coords
         });
-
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
             content: '<div style="width:150px;text-align:center;padding:6px 0;">검색한 위치</div>'
         });
         infowindow.open(map, marker);
-
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
         
@@ -338,18 +386,20 @@ geocoder.addressSearch('<%=city%>', function(result, status) {
         console.log("검색 위치의 위도: " + center.getLat() + ", 검색 위치의 경도: " + center.getLng());
     } 
 });    
-
 if (navigator.geolocation) {
     
     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
     navigator.geolocation.getCurrentPosition(function(position) {
         lat1 = center.getLat(),
         lon1 = center.getLng(),
-        lat2 = position.coords.latitude, // 위도
-        lon2 = position.coords.longitude; // 경도
+        lat2 = position.coords.latitude, // 현재 위치의 위도
+        lon2 = position.coords.longitude; // 현재 위치의 경도
        
            console.log("현재 위치의 위도: "+lat2+", 경도: "+lon2);
            console.log(lat1+", "+lon1+", " + lat2 + ", " +lon2);
+           
+           
+           
            function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
         	   function deg2rad(deg) {
         		   return deg * (Math.PI/180) ;
@@ -364,7 +414,10 @@ if (navigator.geolocation) {
         		   console.log(d);
         		   return d;
            }
+    
           var d = Math.round(getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2)*10)/10.0;
+          //script 내에서 jstl 사용 가능하니 시도해보자
+          
            console.log(getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2));
            $("window").ready(function(){
         	   $(".distance").append(d).append("km");
@@ -381,7 +434,6 @@ if (navigator.geolocation) {
         
     displayMarker(locPosition, message);
 }
-
 	
 </script>
 

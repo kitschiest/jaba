@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,26 @@
 			} else {
 				$header.removeClass('activated');
 			}
-		})
+		});
+		$(window).ready(function(){
+			$.ajax({
+				url:"admin/selectAllStore.do",
+				success: function(res1){
+					console.log(res1);
+					
+					
+				}
+			})
+		});
+	$(window).ready(function(){
+			$.ajax({
+				url:"admin/selectAllClient.do",
+				success: function(res1){
+					console.log(res1);
+					
+				}
+			})
+		});
 	})
 </script>
 <script>
@@ -172,6 +192,15 @@ main {
 	border: 1px solid #89BDBB;
 	background: #89BDBB;
 	color: #fff;
+}
+.resultArea table{
+	margin: 0 auto;
+
+}
+.resultArea tr, td, th{
+	border: 1px solid black;
+	width: 15%;
+	text-align: center;
 }
 
 .main_table_client {
@@ -467,11 +496,78 @@ main {
 	
 
 			<div class="resultArea">
-				<div data-index="0" class="main_table_client"></div>
-				<div data-index="0" class="main_table_store"></div>
+				<div data-index="0" class="main_table_client">
+				<table>
+				<tr>
+					<th>ID
+					</th>
+					<th>NAME
+					</th>
+					<th>ADDR
+					</th>
+					<th>GENDER
+					</th>
+					<th>STATUS
+					</th>
+					<th>YELLOW
+					</th>
+				</tr>
+				 <c:forEach items="${clientList}" var="client">
+				<tr>
+					<td class="clientId">${client.user_id }
+					</td>
+					<td>${client.user_name }
+					</td>
+					<td>${client.user_phone }
+					</td>
+					<td>${client.user_gender }
+					</td>
+					<td>${client.user_status }
+					</td>
+					<td>${client.user_yellow }
+					</td>
+				</tr>
+				</c:forEach>
+				</table>
+				
+        
+				</div>
+				<div data-index="0" class="main_table_store">
+				<table>
+				<tr>
+					<th>ID
+					</th>
+					<th>NAME
+					</th>
+					<th>ADDR
+					</th>
+					<th>TIME
+					</th>
+					<th>IMG
+					</th>
+					
+				</tr>
+				 <c:forEach items="${storeList}" var="store">
+				<tr>
+					<td>${store.store_id }
+					</td>
+					<td>${store.store_name }
+					</td>
+					<td>${store.store_addr }
+					</td>
+					<td>${store.store_time }
+					</td>
+					<td>${store.store_img }
+					</td>
+					
+				</tr>
+				</c:forEach>
+				</table>
+		
+				</div>
 				<div data-index="0" class="main_table_board"></div>
 			</div>
-		</div>
+	</div>
 	</section>
 
 	<!-- ASIDE -->

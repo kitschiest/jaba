@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jaba.store.model.service.StoreService;
+import jaba.store.vo.StoreLocVO;
 import jaba.store.vo.StoreVO;
 
 /**
@@ -39,7 +40,6 @@ public class StoreAllListServlet extends HttpServlet {
 		// ?뒤에 값을 받아와서 셋팅해준다. 
 		String brand = request.getParameter("brand");
 		String city = request.getParameter("city");
-		String location = request.getParameter("location");
 //		String path = request.getContextPath();
 		
 		//해당 req.para ~ 값이 없으면 null 이다. 
@@ -54,6 +54,7 @@ public class StoreAllListServlet extends HttpServlet {
 			RequestDispatcher disp = request.getRequestDispatcher("/explore.jsp");
 //			RequestDispatcher disp = request.getRequestDispatcher("./explore.jsp/?brand=" + brand);
 			disp.forward(request, response);
+		
 		}
 		if(city != null) {
 			System.out.println(city);
@@ -67,6 +68,8 @@ public class StoreAllListServlet extends HttpServlet {
 //			RequestDispatcher disp = request.getRequestDispatcher("./explore.jsp/?brand=" + brand);
 			disp.forward(request, response);
 		}
+		
+			
 	
 		out.flush();
 		out.close();

@@ -35,7 +35,7 @@ public class StoreVO {
 	public void setStore_phone(String store_phone) {
 		this.store_phone = store_phone;
 	}
-	public String getStroe_addr() {
+	public String getStore_addr() {
 		return store_addr;
 	}
 	public void setStore_addr(String store_addr) {
