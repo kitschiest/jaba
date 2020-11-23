@@ -56,8 +56,8 @@ public class MenuListViewServlet extends HttpServlet {
 		MenuService mService = new MenuService();
 		List<List<MenuVO>> sortList = mService.selectmenuListList(store_id);
 		// 테스트
-		System.out.println(sortList.get(0).get(0).getMenu_category());
-		System.out.println(sortList.get(1).get(0).getMenu_category());
+		System.out.println(sortList.get(0).get(0).getMenu_category());	// coffee 
+		System.out.println(sortList.get(1).get(0).getMenu_category());	// beverage
 		request.getSession().setAttribute("sortList", sortList);
 		if(sortList != null) {
 			System.out.println("해당하는 store 의 메뉴List 찾았음");

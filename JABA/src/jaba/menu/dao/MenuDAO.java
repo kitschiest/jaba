@@ -11,6 +11,7 @@ import java.util.List;
 
 import jaba.menu.vo.CustomVO;
 import jaba.menu.vo.MenuVO;
+import jaba.store.vo.StoreVO;
 
 public class MenuDAO {
 
@@ -114,7 +115,39 @@ public class MenuDAO {
 		close(pstmt);
 		return list;
 	}
+	
+	// store_name 과 menu_name을 가지고 menuVO 한개를 return 
+	public MenuVO selectMenu(Connection conn, String store_id, String menu_name) {
+		MenuVO selectMenu = null;
+		String sql = "select * from menu where store_id=? and menu_name=?";
+		// 메뉴이름 중복되면 안된다. 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, store_id);
+			pstmt.setString(2, menu_name);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				selectMenu = new MenuVO();
+				selectMenu.setMenu_id(rs.getString("menu_id"));
+				selectMenu.setStore_id(rs.getString("store_id"));
+				selectMenu.setMenu_name(rs.getString("menu_name"));
+				selectMenu.setMenu_price(rs.getInt("menu_price"));
+				selectMenu.setMenu_img(rs.getString("menu_img"));
+				selectMenu.setMenu_description(rs.getString("menu_description"));
+				selectMenu.setMenu_category(rs.getString("menu_category"));
+				selectMenu.setMenu_available(rs.getInt("menu_available"));
+			} else { // store가 없으면
+				System.out.println("DB에 일치하는 Menu 정보 없음");
+				selectMenu = null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectMenu;
+	}
 
+	// *************************************** CUSTOM ***************************************
+	
 	   // 해당 메뉴의 id를 참고하여 해당메뉴의 커스텀을 불러오고 List<customVO> 를 return 하는 메소드
 	   public List<CustomVO> selectCustomList(Connection conn, String menu_id){
 	      List<CustomVO> list = null;
@@ -157,7 +190,7 @@ public class MenuDAO {
 			if(rs.next()) {
 				customList = new ArrayList<String>();
 				do {
-				String custom_category = rs.getString("CUSTOM_CATEGORY");
+				String custom_category = rs.getString("custom_category");
 				customList.add(custom_category);
 				}while(rs.next());
 			}
@@ -178,7 +211,7 @@ public class MenuDAO {
 	   // menu_id 와 커스텀 카테고리 이름으로 category_ListVo를 불러오는 메소드
 	   public List<CustomVO> selectListByCustomCategory(Connection conn, String menu_id, String custom_category) {
 	      List<CustomVO> list = null;
-	      String sql = "select * from menu where menu_id=? and CUSTOM_CATEGORY=?"; // 외래키로 가져와야 한다!
+	      String sql = "select * from custom where menu_id=? and CUSTOM_CATEGORY=?"; // 외래키로 가져와야 한다!
 	      try {
 	         pstmt = conn.prepareStatement(sql);
 	         pstmt.setString(1, menu_id);
@@ -193,7 +226,7 @@ public class MenuDAO {
 	               vo.setMenu_id(rs.getString("menu_id"));
 	               vo.setCustom_name(rs.getString("custom_name"));
 	               vo.setCustom_price(rs.getInt("custom_price"));
-	               vo.setCustom_category(rs.getString("custom_category"));
+	               vo.setCustom_category(rs.getString("custom_category")); 
 
 	               list.add(vo);
 	            } while (rs.next());
@@ -206,4 +239,8 @@ public class MenuDAO {
 	      return list;
 	   }
 
+	   // *************************************** CUSTOM_CHECK ***************************************
+		
+	   // 선택된 List<String> 으로 구성된 check_id값들을 가져와서 CUSTOM_CHECK에 INSERT하는 dao 
+	   
 }

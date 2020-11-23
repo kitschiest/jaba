@@ -4,7 +4,6 @@ import static jaba.common.jdbcdriver.JDBCTemplate.close;
 import static jaba.common.jdbcdriver.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,8 +78,87 @@ public class MenuService {
 	   return sortList;
    }
    
-   //=======================================CUSTOM=======================================//
-   // 
-   // 
+   // 메뉴의이름과 store_id를 가지고 menu_id를 String 으로 전달하는 메소드 
+   public MenuVO selectMenu(String store_id, String menu_name) {
+	   MenuVO vo = new MenuVO();
+	   Connection conn = getConnection();
+	   try {
+		   MenuDAO dao = new MenuDAO();
+		   vo = dao.selectMenu(conn, store_id, menu_name);
+		   close(conn);
+	   }catch(Exception e) {
+		   e.printStackTrace();
+		   System.out.println("menu_name을 menu_id로 가져올수없음");
+	   }
+	   return vo;
+   }
+   
+   // ******************************** CUSTOM ********************************
+   // custom 리스트 정보를 긁어오는 메소드
+   
+   public List<CustomVO> selectCustomList(String menu_id) {
+	      List<CustomVO> list = null;
+	      Connection conn = getConnection();
+	      try {
+	         MenuDAO dao = new MenuDAO();
+	         list = dao.selectCustomList(conn, menu_id);
+	         close(conn);
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }
+	      return list;
+	   }
+   
+   
+   // distinct 커스텀 카테고리 해서 커스텀 카테고리 갯수와 커스텀 카테고리 이름을 가져오는 메소드 - 서비스
+   public List<String> selectCustomCategoryList(String menu_id){
+	   List<String> categoryCustomList = null;
+	   Connection conn = getConnection();
+	   try {
+		   MenuDAO dao = new MenuDAO();
+		   categoryCustomList = dao.selectCustomCategoryList(conn, menu_id);
+		   System.out.println("서비스파일부분 Custom test");
+		   System.out.println(categoryCustomList.get(0));
+		   System.out.println(categoryCustomList.get(1));
+		   close(conn);
+	   }catch(Exception e) {
+		   e.printStackTrace();
+	   }
+	   
+	   return categoryCustomList;
+   }
+   
+   
+   // menu_id 와 커스텀 카테고리 이름으로 category_ListVo를 불러오는 메소드
+   //
+   public List<CustomVO> selectListByCustomCategory(String menu_id, String custom_category){
+	   List<CustomVO> list = null;
+	   Connection conn = getConnection();
+	   try {
+		   MenuDAO dao = new MenuDAO();
+		   list = dao.selectListByCustomCategory(conn, menu_id, custom_category);
+		   close(conn);
+	   }catch(Exception e) {
+		   e.printStackTrace();
+	   }
+	   return list;
+   }
+   
+   
+   // menu_id를 받아와서 커스텀 메뉴카테고리 별로 List<?????_ListVo>를 만들어주는 메소드
+   
+   public List<List<CustomVO>> selectCustomListList(String menu_id){
+	   List<List<CustomVO>> sortCustomList = null;
+	   // 매장 id를 통해서 카테고리 리스트를 불러옴
+	   List<String> categoryCustomList = selectCustomCategoryList(menu_id);
+	   // sortList 객체 생성
+	   sortCustomList = new ArrayList<List<CustomVO>>();
+	   // 사이즈 categoryList 만큼 반복
+	   for(int i=0; i<categoryCustomList.size(); i++) {
+		   List<CustomVO> list = selectListByCustomCategory(menu_id, categoryCustomList.get(i));
+		   sortCustomList.add(list);
+	   }
+	   return sortCustomList;
+   }
    
 }
