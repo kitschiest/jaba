@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+	String ctxPath = request.getContextPath();
+	String brandName = request.getParameter("brand");
+	if(brandName==null) {
+		brandName = "스타";  // 예외처리  
+	}
+%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -373,42 +380,42 @@ main {
 			<div data-index="0" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
 				<div>
 					<div class="brand-badge ">
-						<a href="store/storeSearch.do?brand=스타벅스"><img src="https://cdn.bopple.app/assets/helloharry/tile-hover.svg" class="active"></a>
+						<img src="https://cdn.bopple.app/assets/helloharry/tile-hover.svg" class="active" id="brand_img">
 					</div>
 				</div>
 			</div>
 			<div data-index="1" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
 				<div>
 					<div class="brand-badge ">
-						<img src="https://cdn.bopple.app/assets/sonoma/tile-hover.svg" class="active"></a>
+						<img src="https://cdn.bopple.app/assets/sonoma/tile-hover.svg" class="active" id="brand_img"></a>
 					</div>
 				</div>
 			</div>
 			<div data-index="2" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
 				<div>
 					<div class="brand-badge ">
-						<img src="https://cdn.bopple.app/assets/suki/tile-hover.svg" class="active"></a>
+						<img src="https://cdn.bopple.app/assets/suki/tile-hover.svg" class="active" id="brand_img"></a>
 					</div>
 				</div>
 			</div>
 			<div data-index="3" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
 				<div>
 					<div class="brand-badge ">
-						<img src="https://cdn.bopple.app/assets/mrburger/tile-hover.svg" class="active"></a>
+						<img src="https://cdn.bopple.app/assets/mrburger/tile-hover.svg" class="active" id="brand_img"></a>
 					</div>
 				</div>
 			</div>
 			<div data-index="4" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
 				<div>
 					<div class="brand-badge ">
-						<img src="https://cdn.bopple.app/assets/madamwoo/tile-hover.svg" class="active"></a>
+						<img src="https://cdn.bopple.app/assets/madamwoo/tile-hover.svg" class="active" id="brand_img"></a>
 					</div>
 				</div>
 			</div>
 			<div data-index="5" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
 				<div>
 					<div class="brand-badge ">
-						<img src="https://cdn.bopple.app/assets/belleshotchicken/tile-hover.svg" class="active"></a>
+						<img src="https://cdn.bopple.app/assets/belleshotchicken/tile-hover.svg" class="active" id="brand_img"></a>
 					</div>
 				</div>
 			</div>
@@ -600,6 +607,37 @@ function displayMarker(locPosition, message) {
 		</div>
 
 	</footer>
+	<!-- 현재 위치 좌표값을 servlet으로 보내는 부분 -->
+	<form name="frm">
+		<input type="hidden" name="lat2">
+		<input type="hidden" name="lon2">		
+	</form>
+	<script>
+	
+	if (navigator.geolocation) {
+		var frm = document.frm;
+	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+	   		navigator.geolocation.getCurrentPosition(function(position) {
+	        lat2 = position.coords.latitude, // 현재 위치의 위도
+	        lon2 = position.coords.longitude; // 현재 위치의 경도
+	        console.log(frm.lat2.value);
+	        console.log(frm.lon2.value);
+	        frm.lat2.value = lat2;
+	        frm.lon2.value = lon2;
+	        console.log(frm.lat2.value);
+	        console.log(frm.lon2.value);
+	        $("#brand_img").on("click", function(){
+	        	
+	        frm.action="<%=ctxPath%>/store/storeSearch.do?brand=<%=brandName%>";
+	        frm.method="post";
+	        frm.submit();
+	        });
+	        
+	    })
+	};
+	
+	
+	</script>
 
 	<!--  로그인 스크립트 ajax 통신  -->
 	<script>

@@ -97,17 +97,4 @@ public class StoreService {
 			return vo;
 		}
 		
-		// 해당 store의 좌표값 가져오는 메소드 (explore에 뿌려주는 것)
-		public List<StoreLocVO> getLatLng(String store_name) {
-			List<StoreLocVO> list = null;
-			Connection conn = getConnection();
-			try {
-				StoreDAO dao = new StoreDAO();
-				list = dao.getLatLngList(conn, store_name);
-				close(conn);
-			} catch (Exception e) {
-				System.out.println("Location 오류발생");
-			}
-			return list;
-		}
 }

@@ -46,10 +46,6 @@ public class CustomListViewServlet extends HttpServlet {
 		String store_id = storevo.getStore_id();
 
 		// 만약 menuVo가 있다면 초기화 시켜줌
-//		if (request.getSession().getAttribute("menuVo") != null) {
-//			System.out.println("이미 해당하는 vo가 있어서 초기화 시켜줌");
-//			request.getSession().removeAttribute("menuVo");
-//		}
 		// vo받아왔어요
 		String menu_name = request.getParameter("menu_name");
 		System.out.println("서블릿들어옴 메뉴이름은 : " + menu_name);
@@ -65,19 +61,14 @@ public class CustomListViewServlet extends HttpServlet {
 
 		List<List<CustomVO>> sortCustomList = null;
 		sortCustomList = mService.selectCustomListList(menuVo.getMenu_id());
-		// 테스트
-		System.out.println("서블릿 카테고리1 : " + sortCustomList.get(0).get(0).getCustom_category()); // coffee
-		System.out.println("서블릿 카테고리2 : " + sortCustomList.get(1).get(0).getCustom_category()); // beverage
 
 		request.getSession().setAttribute("sortCustomList", sortCustomList);
-		//
 
-		// 여기서 코드가 걍끝나버려요 이유는 모르겠어
-//		if(sortCustomList != null) {	
-//			System.out.println("해당하는 menu 의 커스텀List 찾았음");
-//		}else {
-//			System.out.println("해당하는 menu 의 커스텀List 못 찾았음");
-//		}
+		if(sortCustomList.get(0) != null) {	
+			System.out.println("해당하는 menu 의 커스텀List 찾았음");
+		}else {
+			System.out.println("해당하는 menu 의 커스텀List 못 찾았음");
+		}
 
 		out.flush();
 		out.close();

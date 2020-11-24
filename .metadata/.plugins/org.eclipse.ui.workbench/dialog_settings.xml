@@ -5,4 +5,8 @@
 		<item key="EditorSelectionDialog.STORE_ID_INTERNAL_EXTERNAL" value="true"/>
 		<item key="EditorSelectionDialog.STORE_ID_DESCR" value="Google Chrome"/>
 	</section>
+	<section name="ImportExportAction">
+	</section>
+	<section name="ZipFileImportWizard">
+	</section>
 </section>

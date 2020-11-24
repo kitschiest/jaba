@@ -38,8 +38,6 @@ public class MenuService {
 		   MenuDAO dao = new MenuDAO();
 		   categoryList = dao.selectCategoryList(conn, store_id);
 		   System.out.println("서비스파일부분 test");
-		   System.out.println(categoryList.get(0));
-		   System.out.println(categoryList.get(1));
 		   close(conn);
 	   }catch(Exception e) {
 		   e.printStackTrace();
@@ -118,8 +116,6 @@ public class MenuService {
 		   MenuDAO dao = new MenuDAO();
 		   categoryCustomList = dao.selectCustomCategoryList(conn, menu_id);
 		   System.out.println("서비스파일부분 Custom test");
-		   System.out.println(categoryCustomList.get(0));
-		   System.out.println(categoryCustomList.get(1));
 		   close(conn);
 	   }catch(Exception e) {
 		   e.printStackTrace();

@@ -95,6 +95,8 @@ public class StoreDAO {
 					vo.setStore_time(rs.getString("store_time"));
 					vo.setStore_img(rs.getString("store_img"));
 					vo.setStore_description(rs.getString("store_description"));
+					vo.setStore_lat(rs.getString("store_lat"));
+					vo.setStore_lng(rs.getString("store_lng"));
 					list.add(vo);
 				} while (rs.next());
 			}
@@ -132,28 +134,7 @@ public class StoreDAO {
 		return selectStore;
 	}
 	
-	public List<StoreLocVO> getLatLngList(Connection conn, String store_name) {
-		List<StoreLocVO> list = null;
-		//여기서 join으로 묶자?
-		String sql = "select l.store_lat, l.store_lng from location l, store s where l.store_id=s.store_id and s.store_name=?;";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, store_name);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				list = new ArrayList<StoreLocVO>();
-				do {
-					StoreLocVO vo = new StoreLocVO();
-					vo.setStore_id(rs.getString("store_id"));
-					vo.setStore_lat(rs.getString("store_lat"));
-					vo.setStore_lng(rs.getString("store_lng"));
-					list.add(vo);
-				} while (rs.next());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
+	
+	
 
 }

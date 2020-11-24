@@ -71,11 +71,6 @@ public class MenuDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// 테스트
-		String a = categoryList.get(0);
-		String b = categoryList.get(1);
-		System.out.println(a + "           " + b);
-		// 
 		close(rs);
 		close(pstmt);
 		return categoryList;
@@ -197,11 +192,6 @@ public class MenuDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// 테스트
-		String a = customList.get(0);
-		String b = customList.get(1);
-		System.out.println(a + "           " + b);
-		// 
 		close(rs);
 		close(pstmt);
 		return customList;

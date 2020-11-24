@@ -940,6 +940,9 @@ section .container .store_list_grid {
                menu_name : aa
             },
             success : function(res) {
+            	$(".header-title").load(location.href + " .header-title");
+                $(".header-subtitle").load(location.href + " .header-subtitle");
+                $(".modal-body").load(location.href + " .modal-body");
             }
          });
          $("#mmmaaa").load(currentLocation + "#mmmaaa");
