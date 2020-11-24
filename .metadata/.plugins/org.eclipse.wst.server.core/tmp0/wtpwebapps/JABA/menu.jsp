@@ -41,7 +41,6 @@
    $(function() {
       $(window).scroll(function() {
          var navbar = $(this).scrollTop();
-         console.log(navbar);
          var $header = $('header');
          if (navbar > 0) {
             $header.addClass('activated');
@@ -57,40 +56,23 @@
 
       })
    })
+   
+   // sold-out 버튼 기본값 hide로 세팅
+   $(document).ready(function () {
+       $('.sold_out_btn').hide();
+   });
+   
    // 메뉴 카드 클릭 시 모달창 오픈
    $(document).ready(
          function() {
             $(".product_card").click(
                   function() {
-                     //console.log("메뉴이름은 : " + aa.val());
-                     // 오픈전에 서블릿 작업을해주고
-                     // 정보를 가져온다음에
-
                      $('div.modal').modal();
                   });
          });
+  
 
-   // 메뉴 모달창 하단 - + 버튼
-   $(function() {
-      $('#decreaseQuantity').click(function(e) {
-         e.preventDefault();
-         var stat = $('#numberUpDown').text();
-         var num = parseInt(stat, 10);
-         num--;
-         if (num <= 0) {
-            num = 1;
-         }
-         $('#numberUpDown').text(num);
-      });
-      $('#increaseQuantity').click(function(e) {
-         e.preventDefault();
-         var stat = $('#numberUpDown').text();
-         var num = parseInt(stat, 10);
-         num++;
-
-         $('#numberUpDown').text(num);
-      });
-   });
+          
 </script>
 <style>
 body {
@@ -285,13 +267,14 @@ section .container .store_list_grid {
 .product_card {
    position: relative;
    display: flex;
-   border: 1px solid;
+   border: 1px solid white;
    flex-direction: row;
    justify-content: space-between;
    overflow: hidden;
    background-color: white;
    max-height: 145px;
    min-width: 345px;
+   cursor: pointer;
    /* 반응형 추가필요 */
 }
 
@@ -526,6 +509,14 @@ section .container .store_list_grid {
 }
 
 .custom-charge {
+   color: #8492a6;
+   font-weight: 400;
+   margin-left: 10px;
+   min-width: 60px;
+   height: 22px;
+}
+
+.custom-charge-jstl {
    color: #8492a6;
    font-weight: 400;
    margin-left: 10px;
@@ -770,11 +761,11 @@ section .container .store_list_grid {
    <!-- Modal Basic -->
    <div class="modal fade" id="exampleModalCenter" tabindex="-1"
       role="dialog" aria-labelledby="exampleModalCenterTitle"
-      aria-hidden="true">
+      aria-hidden="true" >
       <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content modal-dialog-centered" id="mmmaaa">
             <!-- modal-header -->
-            <div class="modal-header">
+            <div class="modal-header" >
                <button type="button" class="close" data-dismiss="modal"
                   aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -784,9 +775,9 @@ section .container .store_list_grid {
                <div class="header-details">
                   <div class="header-content">
                      <div>
-                        <p class="header-title">${menuVo.menu_name }</p>
+                        <p class="header-title" >${menuVo.menu_name }</p>
                      </div>
-                     <div class="header-subtitle">
+                     <div class="header-subtitle ">
                         <p>${menuVo.menu_description }</p>
                      </div>
                   </div>
@@ -814,9 +805,9 @@ section .container .store_list_grid {
                               <c:forEach items="${sortCustomList}" var="sortCustomList"
                                  varStatus="s2">
                                  <div class="icheck-material-teal">
-                                    <input type="checkbox" id="custom1${s.count }${s2.count }" name="teal" /> <label
-                                       for="custom1${s.count }${s2.count }">${sortCustomList.custom_name}</label> <span
-                                       class="custom-charge">&#8361;+${sortCustomList.custom_price}원</span>
+                                    <input type="checkbox" id="custom1${s.count }${s2.count }" class="chkbox" name="teal" value="${sortCustomList.custom_price}" onclick="itemSum();"/>
+                                    <label for="custom1${s.count }${s2.count }" class="customClick">${sortCustomList.custom_name}</label><div>
+                                    <span class="custom-charge">&#8361;+</span><span class="custom-charge-jstl">${sortCustomList.custom_price}</span><span class="custom-charge"> 원</span></div> 
                                  </div>
                               </c:forEach>
                            </c:if>
@@ -830,7 +821,7 @@ section .container .store_list_grid {
                <div class="quantity">
                   <button
                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary Mui-disabled Mui-disabled"
-                     tabindex="-1" type="button" id="decreaseQuantity">
+                     tabindex="-1" type="button" id="decreaseQuantity" onclick="QuantityDownFunc();">
                      <span class="MuiIconButton-label"><svg
                            class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24"
                            aria-hidden="true" role="presentation">
@@ -840,7 +831,7 @@ section .container .store_list_grid {
                   <span class="quantity__number" id="numberUpDown">1</span>
                   <button
                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary"
-                     tabindex="0" type="button" id="increaseQuantity">
+                     tabindex="0" type="button" id="increaseQuantity" onclick="QuantityUpFunc();">
                      <span class="MuiIconButton-label"><svg
                            class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24"
                            aria-hidden="true" role="presentation">
@@ -851,7 +842,7 @@ section .container .store_list_grid {
                <div class="add-to-order">
                   <button type="button" class="btnChk" id="addorder" name="addorder">
                      <div>ADD TO ORDER</div>
-                     <div>₩ 원</div>
+                     <div><span>&#8361;&nbsp;&nbsp;</span><span id="custom-add-price">${menuVo.menu_price }</span><span>원</span></div>
                      <!-- 금액 부분에 기본적으로 선택한 메뉴의 가격이 출력되고, 체크박스 선택시 합산이 되어야 함! -->
                   </button>
                </div>
@@ -930,32 +921,76 @@ section .container .store_list_grid {
 
    </footer>
    <script>
-      var count = 0;
-      function clickaaaa(obj){
+   // 메뉴가격 전역변수
+   var menu_price = 0;
+   var currunetMenuPrice = 0;
+
+   function clickaaaa(obj){
+         //menu_price = 0;
+       //currunetMenuPrice = 0;
          var aa = $(obj).children("div").children(".product_name").children().children("span").text();
-         console.log(aa);
+         console.log(aa + " product_name을 클릭");
+      // 메뉴 모달창 하단 - + 버튼
          $.ajax({
             url: "<%=ctxPath%>/menu/menuDetailView.do",
             data : {
                menu_name : aa
             },
             success : function(res) {
-            	$(".header-title").load(location.href + " .header-title");
-                $(".header-subtitle").load(location.href + " .header-subtitle");
-                $(".modal-body").load(location.href + " .modal-body");
+               console.log("현재 res값은 " + res);
+               menu_price = parseInt(res,10);
+               currunetMenuPrice = parseInt(res,10);
+               $(".header-title").load(location.href + " .header-title");
+               $(".header-subtitle").load(location.href + " .header-subtitle");
+               $(".modal-body").load(location.href + " .modal-body");
+               $(".modal-footer").load(location.href + " .modal-footer");
+               console.log("onload 완료");
+              console.log("현재 custom-add-price의 값은 : " + parseInt($("#custom-add-price").text()));
             }
          });
-         $("#mmmaaa").load(currentLocation + "#mmmaaa");
-         count++;
-         //$(".header-details .header-content .header-title").html(test);
-         // session에 저장
-/*          console.log("ㅁㅁㅁㅁ");
-         var test = '<c:out value="${menuVo.menu_name}"/>';
-         console.log("c:out  " + test);
-         return; */
+      
       }
+   
+   function QuantityDownFunc(){
+               var stat = $('#numberUpDown').text();
+               var num = parseInt(stat, 10);
+               num--;
+               if (num <= 0) {
+                  num = 1;
+               }
+               //$("#custom-add-price").text(num * menu_price);
+               $('#numberUpDown').text(num);
+   }
+   
+   function QuantityUpFunc(){
+               var stat = $('#numberUpDown').text();
+               var num = parseInt(stat, 10);
+               num++;
+               //$("#custom-add-price").text(num * menu_price);
+               $('#numberUpDown').text(num);
+   }
+   
+
+   // 체크박스 선택 시 합계 금액 바꿔주는 메소드
+     function itemSum(){
+       //var sum =  ${menuVo.menu_price};
+       var sum = currunetMenuPrice;
+       var count = $(".chkbox").length;
+       for(var i=0; i < count; i++ ){
+           if( $(".chkbox")[i].checked == true ){
+
+            sum += parseInt($(".chkbox")[i].value);
+           }
+       }
+       //html 을 text로
+       $("#custom-add-price").text(sum);
+    } 
+      
+      
       
    </script>
-
+   <script>
+   
+   </script>
 </body>
 </html>

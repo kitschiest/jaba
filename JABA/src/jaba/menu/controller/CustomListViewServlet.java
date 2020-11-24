@@ -63,7 +63,9 @@ public class CustomListViewServlet extends HttpServlet {
 		sortCustomList = mService.selectCustomListList(menuVo.getMenu_id());
 
 		request.getSession().setAttribute("sortCustomList", sortCustomList);
-
+		
+		out.print(menuVo.getMenu_price());
+		
 		if(sortCustomList.get(0) != null) {	
 			System.out.println("해당하는 menu 의 커스텀List 찾았음");
 		}else {
