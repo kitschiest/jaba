@@ -840,7 +840,7 @@ section .container .store_list_grid {
                   </button>
                </div>
                <div class="add-to-order">
-                  <button type="button" class="btnChk" id="addorder" name="addorder">
+                  <button type="button" class="btnChk" id="addorder" name="addorder" onclick="addOrder();">
                      <div>ADD TO ORDER</div>
                      <div><span>&#8361;&nbsp;&nbsp;</span><span id="custom-add-price">${menuVo.menu_price }</span><span>원</span></div>
                      <!-- 금액 부분에 기본적으로 선택한 메뉴의 가격이 출력되고, 체크박스 선택시 합산이 되어야 함! -->
@@ -926,8 +926,8 @@ section .container .store_list_grid {
    var currunetMenuPrice = 0;
 
    function clickaaaa(obj){
-         //menu_price = 0;
-       //currunetMenuPrice = 0;
+	   	//menu_price = 0;
+	    //currunetMenuPrice = 0;
          var aa = $(obj).children("div").children(".product_name").children().children("span").text();
          console.log(aa + " product_name을 클릭");
       // 메뉴 모달창 하단 - + 버튼
@@ -937,20 +937,23 @@ section .container .store_list_grid {
                menu_name : aa
             },
             success : function(res) {
-               console.log("현재 res값은 " + res);
-               menu_price = parseInt(res,10);
-               currunetMenuPrice = parseInt(res,10);
+            	console.log("현재 res값은 " + res);
+            	menu_price = parseInt(res,10);
+            	currunetMenuPrice = parseInt(res,10);
+            	
+            	// 모달부분 jstl 부분 reload 시켜주기위해서 load
                $(".header-title").load(location.href + " .header-title");
                $(".header-subtitle").load(location.href + " .header-subtitle");
                $(".modal-body").load(location.href + " .modal-body");
                $(".modal-footer").load(location.href + " .modal-footer");
-               console.log("onload 완료");
-              console.log("현재 custom-add-price의 값은 : " + parseInt($("#custom-add-price").text()));
             }
          });
       
+      
       }
-   
+         
+
+         
    function QuantityDownFunc(){
                var stat = $('#numberUpDown').text();
                var num = parseInt(stat, 10);
@@ -973,7 +976,6 @@ section .container .store_list_grid {
 
    // 체크박스 선택 시 합계 금액 바꿔주는 메소드
      function itemSum(){
-       //var sum =  ${menuVo.menu_price};
        var sum = currunetMenuPrice;
        var count = $(".chkbox").length;
        for(var i=0; i < count; i++ ){
@@ -986,11 +988,15 @@ section .container .store_list_grid {
        $("#custom-add-price").text(sum);
     } 
       
-      
-      
    </script>
    <script>
-   
+   //addorder 버튼 클릭시 작동하는 function()
+   function addOrder(){
+ 	  	console.log("order버튼클릭"); 
+ 	  	console.log(parseInt($("#custom-add-price").text()));
+ 	  	console.log(parseInt($("#numberUpDown").text()));
+ 	  	
+   }
    </script>
 </body>
 </html>
