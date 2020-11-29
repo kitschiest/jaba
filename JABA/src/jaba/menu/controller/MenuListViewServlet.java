@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import jaba.menu.model.service.MenuService;
 import jaba.menu.vo.MenuVO;
+import jaba.store.model.service.DBoardService;
 import jaba.store.model.service.StoreService;
+import jaba.store.vo.DBoardVO;
 import jaba.store.vo.StoreVO;
 
 /**
@@ -59,6 +61,15 @@ public class MenuListViewServlet extends HttpServlet {
 		if(sortList != null) {
 			System.out.println("해당하는 store 의 메뉴List 찾았음");
 		}
+		
+		//해당 매장 게시판 코드
+		DBoardService dService = new DBoardService();
+		List<DBoardVO> dboardList = dService.getStoreFirstBoard(store_name);
+		if(dboardList == null) {
+			System.out.println("store에 게시글이 없습니다.");
+		}
+		System.out.println("store 게시판 불러오기 성공");
+		request.getSession().setAttribute("dboardList", dboardList);
 		
 		// 메뉴리스트~~~
 		request.getRequestDispatcher("/menu.jsp").forward(request, response);

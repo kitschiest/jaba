@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="jaba.client.vo.ClientVO"/>
-<fullyQualifiedTypeName name="jaba.store.vo.StoreVO"/>
 <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
 <fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="jaba.store.vo.StoreLocVO"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="jaba.store.vo.BoardVO"/>
+<fullyQualifiedTypeName name="jaba.store.model.service.BoardService"/>
+<fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
+<fullyQualifiedTypeName name="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"/>
+<fullyQualifiedTypeName name="java.io.PrintWriter"/>
+<fullyQualifiedTypeName name="jaba.store.vo.StoreVO"/>
+<fullyQualifiedTypeName name="jaba.store.model.service.DBoardService"/>
+<fullyQualifiedTypeName name="jaba.store.vo.DBoardVO"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

@@ -197,14 +197,17 @@ main {
 	padding: 20px;
 	width: 100%;
 	height: 300px;
-	background: grey;
+	
 }
 .resultArea table{
 	margin: 0 auto;
+	border-top: 5px solid #89BDBB;
+	border-bottom: 5px solid #89BDBB;
+	color: #89BDBB;
+	
 
 }
 .resultArea tr, td, th{
-	border: 1px solid black;
 	width: 15%;
 	text-align: center;
 }

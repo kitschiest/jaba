@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value=""/>
+		<item key="selection" value="href"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="getGeo"/>
-			<item value="script"/>
-			<item value="storeSearch"/>
-			<item value=".do"/>
-			<item value="lat2"/>
-			<item value="rad"/>
-			<item value="lat"/>
-			<item value="LatLngPostion"/>
-			<item value="latlngpostion"/>
-			<item value="click"/>
-			<item value="key"/>
-			<item value="app"/>
-			<item value="addr"/>
-			<item value="map"/>
-			<item value="clientId"/>
+			<item value="href"/>
+			<item value="modal"/>
+			<item value="selectStore"/>
+			<item value="selectStroe"/>
+			<item value="header-title"/>
+			<item value="container_menu_info"/>
+			<item value="adminStore"/>
+			<item value="boardList"/>
+			<item value="for"/>
+			<item value="menu_name"/>
+			<item value="aa"/>
+			<item value="clickaaa"/>
+			<item value="&#x09;   &#x09;//menu_price = 0;"/>
+			<item value="location"/>
+			<item value="locatino"/>
 		</list>
 		<list key="replacehistory">
 			<item value="td"/>
@@ -32,8 +32,8 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="537"/>
-		<item key="DIALOG_Y_ORIGIN" value="121"/>
+		<item key="DIALOG_X_ORIGIN" value="1146"/>
+		<item key="DIALOG_Y_ORIGIN" value="116"/>
 		<item key="DIALOG_WIDTH" value="294"/>
 		<item key="DIALOG_HEIGHT" value="408"/>
 		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>

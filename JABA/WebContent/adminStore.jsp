@@ -1,6 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%!SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+int pageSize = 3; //  한 페이지당글수
+int pageBlock = 3; // 한 화면에 나타날 페이지 링크 수
+%>
+<%
+int bCount = (int)request.getAttribute("bCount");
+int currentPage = (int)request.getAttribute("currentPage");
+int startPage = (int)request.getAttribute("startPage");
+int endPage = (int)request.getAttribute("endPage");
+%>
+<%
+   String ctxPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,13 +39,13 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- RESET -->
-<link href="./css/html5_reset.css" rel="stylesheet">
+<link href="<%=ctxPath%>/css/html5_reset.css" rel="stylesheet">
 <!-- HEADER CSS -->
-<link href="./css/header.css" rel="stylesheet">
+<link href="<%=ctxPath%>/css/header.css" rel="stylesheet">
 <!-- SECTION CSS -->
-<link href="./css/section.css" rel="stylesheet">
+<link href="<%=ctxPath%>/css/section.css" rel="stylesheet">
 <!-- FOOTER CSS -->
-<link href="./css/footer.css" rel="stylesheet">
+<link href="<%=ctxPath%>/css/footer.css" rel="stylesheet">
 
 <style type="text/css"></style>
 
@@ -114,7 +129,13 @@
 			radioContent.hide();
 			radioContent.eq($("input[type='radio']").index(this)).show();
 		});
+		
 	});
+	
+	 // board 제목 클릭 시 모달창 오픈
+	  
+	  
+
 </script>
 
 
@@ -164,6 +185,7 @@ main {
 
 .container input[type="radio"] {
 	display: none;
+	overflow: auto;
 }
 
 .container input[type="radio"]+span {
@@ -188,14 +210,17 @@ main {
 	padding: 20px;
 	width: 100%;
 	height: 300px;
-	background: grey;
+	
 }
 .resultArea table{
 	margin: 0 auto;
+	border-top: 5px solid #89BDBB;
+	border-bottom: 5px solid #89BDBB;
+	color: #89BDBB;
+	
 
 }
 .resultArea tr, td, th{
-	border: 1px solid black;
 	width: 15%;
 	text-align: center;
 }
@@ -204,15 +229,18 @@ main {
 	padding: 20px;
 	width: 100%;
 	height: 300px;
-	background: lightblue;
+	
 }
 
 .main_table_board {
 	padding: 20px;
 	width: 100%;
 	height: 300px;
-	background: pink;
+	overflow: auto;
+	
 }
+
+
 </style>
 
 <!-- ASIDE -->
@@ -487,7 +515,7 @@ main {
 
 			<div class="resultArea">
 				<div data-index="0" class="main_table_client">
-				<table>
+				<table id="adminStoreListTable">
 				<tr>
 					<th>ID
 					</th>
@@ -505,7 +533,7 @@ main {
 				<tr>
 					<td>${store.store_id }
 					</td>
-					<td>${store.store_name }
+					<td><a onclick="storeSelect(this)" id="storeName">${store.store_name}</a>
 					</td>
 					<td>${store.store_addr }
 					</td>
@@ -519,8 +547,127 @@ main {
 				</table>
 		
 				</div>
-				<div data-index="0" class="main_table_store"></div>
-				<div data-index="0" class="main_table_board"></div>
+			<div data-index="0" class="main_table_store">
+	<section id="menu_info">
+      <div class="container" id="container_menu_info">
+			<table>
+			<thead>
+			<tr>
+				<th>메뉴 이름</th>
+				<th>메뉴 상세정보</th>
+				<th>메뉴 가격</th>
+				
+			</tr>
+			</thead>
+		
+		
+          <tbody>
+ 		<c:choose>
+ 		<c:when test="${not empty menuList}">
+          <c:forEach items="${menuList}" var="menuVo" varStatus="s"> 
+          <tr>
+			<td class = "adminMenuTd1">${menuVo.menu_name}
+			</td>
+			<td class = "adminMenuTd2">${menuVo.menu_description}
+			</td>
+			<td class = "adminMenuTd3">${menuVo.menu_price}
+			</td>
+			</tr>
+		  </c:forEach>
+		</c:when>
+			<c:otherwise>
+			<tr>
+				<td colspan="3">
+				원하는 매장을 골라주세요.
+				</td>
+			</tr>
+			</c:otherwise>
+			</c:choose>
+	
+			
+			</tbody>
+			</table>
+        
+      </div>
+   </section>
+				
+			</div>
+				<div data-index="0" class="main_table_board" id="adminBoard">
+					<div>
+		<table border="1" id="adminBoardTable">
+			<thead>
+			<tr>
+				<th>글번호</th>
+				<th>글쓴이</th>
+				<th width="30px">제목</th>
+				<th>작성일</th>
+				<th>조회수</th>
+				</tr>
+			</thead>
+			
+			<c:choose>
+ 		<c:when test="${not empty boardList}">
+          <c:forEach items="${boardList}" var="vo" varStatus="s"> 
+          <tbody class="adminBoardtbody">
+          <tr class = "adminBoardTr">
+			<td id = "adminBoardTd1">${vo.bno}
+			</td>
+			<td id = "adminBoardTd2">${vo.bwrite}
+			</td>
+			<td id = "adminBoardTd3"><a href="./content.jsp?bno=${vo.bno}&pageNum=${currentPage}" id="bsubject">${vo.bsubject}</a>
+			</td>
+			<td id = "adminBoardTd4">${vo.bdate }
+			</td>
+			<td id = "adminBoardTd5">${vo.bcnt}
+			</td>
+			</tr>
+			</tbody>
+		  </c:forEach>
+		</c:when>
+			<c:otherwise>
+			<tr>
+				<td colspan="5">
+				원하는 매장을 골라주세요.
+				</td>
+			</tr>
+			</c:otherwise>
+			</c:choose>
+		</table>
+<%
+			if (bCount > 0) {
+			// [이전]
+			if (startPage > pageBlock) {
+		%>
+		<a onclick="boardPageBefore()">[이전]</a>
+		<%
+			}
+
+		// [1][2][3]...
+		for (int i = startPage; i <= endPage; i++) {
+		if (currentPage != i) {
+		%>
+		
+		<a onclick="boardPageNum(this)"><%=i%>
+		</a>
+		<%
+			} else {
+		%>
+		[<%=i%>]
+		<%
+			}
+		}
+
+		// [다음]
+		if (startPage < pageBlock) {
+		%>
+		<a onclick="boardPageAfter()">[다음]</a>
+		<%
+			}
+		}
+		%>
+<!-- Servlet에 java 변수들 담아두고 여기선 el태그로만 받아보자 -->
+	</div> 
+			</div>
 			</div>
 		</div>
 	</section>
@@ -533,7 +680,7 @@ main {
 		<div class="container">
 			<div class="row">
 				<div class="footer_logo">
-					<img src="images/jaba_english_white.png">
+					<img src="<%=ctxPath%>/images/jaba_english_white.png">
 				</div>
 				<div class="footer_links">
 					<ul>
@@ -598,7 +745,79 @@ main {
 		</div>
 
 	</footer>
+<script>
+	function storeSelect(obj){
+		var store = $(obj).text();
+		console.log(store);
+		alert(store+"를 클릭하였습니다.");
+		//menu_price = 0;
+	    //currunetMenuPrice = 0;
+         console.log(store + " store_name을 클릭");
+      // 
+         $.ajax({
+            url: "<%=ctxPath%>/admin/selectStore.do",
+            data : {
+               storename : store
+            },
+            success : function(res) {
+            	// 모달부분 jstl 부분 reload 시켜주기위해서 load
+            	
+            	/* $(".adminMenuTd1").load(location.href + " .adminMenuTd1"); //메뉴부분 계속 반복되어서 리로드된다. 
+            	$(".adminMenuTd2").load(location.href + " .adminMenuTd2"); 
+            	$(".adminMenuTd3").load(location.href + " .adminMenuTd3");  */
+            			
+            	/* $("#adminBoardTd1").load(location.href + " #adminBoardTd1"); //앞에 띄어쓰기 필수네?
+            	$("#adminBoardTd2").load(location.href + " #adminBoardTd2");
+            	$("#adminBoardTd3").load(location.href + " #adminBoardTd3");
+            	$("#adminBoardTd4").load(location.href + " #adminBoardTd4");
+            	$("#adminBoardTd5").load(location.href + " #adminBoardTd5"); //이대점에선 오류가 뜬다?
+            			 */
+            	location.reload();
+				
+            	
+            	//method 쓴 것들 close되어 있는 지 확인
+            		
+              	
+            }
+         });	
+	}
 
+</script>
+<!-- Board 페이지 이동 시 adminBoard div만 리로드 -->
+<script>
+	function boardPageBefore(){
+		$.ajax({
+			url: "<%=ctxPath%>/boardList?pageNum=<%=startPage - pageBlock%>",
+			success : function(res){
+				$(".adminBoard").load(location.href + " .adminBoard");
+			}
+		})
+	}
+	function boardPageNum(obj){
+		var i = $(obj).text();
+		console.log(i);
+		$.ajax({
+			url: "<%=ctxPath%>/boardList?pageNum=<%=currentPage%>+1",
+			success : function(res){
+				$(".adminBoard").load(location.href + ".adminBoard");
+			}
+		})
+	}
+	function boardPageAfter(){
+		$.ajax({
+			url: "<%=ctxPath%>/boardList?pageNum=<%=startPage + pageBlock%>",
+			success : function(res){
+				$(".adminBoard").load(location.href + ".adminBoard");
+			}
+		})
+	}
+	function clickStoreName(obj){
+	   
+      
+      
+      }
+
+</script>
 
 
 </body>

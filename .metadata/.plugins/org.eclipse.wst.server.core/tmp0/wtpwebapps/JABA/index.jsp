@@ -260,7 +260,7 @@ main {
 						<br> <span style="font-weight: bold;"> Password </span> <span style="float: right"> <a href="#" style="font-weight: normal;">Forgot&nbsp;password?</a>
 
 
-						</span> <input type="text" class="signin-input" id="pwd" name="pwd">
+						</span> <input type="password" class="signin-input" id="pwd" name="pwd">
 					</div>
 				</div>
 
@@ -328,7 +328,7 @@ main {
 								<br>
 								<div class="text-box" style="font-weight: bold; font-size: 13px;">
 									<p>Password</p>
-									<input type="text" class="signin-input" id="passwordRegister" name="passwordRegister"> <span id="passwordRegisterResult"></span><br>
+									<input type="password" class="signin-input" id="passwordRegister" name="passwordRegister"> <span id="passwordRegisterResult"></span><br>
 									<p style="font-size: 11px; font-weight: normal; padding-top: 3px">Password must be at least 8 characters</p>
 								</div>
 
@@ -652,12 +652,14 @@ function displayMarker(locPosition, message) {
 				console.log(res1);
 				var biz = "BizPartner";
 				var admin = "Admin";
+				var client = "Client";
 				// res1 이 BizPartner 이면 BizPartner 페이지로 이동.
 				if(res1 == biz){
 					location.href="./BizMain.jsp";
-				}
-				if(res1 == admin){
+				}else if(res1 == admin){
 					location.href="./adminMain.jsp";
+				}else if(res1 == client){
+					alert("로그인성공");
 				}
 			}
 		});

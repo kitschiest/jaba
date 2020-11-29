@@ -195,10 +195,13 @@ main {
 }
 .resultArea table{
 	margin: 0 auto;
+	border-top: 5px solid #89BDBB;
+	border-bottom: 5px solid #89BDBB;
+	color: #89BDBB;
+	
 
 }
 .resultArea tr, td, th{
-	border: 1px solid black;
 	width: 15%;
 	text-align: center;
 }
@@ -207,14 +210,14 @@ main {
 	padding: 20px;
 	width: 100%;
 	height: 300px;
-	background: grey;
+	
 }
 
 .main_table_store {
 	padding: 20px;
 	width: 100%;
 	height: 300px;
-	background: lightblue;
+	
 }
 
 .main_table_board {
@@ -366,7 +369,7 @@ main {
 				<div class="menu_bar">
 					<div style="width: 96%; text-align: right" onclick="HideMenu()">&times;</div>
 					<div class="menu_bar_list"><a href="./adminClient.jsp">Client</a></div>
-					<div class="menu_bar_list"><a href="./adminStore.jsp">Biz. Partner</a></div>
+					<div class="menu_bar_list"><a href="./adminStoreTotal.do">Biz. Partner</a></div>
 					<div class="menu_bar_list"><a href="./adminQna.jsp">Q&A</a></div>
 				</div>
 			</div>

@@ -9,7 +9,6 @@ import javax.sql.DataSource;
 
 import jaba.client.dao.ClientDAO;
 import jaba.store.dao.StoreDAO;
-import jaba.store.vo.StoreLocVO;
 import jaba.store.vo.StoreVO;
 
 import static jaba.common.jdbcdriver.JDBCTemplate.*;

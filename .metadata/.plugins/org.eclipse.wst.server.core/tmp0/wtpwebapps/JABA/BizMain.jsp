@@ -1,5 +1,9 @@
 <%@page import="jaba.store.vo.StoreVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+   String ctxPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +16,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!-- 리셋 css -->
-    <link rel="stylesheet" href="html5_reset.css">
+    <link rel="stylesheet" href="<%=ctxPath%>/css/html5_reset.css">
     <!-- switchery-->
     <link rel="stylesheet" href="./dist/switchery.css" />
     <script src="./dist/switchery.js"></script>
@@ -675,7 +679,11 @@ background-color: rgba(219, 242, 255, 0.952);
             </span>
             <span>
                 <!-- 최근 게시판부분-->
-                <h3>재고 소진으로 인해 금일 영업은 20시까지만 합니다. </h3>
+                <c:if test="${not empty dboardList}">
+                	<c:forEach items="${dboardList }" var="bvo" varStatus="s">
+                		<div>${dvo.bcontent }</div>
+                	</c:forEach>
+                </c:if>
             </span>
         </div>
     </section>

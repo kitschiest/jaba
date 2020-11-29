@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import jaba.store.vo.StoreLocVO;
 import jaba.store.vo.StoreVO;
 
 public class StoreDAO {

@@ -179,6 +179,7 @@ a {
 }
 </style>
 
+
 <!-- SECTION 3 -->
 <style>
 #sth {
@@ -192,6 +193,13 @@ a {
 
 .store_information {
    flex-dircetion: column;
+}
+.bossFinalNotice {
+	border: 5px solid #36727C;
+	text-align: center;
+	margin-top: 10px;
+	font-size: 300%;
+
 }
 
 #sth .container {
@@ -713,7 +721,11 @@ section .container .store_list_grid {
             <span id="store_description"> <!-- 매장 설명-->
                ${storeVo.store_description}
             </span> <span> <!-- 최근 게시판부분-->
-               <h3>재고 소진으로 인해 금일 영업은 20시까지만 합니다.</h3>
+             <c:if test="${not empty dboardList}">
+                	<c:forEach items="${dboardList }" var="bvo" varStatus="s">
+                		<div class="bossFinalNotice">${bvo.bcontent }</div>
+                	</c:forEach>
+                </c:if>
             </span>
          </div>
       </c:if>
