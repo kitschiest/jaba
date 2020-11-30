@@ -156,5 +156,43 @@ public class MenuService {
 	   }
 	   return sortCustomList;
    }
+// Custom_check 테이블에 체크된 커스텀 항목들 데이터 추가하는 메소드 (ORDER_ID와 CUSTOM_ID를 이용해서 한 개 INSERT)
+	public int insertCustomCheck(String menu_id, String custom_name,String order_id) {
+		int finalResult = 0;
+		Connection conn = getConnection();
+		MenuDAO dao = new MenuDAO();
+		int result = 0; // insert 할때 result
+		String custom_id = null;
+
+		// custom_check_id 가져오기
+		try {
+			custom_id = dao.selectCustomId(conn, menu_id, custom_name);
+			if (custom_id == null) {
+				System.out.println("custom_check_id가져오는데 오류 발생");
+			}else {
+				System.out.println("custom_name의 custom_id : " + custom_id);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// insert
+		try {
+			result = dao.insertCustomCheck(conn, custom_id, order_id);
+			if (result != 1) {
+				System.out.println("insertCustomCheck 실패");
+			}else {
+				System.out.println("custom_check에 성공적으로 insert");
+				// 성공하면 result를 1로 
+				finalResult = 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		close(conn);
+		return finalResult;
+	}
+
+
    
 }
