@@ -202,12 +202,7 @@ section .container .store_list_grid {
 					src="<%=ctxPath%>/images/jaba_english_white.png"></a>
 			</div>
 			<div class="menu">
-				<button class="menu_btn" value="LOG IN">
-					<span>LOG IN</span>
-				</button>
-				<button class="menu_btn" value="SIGN UP">
-					<span>SIGN UP</span>
-				</button>
+				
 			</div>
 		</div>
 

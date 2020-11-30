@@ -1315,12 +1315,7 @@ h3 {
 				<img src="<%=ctxPath%>/images/jaba_english_white.png">
 			</div>
 			<div class="menu">
-				<button class="menu_btn" value="LOG IN">
-					<span>LOG IN</span>
-				</button>
-				<button class="menu_btn" value="SIGN UP">
-					<span>SIGN UP</span>
-				</button>
+				
 				<button
 					class="MuiButtonBase-root MuiButton-root jss154 cart-select-button false MuiButton-text"
 					tabindex="0" type="button" id="cart-selector">

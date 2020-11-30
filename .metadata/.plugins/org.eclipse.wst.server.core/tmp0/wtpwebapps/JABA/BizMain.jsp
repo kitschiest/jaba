@@ -688,193 +688,45 @@ background-color: rgba(219, 242, 255, 0.952);
         </div>
     </section>
     <!-- SECTION2 menu_info -->
-    <section id="menu_info">
-        <div class="biz_container" id="container_menu_info">
-            <div class="category">
-                <div class="category_name">
-                    <h2> 메뉴카테고리 : 커피</h2>
-                </div>
-                <div class="category_products">
-                    <div class="product_card">
-                        <div class="product_card_detail">
-                            <div class="product_name">
-                                <p>아메리카노&nbsp;&nbsp;<button class="sold_out_btn">Sold out</button></p>
-                            </div>
-                            <div class="product_desc">
-                                아메리카노는 에스프레소 + 물이다.
-                            </div>
-                            <div class="product_price">
-                                <p>4000원</p>
-                            </div>
-                        </div>
-                        <div class="product_card_image">
-                            <img src="https://cdn.boppl.me/products/specialty_affogato_0.jpg" alt="Affogato">
-                        </div>
-                    </div>
-                    <!-- product_card 반복 -->
-                    <div class="product_card">
-                        <div class="product_card_detail">
-                            <div class="product_name">
-                                <p>아메리카노&nbsp;&nbsp;<button class="sold_out_btn">Sold out</button></p>
-                            </div>
-                            <div class="product_desc">
-
-                            </div>
-                            <div class="product_price">
-                                <p>4000원</p>
-                            </div>
-                        </div>
-                        <div class="product_card_image">
-                            <img src="https://cdn.boppl.me/products/specialty_affogato_0.jpg" alt="Affogato">
-                        </div>
-                    </div>
-                    <div class="product_card">
-                        <div class="product_card_detail">
-                            <div class="product_name">
-                                <p>아메리카노&nbsp;&nbsp;<button class="sold_out_btn">Sold out</button></p>
-                            </div>
-                            <div class="product_desc">
-                                아메리카노는 에스프레소 + 물이다.
-                            </div>
-                            <div class="product_price">
-                                <p>4000원</p>
-                            </div>
-                        </div>
-                        <div class="product_card_image">
-                            <img src="https://cdn.boppl.me/products/specialty_affogato_0.jpg" alt="Affogato">
-                        </div>
-                    </div>
-                    <div class="product_card">
-                        <div class="product_card_detail">
-                            <div class="product_name">
-                                <p>아메리카노&nbsp;&nbsp;<button class="sold_out_btn">Sold out</button></p>
-                            </div>
-                            <div class="product_desc">
-                                아메리카노는 에스프레소 + 물이다.
-                            </div>
-                            <div class="product_price">
-                                <p>4000원</p>
-                            </div>
-                        </div>
-                        <div class="product_card_image">
-                            <img src="https://cdn.boppl.me/products/specialty_affogato_0.jpg" alt="Affogato">
-                        </div>
-                    </div>
-                    <div class="product_card">
-                        <div class="product_card_detail">
-                            <div class="product_name">
-                                <p>아메리카노&nbsp;&nbsp;<button class="sold_out_btn">Sold out</button></p>
-                            </div>
-                            <div class="product_desc">
-                                아메리카노는 에스프레소 + 물이다.
-                            </div>
-                            <div class="product_price">
-                                <p>4000원</p>
-                            </div>
-                        </div>
-                        <div class="product_card_image">
-                            <img src="https://cdn.boppl.me/products/specialty_affogato_0.jpg" alt="Affogato">
-                        </div>
-                    </div>
-                    <div class="product_card">
-                        <div class="product_card_detail">
-                            <div class="product_name">
-                                <p>아메리카노&nbsp;&nbsp;<button class="sold_out_btn">Sold out</button></p>
-                            </div>
-                            <div class="product_desc">
-                                아메리카노는 에스프레소 + 물이다.
-                            </div>
-                            <div class="product_price">
-                                <p>4000원</p>
-                            </div>
-                        </div>
-                        <div class="product_card_image">
-                            <img src="https://cdn.boppl.me/products/specialty_affogato_0.jpg" alt="Affogato">
-                        </div>
-                    </div>
-                    <div class="product_card">
-                        <div class="product_card_detail">
-                            <div class="product_name">
-                                <p>아메리카노&nbsp;&nbsp;<button class="sold_out_btn">Sold out</button></p>
-                            </div>
-                            <div class="product_desc">
-                                아메리카노는 에스프레소 + 물이다.
-                            </div>
-                            <div class="product_price">
-                                <p>4000원</p>
-                            </div>
-                        </div>
-                        <div class="product_card_image">
-                            <img src="https://cdn.boppl.me/products/specialty_affogato_0.jpg" alt="Affogato">
-                        </div>
-                    </div>
-                    <div class="product_card">
-                        <div class="product_card_detail">
-                            <div class="product_name">
-                                <p>아메리카노&nbsp;&nbsp;<button class="sold_out_btn">Sold out</button></p>
-                            </div>
-                            <div class="product_desc">
-                                아메리카노는 에스프레소 + 물이다.
-                            </div>
-                            <div class="product_price">
-                                <p>4000원</p>
-                            </div>
-                        </div>
-                        <div class="product_card_image">
-                            <img src="https://cdn.boppl.me/products/specialty_affogato_0.jpg" alt="Affogato">
-                        </div>
-                    </div>
-                    <div class="product_card">
-                        <div class="product_card_detail">
-                            <div class="product_name">
-                                <p>아메리카노&nbsp;&nbsp;<button class="sold_out_btn">Sold out</button></p>
-                            </div>
-                            <div class="product_desc">
-                                아메리카노는 에스프레소 + 물이다.
-                            </div>
-                            <div class="product_price">
-                                <p>4000원</p>
-                            </div>
-                        </div>
-                        <div class="product_card_image">
-                            <img src="https://cdn.boppl.me/products/specialty_affogato_0.jpg" alt="Affogato">
-                        </div>
-                    </div>
-                    <div class="product_card">
-                        <div class="product_card_detail">
-                            <div class="product_name">
-                                <p>아메리카노&nbsp;&nbsp;<button class="sold_out_btn">Sold out</button></p>
-                            </div>
-                            <div class="product_desc">
-                                아메리카노는 에스프레소 + 물이다.
-                            </div>
-                            <div class="product_price">
-                                <p>4000원</p>
-                            </div>
-                        </div>
-                        <div class="product_card_image">
-                            <img src="https://cdn.boppl.me/products/specialty_affogato_0.jpg" alt="Affogato">
-                        </div>
-                    </div>
-                    <div class="product_card">
-                        <div class="product_card_detail">
-                            <div class="product_name">
-                                <p>아메리카노&nbsp;&nbsp;<button class="sold_out_btn">Sold out</button></p>
-                            </div>
-                            <div class="product_desc">
-                                아메리카노는 에스프레소 + 물이다.
-                            </div>
-                            <div class="product_price">
-                                <p>4000원</p>
-                            </div>
-                        </div>
-                        <div class="product_card_image">
-                            <img src="https://cdn.boppl.me/products/specialty_affogato_0.jpg" alt="Affogato">
-                        </div>
-                    </div>
-
-                    <!--category 끝 -->
-                </div>
+	<section id="menu_info">
+		<div class="container" id="container_menu_info">
+			<c:if test="${not empty sortList }">
+				<c:forEach items="${sortList}" var="sortList" varStatus="s">
+					<div class="category">
+						<div class="category_name">
+							<h2>${sortList[0].menu_category}</h2>
+						</div>
+						<div class="category_products">
+							<c:if test="${not empty sortList}">
+								<c:forEach items="${sortList}" var="menuVo" varStatus="s">
+									<div class="product_card" onclick="clickProductCard(this);">
+										<div class="product_card_detail">
+											<div class="product_name">
+												<p>
+													<span>${menuVo.menu_name}</span>&nbsp;&nbsp;
+													<button class="sold_out_btn">Sold out</button>
+												</p>
+											</div>
+											<div class="product_desc">${menuVo.menu_description}</div>
+											<div class="product_price">
+												<p>${menuVo.menu_price}원</p>
+											</div>
+										</div>
+										<div class="product_card_image">
+											<img
+												src="https://cdn.boppl.me/products/specialty_affogato_0.jpg"
+												alt="Affogato">
+										</div>
+									</div>
+								</c:forEach>
+							</c:if>
+						</div>
+						<!--category 끝 -->
+					</div>
+				</c:forEach>
+			</c:if>
+		</div>
+	</section>
                 <!-- footer -->
                 <footer></footer>
                 <!-- modal -->
