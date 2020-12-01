@@ -336,6 +336,7 @@
    flex-direction: row;
    align-items: flex-end;
    margin-left: 90px;
+   margin-top: 15px;
         }
 
         #insert-inputbox #inputtextinput {
@@ -345,6 +346,10 @@
             justify-content: center;
         }
 
+        #insert-inputbox #inputtextinput form, table {
+            width: 92%;
+        }
+        
         #insert-inputbox #inputtextinput input {
             width: 92%;
         }

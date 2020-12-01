@@ -199,7 +199,7 @@ section .container .store_list_grid {
 	<header>
 		<div class="header_container">
 			<div class="logo">
-				<a href="./index.jsp"><img
+				<a href="<%=ctxPath%>/index.jsp"><img
 					src="<%=ctxPath%>/images/jaba_english_white.png"></a>
 			</div>
 			<div class="menu">

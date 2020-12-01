@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 //			out.println("<script>alert(' α  μ   ')</script>");
 			System.out.println("Client 로그인 성공");
 			String user_name = cService.returnName(user_id);
-			out.print("client");
+			out.print("Client");
 		}else {
 			// client에 회원정보 없음 --> store 정보를 검색
 			StoreService sService = new StoreService();
