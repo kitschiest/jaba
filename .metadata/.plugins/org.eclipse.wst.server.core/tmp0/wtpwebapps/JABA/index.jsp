@@ -890,7 +890,7 @@ function displayMarker(locPosition, message) {
             // res1 이 BizPartner 이면 BizPartner 페이지로 이동.
            if(res1 == admin){
                location.href="./adminMain.jsp";
-            }else if(res1 == client){
+            }else if(res1==client){
             	
                $(".menu_btn").hide();
                $("#logoutBtn").show();

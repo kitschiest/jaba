@@ -47,7 +47,8 @@ public class LoginServlet extends HttpServlet {
 			request.getSession().setAttribute("user_id", user_id); // 이제 받아온 user_id를 user_id로 지칭하고 던질 준비
 //			out.println("<script>alert(' α  μ   ')</script>");
 			System.out.println("Client 로그인 성공");
-			out.print("Client");
+			String user_name = cService.returnName(user_id);
+			out.print("client");
 		}else {
 			// client에 회원정보 없음 --> store 정보를 검색
 			StoreService sService = new StoreService();
