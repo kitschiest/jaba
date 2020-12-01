@@ -112,19 +112,22 @@ public class BoardInsertServlet extends HttpServlet {
 			
 			DBoardService dService = new DBoardService();
 			int result = dService.writeBoard(vo);
+			String store_name = vo.getBwrite(); //오타인데 바꾸기 쉽지 않네요,,,
+			
+			
 			if(result>=1) {
 				System.out.println("aaa");
-				response.sendRedirect("adminStoreTotal.do");
+				request.getRequestDispatcher("/biz/menuList.do?storeName="+store_name).forward(request, response);
 			} else{
 				System.out.println("bbb");
-				request.getRequestDispatcher("/bwrite.jsp").forward(request, response);
+				request.getRequestDispatcher("/BizMain.jsp").forward(request, response);
 			}
 		} catch (NumberFormatException e) {
 			System.out.println("ccc");
-			request.getRequestDispatcher("/bwrite.jsp").forward(request, response);
+			request.getRequestDispatcher("/BizMain.jsp").forward(request, response);
 		} catch (NullPointerException e) {
 			System.out.println("ddd");
-			request.getRequestDispatcher("/bwrite.jsp").forward(request, response);
+			request.getRequestDispatcher("/BizMain.jsp").forward(request, response);
 		}
 		
 	}

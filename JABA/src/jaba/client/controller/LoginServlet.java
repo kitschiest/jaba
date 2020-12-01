@@ -58,7 +58,7 @@ public class LoginServlet extends HttpServlet {
 				request.getSession().setAttribute("storeVo", storeVo);	// (자신의) 가게 정보를 가지고 이동.
 				System.out.println("Store 로그인 성공");
 				System.out.println("bizMain으로 이동");
-				out.print("BizPartner");	// println 하면 안됨.
+				out.print(user_id);	// println 하면 안됨.
 			}else {
 				AdminService aService = new AdminService();
 				if(aService.selectLogin(user_id, user_pw) == 1) {

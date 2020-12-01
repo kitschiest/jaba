@@ -91,7 +91,21 @@ public class StoreAllListServlet extends HttpServlet {
 			System.out.println("storeList--explore 연결 서블릿 : city명 검색");
 			StoreService sService = new StoreService();	// StoreService 생성
 			List<StoreVO> storeList = sService.selectList(city);	// 와 같은 작업을 해줌 
-			request.getSession().setAttribute("storeList", storeList);	// StoreList를 세션으로 넘김 
+			for(int i=0; i<storeList.size(); i++) {
+				StoreVO vo = storeList.get(i);
+				double lat1 = Double.parseDouble(vo.getStore_lat());
+				double lon1 = Double.parseDouble(vo.getStore_lng());				
+				double d = Math.round(getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2)*10)/10.0;
+				vo.setDistance(d);				
+				//dList.add(d);
+			}
+			
+			System.out.println("aaa:" + storeList);
+			Collections.sort(storeList); //오름차순 정리
+			System.out.println("bbb:" + storeList);
+			
+			request.getSession().setAttribute("storeList", storeList);	// StoreList를 세션으로 넘김  
+			
 			 // 라고치고 해당 url로 forward로 이동~~~ 
 			System.out.println("city부분 작동");
 			RequestDispatcher disp = request.getRequestDispatcher("/explore.jsp");

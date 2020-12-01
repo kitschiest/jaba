@@ -6,6 +6,10 @@
    if(brandName==null) {
       brandName = "스타";  // 예외처리  
    }
+   
+%>
+<%
+	String avenue = request.getParameter("city");
 %>
 <html>
 <head>
@@ -47,14 +51,7 @@ $(function(){
  })
 })
 </script>
-<!-- SEARCH BTN JS -->
-<script>
- $(".searchBtn").on("click", function(){
-    var addr = $("#addr_search").val();
-    
-    
- })
-</script>
+
 
 <style>
 body {
@@ -360,7 +357,7 @@ main {
             GRAB whatever<br> you want<br>
          </h1>
          <p>order from amazing cafes.</p>
-         <form action="store/storeSearch.do" method="GET">
+         
          <div class="search-bar">
             <div class="jss38">
                <input type="text" class="search_text" id="addr_search" name="city">
@@ -368,9 +365,9 @@ main {
          </div>
 
          <div class="search-button">
-            <button name="searchBtn" value="search" type="submit">SEARCH</button>
+            <button  id="searchBtn">검색</button>
          </div>
-         </form>
+         
       </div>
 
    </section>
@@ -383,43 +380,43 @@ main {
          </div>
          <div data-index="0" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
-               <div class="brand-badge ">
-                  <img src="https://cdn.bopple.app/assets/helloharry/tile-hover.svg" class="active" id="brand_img">
+               <div class="brand-badge">
+                  <img src="https://cdn.bopple.app/assets/helloharry/tile-hover.svg" class="active brand_img" id="스타벅스" >
                </div>
             </div>
          </div>
          <div data-index="1" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="brand-badge ">
-                  <img src="https://cdn.bopple.app/assets/sonoma/tile-hover.svg" class="active" id="brand_img"></a>
+                  <img src="https://cdn.bopple.app/assets/sonoma/tile-hover.svg" class="active brand_img">
                </div>
             </div>
          </div>
          <div data-index="2" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="brand-badge ">
-                  <img src="https://cdn.bopple.app/assets/suki/tile-hover.svg" class="active" id="brand_img"></a>
+                  <img src="https://cdn.bopple.app/assets/suki/tile-hover.svg" class="active brand_img">
                </div>
             </div>
          </div>
          <div data-index="3" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="brand-badge ">
-                  <img src="https://cdn.bopple.app/assets/mrburger/tile-hover.svg" class="active" id="brand_img"></a>
+                  <img src="https://cdn.bopple.app/assets/mrburger/tile-hover.svg" class="active brand_img">
                </div>
             </div>
          </div>
          <div data-index="4" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="brand-badge ">
-                  <img src="https://cdn.bopple.app/assets/madamwoo/tile-hover.svg" class="active" id="brand_img"></a>
+                  <img src="https://cdn.bopple.app/assets/madamwoo/tile-hover.svg" class="active brand_img">
                </div>
             </div>
          </div>
          <div data-index="5" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="brand-badge ">
-                  <img src="https://cdn.bopple.app/assets/belleshotchicken/tile-hover.svg" class="active" id="brand_img"></a>
+                  <img src="https://cdn.bopple.app/assets/belleshotchicken/tile-hover.svg" class="active brand_img">
                </div>
             </div>
          </div>
@@ -434,42 +431,42 @@ main {
          <div data-index="0" class="cities" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="city-badge">
-                  <a href="store/storeSearch.do?city=종로구">JongRo</a>
+                  <a class="city_name" id="종로3가">JongRo</a>
                </div>
             </div>
          </div>
          <div data-index="1" class="cities" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="city-badge">
-                  <a href="store/storeSearch.do?city=연남동">YeonNam</a>
+                  <a class="city_name" id="신촌">ShinChon</a>
                </div>
             </div>
          </div>
          <div data-index="2" class="cities" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="city-badge">
-                  <a href="store/storeSearch.do?city=서교동">HongDae</a>
+                  <a class="city_name" id="홍익로 5길">HongDae</a>
                </div>
             </div>
          </div>
          <div data-index="3" class="cities" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="city-badge">
-                  <a href="store/storeSearch.do?city=강남구">Paris</a>
+                  <a class="city_name" id="강남구청">GangNam</a>
                </div>
             </div>
          </div>
          <div data-index="4" class="cities" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="city-badge">
-                  <a href="store/storeSearch.do?city=강서구">GangSeo</a>
+                  <a class="city_name" id="양천로55길 55">GangSeo</a>
                </div>
             </div>
          </div>
          <div data-index="5" class="cities" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="city-badge">
-                  <a href="store/storeSearch.do?city=인천시">Incheon</a>
+                  <a class="city_name" id="인천시청">Incheon</a>
                </div>
             </div>
          </div>
@@ -478,7 +475,7 @@ main {
 
    </section>
    <!-- MAP API -->
-   <div id="map" style="width:100%;height:350px;"></div>
+   <div id="map"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7e6cd41f87d7529ffb39adb770099e29"></script>
 <script>
@@ -628,12 +625,30 @@ function displayMarker(locPosition, message) {
            frm.lon2.value = lon2;
            console.log(frm.lat2.value);
            console.log(frm.lon2.value);
-           $("#brand_img").on("click", function(){
-              
-           frm.action="<%=ctxPath%>/store/storeSearch.do?brand=<%=brandName%>";
+          
+           
+           $(".brand_img").on("click", function(){
+        var getId=$(this).attr("id");
+           frm.action="<%=ctxPath%>/store/storeSearch.do?brand="+getId;
            frm.method="post";
            frm.submit();
            });
+           
+           $(".city_name").on("click", function(){
+               var getId=$(this).attr("id");
+                  frm.action="<%=ctxPath%>/store/storeSearch.do?city="+getId;
+                  frm.method="post";
+                  frm.submit();
+                  });
+           
+           $("#searchBtn").click(function(){
+        	   var getInputValue = $("#addr_search").val();
+        	   frm.action="<%=ctxPath%>/store/storeSearch.do?city="+getInputValue;
+               frm.method="post";
+               frm.submit();
+           });
+     
+          
            
        })
    };
@@ -655,15 +670,15 @@ function displayMarker(locPosition, message) {
             var admin = "Admin";
             var client = "Client";
             // res1 이 BizPartner 이면 BizPartner 페이지로 이동.
-            if(res1 == biz){
-               location.href="./BizMain.jsp";
-            }else if(res1 == admin){
+           if(res1 == admin){
                location.href="./adminMain.jsp";
             }else if(res1 == client){
                $(".menu_btn").hide();
                $("#logoutBtn").show();
                document.getElementById("loginCloseBtn").click();
-            }
+            }else{ //bizPartner일 경우, user_id받아와서 해당 페이지로 이동하게끔
+                location.href="<%=ctxPath%>/biz/menuList.do?storeId="+res1;
+             }
          }
       });
    });

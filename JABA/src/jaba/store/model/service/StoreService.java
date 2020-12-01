@@ -95,5 +95,30 @@ public class StoreService {
 			}
 			return vo;
 		}
+		public StoreVO selectStoreId(String store_id) {
+			StoreVO vo = null;
+			Connection conn = getConnection();
+			try {
+				StoreDAO dao = new StoreDAO();
+				vo = dao.selectStorebyId(conn, store_id);
+				close(conn);
+			} catch (Exception e) {
+				System.out.println("Store 오류발생 return 3");
+				
+			}
+			return vo;
+		}
+		public StoreVO changeIdtoName(String store_id) {
+			StoreVO vo = null;
+			Connection conn = getConnection();
+			try {
+				StoreDAO dao = new StoreDAO();
+				vo = dao.changeIdtoName(conn, store_id);
+				close(conn);
+			} catch (Exception e){
+				System.out.println("이름변경 오류 발생");
+			}
+			return vo;
+		}
 		
 }

@@ -16,45 +16,20 @@
 </script>
 </head>
 <body>
-<%
-	String bno = (request.getParameter("bno")!=null) ? request.getParameter("bno") : "0";
-	String bref = (request.getParameter("bref")!=null) ? request.getParameter("bref") : "0";
-	String bre_step = (request.getParameter("bre_step")!=null) ? request.getParameter("bre_step") : "0";
-	String bre_level = (request.getParameter("bre_level")!=null) ? request.getParameter("bre_level") : "0";
-%>
+
 	<p>글쓰기</p>
 	<form enctype="multipart/form-data"	method="post" action="<%=request.getContextPath()%>/boardInsert.lo"	onsubmit="return writefrm_submit();">
-		<input type="text" name="bno" value="<%=bno%>">   <!-- 0은 새글, 그외 댓글인 경우는 읽고 있던 글의 bno를 넣어주기로 함. -->
-		<input type="text" name="bref" value="<%=bref%>">
-		<input type="text" name="bre_step" value="<%=bre_step%>">
-		<input type="text" name="bre_level" value="<%=bre_level%>">
+
 		<table border="1">
-			<tr>
-				<td colspan="2"><a href="adminStoreTotal.do">글목록</a></td>
-			</tr>
+			
 			<tr>
 				<td>작성자ID</td>
 				<td><input type="text" name="bwriter" id="bwriter"></td>
 			</tr>
-			<tr>
-				<td>제목</td>
-				<td><input type="text" name ="bsubject" id="bsubject"></td>
-			</tr>
+
 			<tr>
 				<td>내용</td>
 				<td><input type="text" name ="bcontent" id="bcontent"></td>
-			</tr>
-			<tr>
-				<td>파일선택</td>
-				<td><input type="file" name ="bfilepath" id="bfilepath"></td>
-			</tr>
-			<tr>
-				<td>파일선택</td>
-				<td><input type="file" name ="bfilepath" id="bfilepaths" multiple="multiple"></td>
-			</tr>
-			<tr>
-				<td>비밀번호</td>
-				<td><input type="password" name ="bpwd"></td>
 			</tr>
 			<tr>
 				<td colspan="2">

@@ -132,7 +132,53 @@ public class StoreDAO {
 		}
 		return selectStore;
 	}
-	
+	// store리스트에서 매장 클릭시 해당 매장 메뉴페이지를 출력하는 메소드 작성
+	public StoreVO selectStorebyId(Connection conn, String store_id) {
+		StoreVO selectStore = null;
+		String sql = "select * from store where store_id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, store_id);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				selectStore = new StoreVO();
+				selectStore.setStore_id(rs.getString("store_id"));
+				selectStore.setStore_pw(rs.getString("store_pw"));
+				selectStore.setStore_name(rs.getString("store_name"));
+				selectStore.setStore_addr(rs.getString("store_addr"));
+				selectStore.setStore_time(rs.getString("store_time"));
+				selectStore.setStore_img(rs.getString("store_img"));
+				selectStore.setStore_description(rs.getString("store_description"));
+			} else { // store가 없으면
+				System.out.println("DB에 일치하는 Store 정보 없음");
+				selectStore = null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectStore;
+	}
+	public StoreVO changeIdtoName(Connection conn, String store_id) {
+		StoreVO changeIdtoName = null;
+		String sql = "select store_name from store where store_id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, store_id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				changeIdtoName = new StoreVO();
+				changeIdtoName.setStore_name(rs.getString(1));
+			} else {
+				System.out.println("id > name 변경 실패");
+				changeIdtoName = null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return changeIdtoName;
+	}
 	
 	
 

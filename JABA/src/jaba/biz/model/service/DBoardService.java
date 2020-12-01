@@ -1,4 +1,4 @@
-package jaba.store.model.service;
+package jaba.biz.model.service;
 
 import static jaba.common.jdbcdriver.JDBCTemplate.close;
 import static jaba.common.jdbcdriver.JDBCTemplate.commit;

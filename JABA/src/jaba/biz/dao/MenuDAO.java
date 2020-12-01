@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import jaba.menu.vo.CustomVO;
-import jaba.menu.vo.MenuVO;
+import jaba.biz.vo.CustomVO;
+import jaba.biz.vo.MenuVO;
 import jaba.store.vo.StoreVO;
 
 public class MenuDAO {

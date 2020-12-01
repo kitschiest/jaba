@@ -1,8 +1,17 @@
 <%@page import="jaba.store.vo.StoreVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
    String ctxPath = request.getContextPath();
+%>
+<!-- board INPUT을 위함 -->
+<%
+	String bno = (request.getParameter("bno")!=null) ? request.getParameter("bno") : "0";
+	String bref = (request.getParameter("bref")!=null) ? request.getParameter("bref") : "0";
+	String bre_step = (request.getParameter("bre_step")!=null) ? request.getParameter("bre_step") : "0";
+	String bre_level = (request.getParameter("bre_level")!=null) ? request.getParameter("bre_level") : "0";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,22 +19,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biz Partner Main</title>
-    <!-- jquery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- 모달관련 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <!-- 리셋 css -->
-    <link rel="stylesheet" href="<%=ctxPath%>/css/html5_reset.css">
+    <!-- Bootstrap -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- RESET -->
+<link href="<%=ctxPath%>/css/html5_reset.css" rel="stylesheet">
+<!-- HEADER CSS -->
+<link href="<%=ctxPath%>/css/header.css" rel="stylesheet">
+<!-- SECTION CSS -->
+<link href="<%=ctxPath%>/css/section.css" rel="stylesheet">
+<!-- FOOTER CSS -->
+<link href="<%=ctxPath%>/css/footer.css" rel="stylesheet">
+<!-- 폰트 CSS -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+	rel="stylesheet">
+<!-- 체크박스 라디오버튼 CSS -->
+<link href="<%=ctxPath%>/css/icheck-material.css" rel="stylesheet"
+	type="text/css">
+
     <!-- switchery-->
-    <link rel="stylesheet" href="./dist/switchery.css" />
-    <script src="./dist/switchery.js"></script>
+    <link rel="stylesheet" href="<%=ctxPath%>/dist/switchery.css" />
+    <script src="<%=ctxPath%>/dist/switchery.js"></script>
     <!-- 폰트부분 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
     <!-- 아이콘 폰트-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://code.jquery.com/jquery-3.4.0.js'></script>
+
     <style>
+    
 
 
         body {
@@ -122,28 +151,25 @@
 
         /* 모달 footer 세팅 */
         .modal-footer {
-            flex: 0 0 auto;
-            display: flex;
-            padding: 16px 32px 32px 32px;
-            align-items: center;
-            justify-content: center;
-            border-top: 0;
-        }
+   flex: 0 0 auto;
+   display: flex;
+   padding: 16px 32px 32px 32px;
+   align-items: center;
+   justify-content: center;
+   border-top: 0;
+}
 
-        .btnChk {
-            width: 100%;
-            height: 50px;
-            background-color: #36727C;
-            color: white;
-            border-radius: 12px;
-            border: 0;
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-
-
-
-
+.btnChk {
+   width: 60px;
+   height: 40px;
+   background-color: #36727C;
+   color: white;
+   border-radius: 13px;
+   border: 0;
+   font-weight: bold;
+   font-size: 12px;
+   margin: 5px;
+}
 
 
         /* 모달 table 셋팅 */
@@ -151,12 +177,17 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            font-size: 13px;
         }
 
         #notice-table-container #notice-table-body {
-            background-color: rgb(249, 250, 252);
+           
             display: flex;
             flex-direction: column;
+            border-top: 3px solid #89BDBB;
+   			border-bottom: 3px solid #89BDBB;
+   			height: 250px;
+   			overflow:auto;
         }
 
 
@@ -176,6 +207,8 @@
             display: flex;
             flex: 9;
             text-align: center;
+            height: 30px;
+           
         }
 
         #notice-table-container #notice-table-body .notice-table-tr .th-text-wrap {
@@ -186,31 +219,18 @@
 
         /* no. content. date. 헤더부분 */
         #notice-table-container #notice-table-body .notice-table-th .th-text-wrap .th-no {
-            border: solid;
-            border-top-width: 0px;
-            border-bottom-width: 0px;
-            border-left-width: 0px;
-            border-right-width: 1px;
-
+           	
             flex: 1;
         }
 
         #notice-table-container #notice-table-body .notice-table-th .th-text-wrap .th-content {
-            border: solid;
-            border-top-width: 0px;
-            border-bottom-width: 0px;
-            border-left-width: 0px;
-            border-right-width: 1px;
+           
             flex: 10;
 
         }
 
         #notice-table-container #notice-table-body .notice-table-th .th-text-wrap .th-date {
-            border: solid;
-            border-top-width: 0px;
-            border-bottom-width: 0px;
-            border-left-width: 0px;
-            border-right-width: 0px;
+           
             flex: 5;
 
         }
@@ -228,24 +248,28 @@
 
         #notice-table-container #notice-table-body .notice-table-tr .th-text-wrap .td-no {
             border: solid;
-            border-top-width: 1px;
-            border-bottom-width: 0px;
-            border-left-width: 0px;
-            border-right-width: 1px;
-
-            flex: 1;
+   border-top-width: 1px;
+   border-bottom-width: 0px;
+   border-left-width: 0px;
+   border-right-width: 0px;
+   border-color:rgba(20, 23, 26, .08);
+   flex: 1;
+   /* border: 1px solid rgba(20, 23, 26, .08); */
         }
 
         #notice-table-container #notice-table-body .notice-table-tr .th-text-wrap .td-content {
-            border: solid;
-            border-top-width: 1px;
-            border-bottom-width: 0px;
-            border-left-width: 0px;
-            border-right-width: 1px;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: stretch;
-            overflow: hidden;
+           border: solid;
+   border-top-width: 1px;
+   border-bottom-width: 0px;
+   border-left-width: 0px;
+   border-right-width: 0px;
+   display: flex;
+   flex-wrap: wrap;
+   align-items: stretch;
+   overflow: hidden;
+   border-color:rgba(20, 23, 26, .08);
+   flex: 10;
+   /* border: 1px solid rgba(20, 23, 26, .08); */
             flex: 10;
         }
 
@@ -258,44 +282,60 @@
 
         #notice-table-container #notice-table-body .notice-table-tr .th-text-wrap .td-date {
             border: solid;
-            border-top-width: 1px;
-            border-bottom-width: 0px;
-            border-left-width: 0px;
-            border-right-width: 0px;
-
-            flex: 5;
+   border-top-width: 1px;
+   border-bottom-width: 0px;
+   border-left-width: 0px;
+   border-right-width: 0px;
+   border-color:rgba(20, 23, 26, .08);
+   flex: 3;
+   /* border: 1px solid rgba(20, 23, 26, .08); */
         }
 
-        /* 행삭제 버튼 관련 */
-        .th-btn {
-            display: flex;
-            justify-content: center;
+       /* 행삭제 버튼 관련 */
+/* .th-btn {
+   display: flex;
+   justify-content: center;
+   background-color: #89BDBB;
+   color: white;
+   border-radius: 12px;
+   border: 0;
+   width: 60px;
+   height: 30px;
+}
+ */
 
-        }
 
+#btn-add-row ,.rowDeleteBtn {
+   background-color: #89BDBB;
+   color: white;
+   border-radius: 12px;
+   border: 0;
+   width: 50px;
+   height: 30px;
+   margin: 2px;
+}
 
-
+.rowDeleteBtn{
+   background-color: white;
+   color: #89BDBB;
+}
 
         #notice-table-list {
             display: flex;
-            justify-content: center;
-            height: 50px;
-            background-color: rgb(249, 250, 252);
-
+   justify-content: center;
+   height: 50px;
+   margin: 10px;
         }
 
 
 
 
         #insert-inputbox {
-            background-color: rgb(249, 250, 252);
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            height: 50px;
+            /* background-color: rgb(249, 250, 252); */
+   display: flex;
+   flex-direction: row;
+   align-items: flex-end;
+   margin-left: 90px;
         }
 
         #insert-inputbox #inputtextinput {
@@ -306,12 +346,12 @@
         }
 
         #insert-inputbox #inputtextinput input {
-            width: 80%;
+            width: 92%;
         }
 
         #insertBtn {
             background-color: white;
-            height: 26px;
+           
             flex: 3;
         }
 
@@ -461,6 +501,14 @@ nav::after {
         #container_store_info #store_description {
             color: #8492a6;
         }
+        
+        .bossFinalNotice {
+		border: 5px solid #89BDBB;
+		text-align: center;
+	margin-top: 10px;
+	font-size: 130%;
+
+}
 
         /* 메뉴수정아이콘 스타일지정 */
         .menu_update_icon {
@@ -479,6 +527,7 @@ nav::after {
             justify-content: center;
             width: 100%;
             max-width: 100vw;
+            
             /*
 background-color: rgba(219, 242, 255, 0.952);
 */
@@ -487,6 +536,8 @@ background-color: rgba(219, 242, 255, 0.952);
 
         #container_menu_info {
             background-color: rgb(249, 250, 252);
+            height: 700px;
+            overflow: auto;
         }
 
         .category h2 {
@@ -631,13 +682,11 @@ background-color: rgba(219, 242, 255, 0.952);
     <header>
         <div class="biz_container" id="container_header">
             <div class="logo">
-                <img src="./images/jaba_92x32.png">
+               <img src="<%=ctxPath%>/images/jaba_english_white.png">
             </div>
             <!-- .logo 부분 display: inline-flex로 수정하고 header_biz도 inline block 으로 -->
             <div id="header_biz">
-                <span>
-                    BizPartner 폰트가안먹어
-                </span>
+                
             </div>
         </div>
     </header>
@@ -666,27 +715,24 @@ background-color: rgba(219, 242, 255, 0.952);
     	// jstl로 수정
     %>
     <!-- SECTION1 Store_info -->
-    <section id="store_info">
-        <div class="biz_container" id="container_store_info">
-            <h1 class="h11">
-                <!--매장 이름-->
-                <%=storeName %>&nbsp;
-                <a href="#"><i class="fa fa-pencil menu_update_icon" style="font-size: 28px;"></i></a>
-            </h1>
-            <span id="store_description">
-                <!-- 매장 설명-->
-                스타벅스 종각점입니다. 스타벅스 종각점입니다. 스타벅스 종각점입니다. 스타벅스 종각점입니다. 스타벅스 종각점입니다. 스타벅스 종각점입니다. 스타벅스 종각점입니다.
-            </span>
-            <span>
-                <!-- 최근 게시판부분-->
-                <c:if test="${not empty dboardList}">
+   <!-- SECTION1 Store_info -->
+   <section id="store_info">
+      <c:if test="${not empty storeVo }">
+         <div class="container" id="container_store_info">
+            <!--매장 이름-->
+            <h1>${storeVo.store_name}&nbsp;&nbsp;<a href="#"><i class="fa fa-pencil menu_update_icon" style="font-size: 20px;"></i></a></h1>
+            <span id="store_description"> <!-- 매장 설명-->
+               ${storeVo.store_description}
+            </span> <span> <!-- 최근 게시판부분-->
+             <c:if test="${not empty dboardList}">
                 	<c:forEach items="${dboardList }" var="bvo" varStatus="s">
-                		<div>${dvo.bcontent }</div>
+                		<div class="bossFinalNotice">${bvo.bcontent }</div>
                 	</c:forEach>
                 </c:if>
             </span>
-        </div>
-    </section>
+         </div>
+      </c:if>
+   </section>
     <!-- SECTION2 menu_info -->
 	<section id="menu_info">
 		<div class="container" id="container_menu_info">
@@ -727,144 +773,118 @@ background-color: rgba(219, 242, 255, 0.952);
 			</c:if>
 		</div>
 	</section>
-                <!-- footer -->
-                <footer></footer>
+                
                 <!-- modal -->
-                <!-- Modal Basic -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-size" role="document">
-                        <div class="modal-content modal-size">
+               
+               <!-- Modal Basic -->
+            <div class="modal fade" id="exampleModal" tabindex="-1"
+               role="dialog" aria-labelledby="exampleModalLabel"
+               aria-hidden="true">
+               <div class="modal-dialog modal-size" role="document">
+                  <div class="modal-content modal-size">
 
-                            <!-- modal-header -->
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <div class="header-title" style="font-weight: bold; font-size: 20px;">
-                                    <p>NOTICE</p>
-                                </div>
-                            </div>
+                     <!-- modal-header -->
+                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                           aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="header-title"
+                           style="font-weight: bold; font-size: 20px;">
+                           <p>NOTICE</p>
+                        </div>
+                     </div>
 
-                            <!-- modal-body -->
-                            <div class="modal-body">
-                                <div id="notice-table-container">
-                                    <div id="notice-table-body">
-                                        <!-- 테이블 th 부분 -->
-                                        <div class="notice-table-th">
-                                            <div class="th-text-wrap">
-                                                <div class="th-no">
-                                                    <span>NO.</span>
-                                                </div>
-                                                <div class="th-content">
-                                                    <span>CONTENT</span>
-                                                </div>
-                                                <div class="th-date">
-                                                    <span>DATE</span>
-                                                </div>
-                                            </div>
+                     <!-- modal-body -->
+                     <div class="modal-body">
+                        <div id="notice-table-container">
+                           <div id="notice-table-body">
+                              <!-- 테이블 th 부분 -->
+                              <div class="notice-table-th">
+                                 <div class="th-text-wrap">
+                                    <div class="th-no">
+                                       <span>NO.</span>
+                                    </div>
+                                    <div class="th-content">
+                                       <span>CONTENT</span>
+                                    </div>
+                                    <div class="th-date">
+                                       <span>DATE</span>
+                                    </div>
+                                 </div>
 
-                                            <!-- 삭제버튼크기만큼 위치를 잡아줌 -->
-                                            <div class="th-btn">
-                                            </div>
-                                        </div>
-                                        <div id="table-tr-wrap">
-                                            <!-- 테이블 tr 부분 데이터 갯수만큼 출력 -->
-                                            <div class="notice-table-tr">
-                                                <div class="th-text-wrap">
-                                                    <div class="td-no">
-                                                        <span>6</span>
-                                                    </div>
-                                                    <div class="td-content">
-                                                        <span>재고 소진으로 인해 금일 영업은 20시까지 합니다.qqqq</span>
-                                                    </div>
-                                                    <div class="td-date">
-                                                        <span>2020-10-13</span>
-                                                    </div>
-                                                </div>
-                                                <div class="th-btn">
-                                                    <button class="rowDeleteBtn"
-                                                        onclick="deleteRow(this);"><span>삭제</span></button>
-                                                </div>
-                                            </div>
-                                            <div class="notice-table-tr">
-                                                <div class="th-text-wrap">
-                                                    <div class="td-no">
-                                                        <span>6</span>
-                                                    </div>
-                                                    <div class="td-content">
-                                                        <span>재고 소진으로 인해 금일 영업은 20시까지 합니다.aaaaaaaaaaaaaaaaa aaaaa
-                                                            aaaaaaaaaa aaaa
-                                                            aaaaaaaaa aaaaaaaaaaa a aaaaaaa
-                                                            aaaaaaaaaaaaaaaaaaaaaaaa</span>
-                                                    </div>
-                                                    <div class="td-date">
-                                                        <span>2020-10-13</span>
-                                                    </div>
-                                                </div>
-                                                <div class="th-btn">
-                                                    <button class="rowDeleteBtn"
-                                                        onclick="deleteRow(this);"><span>삭제</span></button>
-                                                </div>
-                                            </div>
-                                            <div class="notice-table-tr">
-                                                <div class="th-text-wrap">
-                                                    <div class="td-no">
-                                                        <span>6</span>
-                                                    </div>
-                                                    <div class="td-content">
-                                                        <span>재고 소진으로 인해 금일 영업은 20시까지 합니다.</span>
-                                                    </div>
-                                                    <div class="td-date">
-                                                        <span>2020-10-13</span>
-                                                    </div>
-                                                </div>
-                                                <div class="th-btn">
-                                                    <button class="rowDeleteBtn"
-                                                        onclick="deleteRow(this);"><span>삭제</span></button>
-                                                </div>
-                                            </div>
-                                            <div class="notice-table-tr">
-                                                <div class="th-text-wrap">
-                                                    <div class="td-no">
-                                                        <span>6</span>
-                                                    </div>
-                                                    <div class="td-content">
-                                                        <span>재고 소진으로 인해 금일 영업은 20시까지 합니다.</span>
-                                                    </div>
-                                                    <div class="td-date">
-                                                        <span>2020-10-13</span>
-                                                    </div>
-                                                </div>
-                                                <div class="th-btn">
-                                                    <button class="rowDeleteBtn"
-                                                        onclick="deleteRow(this);"><span>삭제</span></button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                 <!-- 삭제버튼크기만큼 위치를 잡아줌 -->
+                                 <div class="th-btn"></div>
+                              </div>
+                                 <c:if test="${not empty dboardAllList}">
+          <c:forEach items="${dboardAllList}" var="vo" varStatus="s"> 
+                              <div id="table-tr-wrap">
+                                 <!-- 테이블 tr 부분 데이터 갯수만큼 출력 -->
+                                 <div class="notice-table-tr">
+                                    <div class="th-text-wrap">
+                                       <div class="td-no">
+                                          <span>${vo.bno }</span>
+                                       </div>
+                                       <div class="td-content">
+                                          <span>${vo.bcontent }</span>
+                                       </div>
+                                       <div class="td-date">
+                                          <span>${vo.bdate }</span>
+                                       </div>
                                     </div>
-                                    <!-- notice-table-container-->
-                                </div>
-                                <!-- notice table list & btn -->
-                                <div id="notice-table-list">
-                                    <button>왼쪽페이지</button>
-                                    <spna>ㅁㅁㅁㅁ</spna>
-                                    <button>오른쪽페이지</button>
-                                </div>
-                                <div id="insert-inputbox">
-                                    <div id="inputtextinput">
-                                        <input type="text" id="boardTitleInput" placeholder="내용을 입력해주세요.">
+                                    <div class="th-btn">
+                                       <button class="rowDeleteBtn" onclick="deleteRow(this);">
+                                          <span>✖</span>
+                                       </button>
                                     </div>
-                                    <div id="insertBtn">
-                                        <button id="btn-add-row">추가</button>
-                                    </div>
-                                </div>
-                                <!-- modal-footer -->
-                                <div class="modal-footer">
-                                    <br>
-                                    <button type="button" class="btnChk" id="signin" name="signin">수정</button>
-                                </div>
-                                <!-- modal body 끝 -->
+                                 </div>
+                                 </div>
+                                 </c:forEach>
+                                 </c:if>
+                                 
+                           <!-- notice-table-container-->
+                        </div>
+                        <!-- notice table list & btn -->
+                       
+                        <div id="insert-inputbox">
+                           <div id="inputtextinput">
+                               <form enctype="multipart/form-data"	method="post" action="<%=request.getContextPath()%>/boardInsert.lo"	onsubmit="return writefrm_submit();">
+<c:if test="${not empty storeVo }">
+		<table border="1">
+			<tr style="display: none">
+				<td><input type="text" name="bno" value="<%=bno%>">   <!-- 0은 새글, 그외 댓글인 경우는 읽고 있던 글의 bno를 넣어주기로 함. -->
+		<input type="text" name="bref" value="<%=bref%>">
+		<input type="text" name="bre_step" value="<%=bre_step%>">
+		<input type="text" name="bre_level" value="<%=bre_level%>">
+		<input type="text" name="bsubject" value="<%=bno %>">
+		<input type="text" name="bwriter" value="${storeVo.store_name}">
+		</td>
+			</tr>
+			<tr>
+				<td><input type="text" name ="bcontent" id="bcontent" style="padding: 5px;" placeholder="내용을 입력해주세요."></td>
+			
+			
+				<td colspan="1">
+					<input type="submit" id="btn-add-row" value="추가">
+				</td>
+			</tr>
+		</table>
+		</c:if>
+
+
+	</form>
+                           </div>
+                         
+                        </div>
+                        <!-- modal-footer -->
+                        <div class="modal-footer">
+                           <br>
+                          
+                           <button type="button" class="btnChk" id="signin_modify" name="signin_modify">수정</button>
+                           <button type="button" class="btnChk" id="signin_cancel" name="signin_cancel">취소</button>
+                        </div>
+                        <!-- modal body 끝 -->
+
                             </div>
                         </div>
                     </div>
@@ -873,6 +893,75 @@ background-color: rgba(219, 242, 255, 0.952);
             </div>
         </div>
     </section>
+    <!-- FOOTER -->
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="footer_logo">
+					<img src="<%=ctxPath%>/images/jaba_english_white.png">
+				</div>
+				<div class="footer_links">
+					<ul>
+						<li class="links_head">JABA for YOUNG&RICH</li>
+						<li>WHY JABA?</li>
+						<li>PRICING</li>
+						<li><a href='#'>PARTNER LOGIN</a></li>
+					</ul>
+					<ul>
+						<li class="links_head">TOP CITIES</li>
+						<li>JONGRO</li>
+						<li>SEOCHON</li>
+						<li>PARIS</li>
+					</ul>
+					<ul>
+						<li class="links_head">SUPPORT</li>
+						<li>CUSTOMER HELP</li>
+						<li>PARTNER HELP</li>
+						<li>SUGGEST STH</li>
+					</ul>
+					<ul>
+						<li class="links_head">COMPANY</li>
+						<li>CUSTOMER HELP</li>
+						<li>PARTNER HELP</li>
+						<li>SUGGEST STH</li>
+					</ul>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="footer__disclaimer">
+					<strong>JABA connects customers with popular cafe brands.</strong>
+					<p>We believe that time is precious. We strive to create
+						beautiful technology that helps you save time and make ordering
+						easy, both sides of the counter. Order from JABA with the best
+						selection of local cafes.</p>
+					<div class="legal">
+						<div>
+							<div class="legal__copyright">© 2020 JABA Technologies Pty
+								Ltd</div>
+							<ul class="legal__links">
+								<li><a
+									class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
+									href="/legal/privacy-policy">Privacy Policy</a></li>
+								<li><a
+									class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
+									href="/legal/terms-and-conditions">Terms of Use</a></li>
+								<li><a
+									class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
+									href="https://help.bopple.com/" target="_blank"
+									rel="noopener noreferrer">Help Centre</a></li>
+								<li><a
+									class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
+									href="https://customer-contact-help.bopple.com" target="_blank"
+									rel="noopener noreferrer">Leave Feedback</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</footer>
     <!-- switchery -->
     <script>
         // switchery 
@@ -897,9 +986,9 @@ background-color: rgba(219, 242, 255, 0.952);
             var date = new Date();
             var currDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
             var boardId = getBoardId();
-            var boardContent = $('#boardTitleInput').val();
-            $('#notice-table-body #table-tr-wrap').prepend('<div class="notice-table-tr"><div class="th-text-wrap"><div class="td-no"><span>' + boardId + '</span></div><div class="td-content"><span>' + boardContent + '</span></div><div class="td-date"><span>' + currDate + '</span></div></div><div class="th-btn"><button class="rowDeleteBtn" onclick="deleteRow(this);"><span>삭제</span></button></div></div>');
-            $('#boardTitleInput').val('');
+            var boardContent = $('#boardContentInput').val();
+            $('#notice-table-body #table-tr-wrap').prepend('<div class="notice-table-tr"><div class="th-text-wrap"><div class="td-no"><span>' + boardId + '</span></div><div class="td-content"><span>' + boardContent + '</span></div><div class="td-date"><span>' + currDate + '</span></div></div><div class="th-btn"><button class="rowDeleteBtn" onclick="deleteRow(this);"><span>x</span></button></div></div>');
+            $('#boardContentInput').val('');
         });
 
         // 행삭제 
@@ -907,7 +996,20 @@ background-color: rgba(219, 242, 255, 0.952);
             $(obj).parent().parent().remove();
         }
             // 스크립트 공격대비해야함 .
+            
+       
+       
     </script>
+    <!-- 게시판에 글 추가 -->
+    <script type="text/javascript">
+	function writefrm_submit(){
+		//document.getElementById("bwriter");
+		// 유효성 체크 부분 이부분에 넣어 줌
+		// 유효성에 문제가 있으면 return false;
+		// 유효성에 문제가 없다면 
+		return true;
+	}
+</script>
 
 
 

@@ -7,9 +7,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import jaba.menu.dao.MenuDAO;
-import jaba.menu.vo.CustomVO;
-import jaba.menu.vo.MenuVO;
+import jaba.biz.dao.MenuDAO;
+import jaba.biz.vo.CustomVO;
+import jaba.biz.vo.MenuVO;
 
 public class MenuService {
    public MenuService() {
