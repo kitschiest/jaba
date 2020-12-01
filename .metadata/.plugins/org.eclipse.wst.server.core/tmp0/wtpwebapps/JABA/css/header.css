@@ -37,13 +37,24 @@ header.activated{
 .menu {
 	display: inline-block;
 	justify-content: flex-end;
-	text: white;
-}
-.menu button{
-	width: 80px;
-	height: 30px;
-	font-size: 0.65rem;
+	color: white;
 }
 .menu_btn{
+	width: 80px;
+	height: 30px;
+	font-size: 10px;
+	border-radius: 28px;
+}
+#logoutBtn {
+	width: 80px;
+	height: 30px;
+	font-size: 10px;
+	border-radius: 28px;
+}
+
+#cart-selector {
+	width: 80px;
+	height: 30px;
+	font-size: 10px;
 	border-radius: 28px;
 }

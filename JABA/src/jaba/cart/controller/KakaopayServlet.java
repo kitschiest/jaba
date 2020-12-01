@@ -1,39 +1,41 @@
-package jaba.cart.controller;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-/**
- * Servlet implementation class KakaopayServlet
- */
+//package jaba.cart.controller;
+//
+//import java.io.BufferedReader;
+//import java.io.IOException;
+//import java.io.InputStreamReader;
+//import java.io.OutputStream;
+//import java.io.PrintWriter;
+//import java.net.HttpURLConnection;
+//import java.net.URL;
+//import java.text.SimpleDateFormat;
+//import java.util.ArrayList;
+//import java.util.Date;
+//import java.util.HashMap;
+//import java.util.List;
+//import java.util.Map;
+//
+//import javax.servlet.ServletException;
+//import javax.servlet.annotation.WebServlet;
+//import javax.servlet.http.HttpServlet;
+//import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletResponse;
+//import javax.servlet.http.HttpSession;
+//
+//import org.json.simple.JSONObject;
+//import org.json.simple.parser.JSONParser;
+//import org.json.simple.parser.ParseException;
+//
+//import jaba.client.vo.ClientVO;
+//
+///**
+// * Servlet implementation class KakaopayServlet
+// */
 //@WebServlet("/KakaopayServlet")
 //public class KakaopayServlet extends HttpServlet {
 //
 //		private static final long serialVersionUID = 1L;
-//	    private PaymentBiz pBiz = new PaymentBiz();   
-//	    private MartBiz martBiz = new MartBiz();
+//	    private PaymentBiz pBiz = new PaymentBiz();    //일단 payment관련 서비스를 의미하는 듯?
+//	    private MartBiz martBiz = new MartBiz(); // 가격이랑 메뉴 이름들 가져오는 거 보니 menu관련 service인듯
 //		
 //		
 //		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,7 +49,7 @@ import org.json.simple.parser.ParseException;
 //			HttpSession session = request.getSession();
 //			String command = request.getParameter("command");
 //			System.out.println("[" + command + "]");
-//			ProductListBiz proBiz = new ProductListBiz();
+//			ProductListBiz proBiz = new ProductListBiz(); //장바구니리스트인 것 같은데
 //			
 //			if(command.equals("pay")) {
 //				URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
@@ -58,11 +60,11 @@ import org.json.simple.parser.ParseException;
 //				conn.setDoInput(true); 
 //				conn.setDoOutput(true); 
 //		        
-//				String partner_order_id = request.getParameter("partner_order_id");
-//				String partner_user_id = request.getParameter("partner_user_id");
-//				String item_name = request.getParameter("item_name");
-//				String item_code = request.getParameter("item_code");
-//				String shipping_addr = request.getParameter("addr1") + " " + request.getParameter("addr2");
+//				String partner_order_id = request.getParameter("partner_order_id"); //장바구니번호
+//				String partner_user_id = request.getParameter("partner_user_id"); //client id
+//				String item_name = request.getParameter("item_name"); //메뉴이름
+//				String item_code = request.getParameter("item_code"); //메뉴 코드
+//				
 //
 //		       
 //				Map<String, String> params = new HashMap<String, String>();
@@ -73,13 +75,13 @@ import org.json.simple.parser.ParseException;
 //				
 //				
 //		        params.put("cid", "TC0ONETIME");
-//		        params.put("partner_order_id", partner_order_id);
-//		        params.put("partner_user_id", partner_user_id);
-//		        params.put("item_name", request.getParameter("item_name"));
-//		        params.put("item_code", request.getParameter("item_code"));
-//		        params.put("quantity", request.getParameter("quantity"));
-//		        params.put("total_amount", request.getParameter("total_amount"));
-//		        params.put("tax_free_amount", request.getParameter("tax_free_amount"));
+//		        params.put("partner_order_id", partner_order_id); //가맹점 주문 번호
+//		        params.put("partner_user_id", partner_user_id); //가맹점 아이디
+//		        params.put("item_name", request.getParameter("item_name")); //메뉴 이름
+//		        params.put("item_code", request.getParameter("item_code")); //메뉴 id
+//		        params.put("quantity", request.getParameter("quantity")); //양
+//		        params.put("total_amount", request.getParameter("total_amount")); //전체양
+//		        params.put("tax_free_amount", request.getParameter("tax_free_amount")); //상품비과세금액
 //		        params.put("approval_url", "http://localhost:8787/PreparedKitchen/payment/approval.jsp");
 //		        params.put("cancel_url", "http://localhost:8787/PreparedKitchen/payment/cancel.jsp");
 //		        params.put("fail_url", "http://localhost:8787/PreparedKitchen/payment/fail.jsp");
@@ -137,7 +139,7 @@ import org.json.simple.parser.ParseException;
 //				String partner_user_id = (String)session.getAttribute("partner_user_id");
 //				String item_name = (String)session.getAttribute("item_name");
 //				String item_code = (String)session.getAttribute("item_code");
-//				String shipping_addr = (String)session.getAttribute("shipping_addr");
+//			
 //				String pg_token = request.getParameter("pg_token");
 //
 //				String[] recipeno = (String[])session.getAttribute("recipeno");
@@ -297,9 +299,9 @@ import org.json.simple.parser.ParseException;
 //			} else if(command.equals("confirmpay")) {
 //				
 //				PrintWriter out = response.getWriter();
-//				MemberDto mDto = (MemberDto)session.getAttribute("memberDto");
+//				ClientVO cVO = (ClientVO)session.getAttribute("ClientVO");
 //				
-//				if(mDto == null) {
+//				if(cVO == null) {
 //					
 //					out.println("<script>");
 //					out.println("alert('로그인을 해주세요.');");
@@ -308,7 +310,7 @@ import org.json.simple.parser.ParseException;
 //					
 //				} else {
 //					
-//					String id = mDto.getId();
+//					String id = cVO.getUser_id();
 //					String recipeno_string = request.getParameter("recipenos");
 //					String product = request.getParameter("proList");
 //					String[] proList = product.split(",");
@@ -318,6 +320,8 @@ import org.json.simple.parser.ParseException;
 //					for(int i = 0; i < recipeno_arr.length; i++) {
 //						recipenos[i] = Integer.parseInt(recipeno_arr[i]);
 //					}
+//					
+//					
 //					
 //					MartBiz martBiz = new MartBiz();
 //					List<MartDto> list = martBiz.buyProduct(proList);

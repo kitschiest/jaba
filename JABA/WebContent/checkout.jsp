@@ -1,24 +1,19 @@
+<%@page import="jaba.menu.vo.MenuVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%
+   String ctxPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>JABA</title>
-<meta name="viewport"
-	content="width=device-width,initial-scale=1,maximum-scale=1,minimal-ui" />
-<!-- <link rel="stylesheet" type="text/css" href="mainStyle.css" /> -->
 <script src='https://code.jquery.com/jquery-3.4.0.js'></script>
-<!-- MODAL -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
-	rel="stylesheet">
+<!-- Bootstrap -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script
@@ -26,18 +21,22 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- RESET -->
-<link href="./css/html5_reset.css" rel="stylesheet">
+<link href="<%=ctxPath%>/css/html5_reset.css" rel="stylesheet">
 <!-- HEADER CSS -->
-<link href="./css/header.css" rel="stylesheet">
+<link href="<%=ctxPath%>/css/header.css" rel="stylesheet">
 <!-- SECTION CSS -->
-<link href="./css/section.css" rel="stylesheet">
+<link href="<%=ctxPath%>/css/section.css" rel="stylesheet">
 <!-- FOOTER CSS -->
-<link href="./css/footer.css" rel="stylesheet">
-<!-- 라디오버튼 CSS -->
-<link href="./css/icheck-material.css" rel="stylesheet" type="text/css">
-
-<style type="text/css"></style>
-
+<link href="<%=ctxPath%>/css/footer.css" rel="stylesheet">
+<!-- 폰트 CSS -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+	rel="stylesheet">
+<!-- 체크박스 라디오버튼 CSS -->
+<link href="<%=ctxPath%>/css/icheck-material.css" rel="stylesheet"
+	type="text/css">
 
 <script>
 	$(function() {
@@ -122,24 +121,17 @@ main {
 	flex-wrap: wrap;
 }
 </style>
+<!-- pickup & asap 모달창 -->
+<style>
+.signin-input { /*Near 체크박스 */
+	width: 100%;
+	height: 40px;
+	border-radius: 6px;
+	font-weight: normal;
+	border: 1px solid rgba(20, 23, 26, .2);
+	padding-left: 15px;
+}
 
-<!-- ASIDE -->
-
-<style>
-</style>
-
-<!-- ASIDE -->
-<style>
-</style>
-<!--Modal-->
-<style>
-</style>
-<!-- FOOTER -->
-<!-- FOOTER -->
-<style>
-</style>
-<!-- MODAL -->
-<style>
 /* 모달 전체 세팅 */
 .modal-dialog.modal-size {
 	width: 444px;
@@ -158,7 +150,7 @@ main {
 	text-align: center;
 }
 
-@media screen and (min-width: 768px) {
+@media screen {
 	.modal:before {
 		display: inline-block;
 		vertical-align: middle;
@@ -175,7 +167,7 @@ main {
 
 /* 모달 header 세팅 */
 .modal-header {
-	padding: 32px;
+	padding-top: 35px;
 	display: flex;
 	width: 100%;
 	flex-direction: column;
@@ -187,9 +179,9 @@ main {
 
 .header-icon {
 	display: inline-flex;
-	padding: 16px;
+	width: 100%;
+	padding: 15px 15px;
 	border-radius: 16px;
-	margin-bottom: 16px;
 }
 
 .close {
@@ -202,21 +194,88 @@ main {
 /* 모달 body 세팅 */
 .modal-body {
 	flex: 1 1 auto;
-	padding: 32px 32px 16px 32px;
+	padding: 32px 30px 32px 30px;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
+	border-bottom: 0;
+	font-size: 14px;
+}
+
+#modalForm {
+	width: 100%;
+	height: 150px;
+	background: #f2f3f5;
+	border-radius: 12px;
+	padding: 30px 24px 16px 36px;
+	font-size: 14px;
+}
+
+#modalForm .asap {
+	display: flex;
+	flex-wrap: wrap;
+	margin-right: 0;
+	position: relative;
+}
+
+#modalForm .later {
+	display: flex;
+	flex-wrap: wrap;
+	margin-right: 0;
+	position: relative;
+}
+
+.modal-body h3 {
+	color: #14171a;
+	width: 100%;
+	font-size: 14px;
+	font-weight: 600;
+	padding: 0 0 8px;
+	margin: 0;
 }
 
 /* 모달 footer 세팅 */
 .modal-footer {
-	flex: 0 0 auto;
-	display: flex;
-	padding: 16px 32px 32px 32px;
+	padding: 16px 30px 20px 30px;
 	align-items: center;
-	justify-content: center;
-	border-top: 0;
+	border-top: 1px solid rgba(20, 23, 26, .08);
 }
 
+.modalBtnChk {
+	width: 100%;
+	height: 50px;
+	background-color: #36727C;
+	color: white;
+	border-radius: 12px;
+	border: 0;
+	font-size: 1.5rem;
+}
+
+#btnChk_footer {
+	justify-content: flex-end;
+	width: 85px;
+	height: 40px;
+	background-color: #36727C;
+	color: white;
+	border-radius: 12px;
+	border: 0;
+	font-size: 13px;
+}
+
+.pickup_time {
+	border: 1px solid #C6C8CC;
+	padding: 10px 16px;
+	border-radius: 6px;
+	cursor: pointer;
+	margin-top: 10px;
+	float: right;
+}
+</style>
+<!-- FOOTER -->
+<!-- FOOTER -->
+<style>
+</style>
+<!-- MODAL -->
+<style>
 #orderSummary {
 	width: 48%;
 	padding-left: 19%;
@@ -445,26 +504,26 @@ main {
 	border-width: 1px;
 }
 </style>
+<script>
+	// 모달창 script
+	function setDisplay() {
+		if ($('input:radio[id=asap]').is(':checked')) {
+			$('#later_time').hide();
+		} else {
+			$('#later_time').show();
+		}
+	}
+</script>
 </head>
 <body>
 	<!-- HEADER -->
 	<header>
 		<div class="header_container">
 			<div class="logo">
-				<img src="./images/jaba_english_white.png">
+				<a href="<%=ctxPath%>/index.jsp"><img
+					src="<%=ctxPath%>/images/jaba_english_white.png"></a>
 			</div>
-			<div class="menu">
-				<button class="menu_btn" value="LOG IN" type="button"
-					class="btn btn-primary" data-toggle="modal"
-					data-target="#LoginModal">
-					<span>LOG IN</span>
-				</button>
-
-				<button class="menu_btn" value="SIGN UP" class="btn btn-primary"
-					data-toggle="modal" data-target="#registerModal">
-					<span>SIGN UP</span>
-				</button>
-			</div>
+			<div class="menu"></div>
 		</div>
 
 	</header>
@@ -511,8 +570,7 @@ main {
 												<p>
 													<span
 														style="float: left; font-weight: bold; font-size: 15px;">PICK
-														UP</span> <span style="float: right"> <a
-														href="./modal_pickup.jsp" style="color: #5b5858;">변경</a></span>
+														UP</span> <span style="float: right"> <a data-toggle="modal" href="#exampleModal" style="color: #5b5858;">변경</a></span>
 												</p>
 											</div>
 											<div>
@@ -541,10 +599,10 @@ main {
 								<table>
 									<tr>
 										<td>
-											<div class="payment_method icheck-material-teal">
 												<h2>Payment method</h2>
+											<div class="payment_method icheck-material-teal">
 												<input type="radio" id="payment_method" name="teal"
-													value="agree" checked="checked" onchange="setDisplay()">
+													value="agree" onchange="setDisplay()">
 												<label for="payment_method" style="font-weight: normal;">&nbsp;Pay
 													with Card</label>
 												<div id="card_section">
@@ -617,8 +675,71 @@ main {
 		</div>
 	</section>
 
-	<!-- ASIDE -->
-	<aside></aside>
+	<!-- pickup asap 모달창 -->
+	<!-- Modal Basic -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-size" role="document">
+			<div class="modal-content modal-size">
+
+				<!-- modal-header -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+
+					<div class="header-icon">
+						<button type="button" class="modalBtnChk" id="btn_pickup"
+							name="btn_pickup" style="font-size: 15px;">Pick Up</button>
+					</div>
+				</div>
+
+				<!-- modal-body -->
+				<div class="modal-body">
+					<h3>Select pick up time</h3>
+					<form id="modalForm" action="#" method="get">
+						<table>
+							<tr>
+								<td>
+									<div class="asap icheck-material-teal">
+										<input type="radio" id="asap" name="teal" value="agree"
+											checked="checked" onchange="setDisplay()"> <label
+											for="asap" style="font-weight: normal;">&nbsp;&nbsp;ASAP</label>
+									</div>
+									<div class="later icheck-material-teal">
+										<input type="radio" id="later" name="teal" value="denial"
+											onchange="setDisplay()" style="font-weight: 15px;"> <label
+											for="later" style="font-weight: normal;">&nbsp;&nbsp;LATER</label>
+									</div>
+								</td>
+							</tr>
+
+							<tr id="later_time">
+								<td><select name="pickup_time" class="pickup_time">
+										<option value="">Select Pick Up Time</option>
+										<option value="30">10:00</option>
+										<option value="31">10:30</option>
+										<option value="31">11:30</option>
+										<option value="31">11:30</option>
+										<option value="31">12:00</option>
+										<option value="31">12:30</option>
+								</select></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+				<!-- modal-footer -->
+				<div class="modal-footer">
+					<button type="button" class="modalBtnChk" data-dismiss="modal"
+						aria-label="Close" id="btnChk_footer"
+						name="btnChk_cancel">Cancel</button>
+					<button type="button" class="modalBtnChk" id="btnChk_footer"
+						name="btnChk_confirm">Confirm</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- FOOTER -->
 	<footer>
@@ -701,7 +822,8 @@ main {
 		             },
 		             success : function(res){
 		                console.log("payment ajax통신 잘됨");
-		                
+		                alert("결제가 완료되었습니다.");
+		                location.href="./index.jsp";
 		             }
 			}); 
 		});

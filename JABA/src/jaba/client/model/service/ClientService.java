@@ -64,7 +64,19 @@ public class ClientService {
 		}
 		return result;
 	}
-	
+	public String returnName(String user_id) {
+		String result = null;
+		try {
+			Connection conn = getConnection();
+			ClientDAO dao = new ClientDAO();
+			result = (String) dao.returnName(conn, user_id);
+			close(conn);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "오류";	// 오류발생
+		}
+		return result;
+	}
 	
 
 }

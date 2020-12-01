@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	String ctxPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,13 +11,13 @@
 <title>Q&A</title>
 <script src='https://code.jquery.com/jquery-3.4.0.js'></script>
 <!-- RESET -->
-<link href="./css/html5_reset.css" rel="stylesheet">
+<link href="<%=ctxPath%>/css/html5_reset.css" rel="stylesheet">
 <!-- HEADER CSS -->
-<link href="./css/header.css" rel="stylesheet">
+<link href="<%=ctxPath%>/css/header.css" rel="stylesheet">
 <!-- SECTION CSS -->
-<link href="./css/section.css" rel="stylesheet">
+<link href="<%=ctxPath%>/css/section.css" rel="stylesheet">
 <!-- FOOTER CSS -->
-<link href="./css/footer.css" rel="stylesheet">
+<link href="<%=ctxPath%>/css/footer.css" rel="stylesheet">
 <script>
 	$(function() {
 		$(window).scroll(function() {
@@ -34,6 +38,13 @@
 
 		})
 	});
+	
+</script>
+<script>
+ $(function(){
+	 $(".menu_btn").hide();
+ })
+
 </script>
 
 <!-- Q&A JS -->
@@ -234,7 +245,7 @@ a {
 	<header>
 		<div class="header_container">
 			<div class="logo">
-				<img src="./images/jaba_english_white.png">
+				<img src="<%=ctxPath%>/images/jaba_english_white.png">
 			</div>
 			<div class="menu">
 				<button class="menu_btn" value="LOG IN">
@@ -296,86 +307,23 @@ a {
 	<!-- SECTION 3 -->
 	<section id="faq">
 		<div class="content container">
-			<div class="faq-item">
-				<div class="question">
-					<div class="desc">
-						<div class="q"></div>
-						<div class="name">기존에 사용하는 POS와 연동이 가능한가요?</div>
+			<c:if test="${not empty qnaList}">
+				<c:forEach items="${qnaList}" var="qnaList" varStatus="s">
+					<div class="faq-item">
+						<div class="question">
+							<div class="desc">
+								<div class="q"></div>
+								<div class="name">${qnaList.qna_title }</div>
+							</div>
+							<div class="control"></div>
+						</div>
+						<div class="answer">
+							<div class="a"></div>
+							<p>${qnaList.qna_content }</p>
+						</div>
 					</div>
-					<div class="control"></div>
-				</div>
-				<div class="answer">
-					<div class="a"></div>
-					<p>네 가능하며 추가적인 기기 및 설치 비용이 따로 발생하지 않습니다.</p>
-				</div>
-			</div>
-			<div class="faq-item">
-				<div class="question">
-					<div class="desc">
-						<div class="q"></div>
-						<div class="name">기존에 사용하는 POS 프린터에서 영수증 인쇄가 가능한가요?</div>
-					</div>
-					<div class="control"></div>
-				</div>
-				<div class="answer">
-					<div class="a"></div>
-					<p>네 가능하며 원하시는 경우 조리실에서도 인쇄가 가능합니다.</p>
-				</div>
-			</div>
-			<div class="faq-item">
-				<div class="question">
-					<div class="desc">
-						<div class="q"></div>
-						<div class="name">매장에 POS가 없는데 사용 가능한가요?</div>
-					</div>
-					<div class="control"></div>
-				</div>
-				<div class="answer">
-					<div class="a"></div>
-					<p>네 사용하시는 휴대폰 혹은 태블릿, 노트북으로 사용 가능합니다.</p>
-				</div>
-			</div>
-			<div class="faq-item">
-				<div class="question">
-					<div class="desc">
-						<div class="q"></div>
-						<div class="name">품절 처리 및 가격 변경이 가능한가요?</div>
-					</div>
-					<div class="control"></div>
-				</div>
-				<div class="answer">
-					<div class="a"></div>
-					<p>네 사용하시는 프로그램에서 품절 처리 및 메뉴 추가 / 수정이 가능합니다</p>
-				</div>
-			</div>
-			<div class="faq-item">
-				<div class="question">
-					<div class="desc">
-						<div class="q"></div>
-						<div class="name">메뉴 사진은 제공해주나요?</div>
-					</div>
-					<div class="control"></div>
-				</div>
-				<div class="answer">
-					<div class="a"></div>
-					<p>네 기본적인 메뉴 사진을 제공해드리며 원하시는 메뉴 이미지를 넣고 싶은 경우 사용하시는 프로그램에서 수정
-						가능합니다.</p>
-				</div>
-			</div>
-			<div class="faq-item">
-				<div class="question">
-					<div class="desc">
-						<div class="q"></div>
-						<div class="name">건당 중개 수수료가 어떻게 되나요?</div>
-					</div>
-					<div class="control"></div>
-				</div>
-				<div class="answer">
-					<div class="a"></div>
-					<p>저희 패스오더는 매장 운영에 도움을 드리기 위한 서비스로, 매출이 많아질수록 더욱 업체의 부담이 커지는 건당
-						중개 수수료를 일절 받고 있지 않습니다.</p>
-				</div>
-			</div>
+				</c:forEach>
+			</c:if>
 		</div>
 	</section>
 	<!-- FOOTER -->
@@ -383,7 +331,7 @@ a {
 		<div class="container">
 			<div class="row">
 				<div class="footer_logo">
-					<img src="images/jaba_english_white.png">
+					<img src="<%=ctxPath%>/images/jaba_english_white.png">
 				</div>
 				<div class="footer_links">
 					<ul>

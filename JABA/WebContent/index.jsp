@@ -10,6 +10,7 @@
 %>
 <%
 	String avenue = request.getParameter("city");
+
 %>
 <html>
 <head>
@@ -71,6 +72,161 @@ input {
 </style>
 <!-- HEADER -->
 <style>
+/* dropdown 메뉴 세팅 */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 8px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+}
+.menu-item__icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+.dropdown-itemss span {
+  margin: auto;
+  width: 50%;
+}
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 4px 24px;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    
+    font-family: Inter,sans-serif;
+   font-size: 14px;
+   font-weight: 400;
+    line-height: 1.75;
+}
+
+/* 원형 아이콘 */
+.jss98 {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    font-size: 10px;
+    align-items: center;
+    flex-shrink: 0;
+    font-family: Inter,sans-serif;
+    user-select: none;
+    border-radius: 50%;
+    justify-content: center;
+    
+    font-size: 10px;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+}
+
+.MuiAvatar-root {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    overflow: hidden;
+    position: relative;
+    font-size: 10px;
+    align-items: center;
+    flex-shrink: 0;
+    font-family: Inter,sans-serif;
+    user-select: none;
+    border-radius: 50%;
+    justify-content: center;
+}
+
+/* 화살표 아이콘 버튼 */
+.jss99 {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+}
+.MuiIconButton-sizeSmall {
+    padding: 3px;
+    font-size: 1.125rem;
+}
+.MuiIconButton-root {
+    flex: 0 0 auto;
+    color: rgba(0, 0, 0, 0.54);
+    padding: 12px;
+    overflow: visible;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 50%;
+}
+.MuiButtonBase-root {
+    color: inherit;
+    border: 0;
+    cursor: pointer;
+    margin: 0;
+    display: inline-flex;
+    outline: 0;
+    padding: 0;
+    position: relative;
+    align-items: center;
+    user-select: none;
+    border-radius: 0;
+    vertical-align: middle;
+    -moz-appearance: none;
+    justify-content: center;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+}
+.MuiIconButton-label {
+    width: 100%;
+    display: flex;
+    align-items: inherit;
+    justify-content: inherit;
+}
+.MuiIconButton-sizeSmall {
+    padding: 3px;
+    font-size: 1.125rem;
+}
+.MuiSvgIcon-root {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    font-size: 1.5rem;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    flex-shrink: 0;
+    user-select: none;
+}
+.MuiTouchRipple-root {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+    overflow: hidden;
+    position: absolute;
+    border-radius: inherit;
+    pointer-events: none;
+}
 </style>
 <!-- MAIN -->
 <style>
@@ -88,6 +244,13 @@ main {
    .container {
       width: 980px;
    }
+}
+
+.brand_img {
+ width: 130px;
+ height: 80px;
+ border: none;
+ border-radius: 12px;
 }
 
 </style>
@@ -200,28 +363,83 @@ main {
 #logoutBtn{
    display:none;
 }
+
+#dropdownMenuButton{
+	display:none;
+}
+
+#MuiAvatar-root-id{
+	visibility:hidden;
+}
+
 </style>
 </head>
 <body>
    <!-- HEADER -->
    <header>
-      <div class="header_container">
-         <div class="logo">
-            <a href="index.jsp"><img src="./images/jaba_english_white.png"></a>
-         </div>
-         <div class="menu">
-            <button class="menu_btn" value="LOG IN" type="button" class="btn btn-primary" data-toggle="modal" data-target="#LoginModal">
-               <span>LOG IN</span>
-            </button>
+		<div class="header_container">
+			<div class="logo">
+				<a href="index.jsp"><img src="./images/jaba_english_white.png"></a>
+			</div>
+			<div class="dropdown">
+				<div class="menu">
+					<div class="MuiAvatar-root jss98" id="MuiAvatar-root-id"
+						style="color: rgb(255, 255, 255); background-color: rgb(0, 0, 0);">ZK</div>
+					<button
+						class="MuiButtonBase-root MuiIconButton-root jss99 logo__navigation MuiIconButton-sizeSmall"
+						tabindex="0" type="button" id="dropdownMenuButton"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+						style="color: rgb(0, 0, 0);">
+						<span class="MuiIconButton-label"><svg
+								class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24"
+								aria-hidden="true" role="presentation">
+								<path
+									d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path>
+								<path fill="none" d="M0 0h24v24H0V0z"></path></svg></span><span
+							class="MuiTouchRipple-root"></span>
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="#" id="My_account_profile"><div class="dropdown-itemss">
+								<svg class="menu-item__icon">
+									<g id="\u2192-Assets" stroke="none" stroke-width="1"
+										fill="none" fill-rule="evenodd">
+									<g id="ic-account" fill="#14171A">
+									<path
+										d="M7,12 L13,12 C15.7614237,12 18,14.2385763 18,17 C18,17.5522847 17.5522847,18 17,18 C16.4871642,18 16.0644928,17.6139598 16.0067277,17.1166211 L15.9949073,16.8237272 C15.9070404,15.3072462 14.6927538,14.0929596 13.1762728,14.0050927 L13,14 L7,14 C5.34314575,14 4,15.3431458 4,17 C4,17.5522847 3.55228475,18 3,18 C2.44771525,18 2,17.5522847 2,17 C2,14.3112453 4.12230671,12.1181819 6.78311038,12.0046195 L7,12 L13,12 L7,12 Z M10,2 C12.7614237,2 15,4.23857625 15,7 C15,9.76142375 12.7614237,12 10,12 C7.23857625,12 5,9.76142375 5,7 C5,4.23857625 7.23857625,2 10,2 Z M10,4 C8.34314575,4 7,5.34314575 7,7 C7,8.65685425 8.34314575,10 10,10 C11.6568542,10 13,8.65685425 13,7 C13,5.34314575 11.6568542,4 10,4 Z"
+										id="Icon-Color"></path></g></g></svg>
+								<span>My account</span>
+							</div></a> <a class="dropdown-item" href="#"><svg
+								class="menu-item__icon">
+								<g id="\u2192-Assets" stroke="none" stroke-width="1" fill="none"
+									fill-rule="evenodd">
+								<g id="ic-order_history" fill="#14171A">
+								<path
+									d="M10,2 C14.418278,2 18,5.581722 18,10 C18,14.418278 14.418278,18 10,18 C5.581722,18 2,14.418278 2,10 C2,5.581722 5.581722,2 10,2 Z M10,4 C6.6862915,4 4,6.6862915 4,10 C4,13.3137085 6.6862915,16 10,16 C13.3137085,16 16,13.3137085 16,10 C16,6.6862915 13.3137085,4 10,4 Z M10,6 C10.5128358,6 10.9355072,6.38604019 10.9932723,6.88337887 L11,7 L11,9.58578644 L12.7071068,11.2928932 C13.0976311,11.6834175 13.0976311,12.3165825 12.7071068,12.7071068 C12.3466228,13.0675907 11.7793918,13.0953203 11.3871006,12.7902954 L11.2928932,12.7071068 L9.29289322,10.7071068 C9.1366129,10.5508265 9.03740171,10.3481451 9.00867243,10.131444 L9,10 L9,7 C9,6.44771525 9.44771525,6 10,6 Z"
+									id="Icon-Color"></path></g></g></svg>Order history</a> <a class="dropdown-item"
+							href="<%=ctxPath%>/qna/qnaList.do"><svg class="menu-item__icon">
+								<g id="\u2192-Assets" stroke="none" stroke-width="1" fill="none"
+									fill-rule="evenodd">
+								<g id="ic-help_center" fill="#14171A">
+								<path
+									d="M10,2 C14.418278,2 18,5.581722 18,10 C18,14.418278 14.418278,18 10,18 C5.581722,18 2,14.418278 2,10 C2,5.581722 5.581722,2 10,2 Z M10,14 C9.44771525,14 9,14.4477153 9,15 C9,15.5522847 9.44771525,16 10,16 C10.5522847,16 11,15.5522847 11,15 C11,14.4477153 10.5522847,14 10,14 Z M10,4 C11.6568542,4 13,5.34314575 13,7 C13,7.54060402 12.7972,7.95243249 12.4324938,8.33695441 L12.3049846,8.46425623 L11.6976805,9.00562265 C11.227883,9.46313853 11,9.98493642 11,11 C11,11.5128358 10.6139598,11.9355072 10.1166211,11.9932723 L10,12 C9.44771525,12 9,11.5522847 9,11 L9.00528561,10.712882 C9.05455619,9.40117173 9.44742455,8.4787716 10.1475931,7.73055006 L10.3023195,7.57280447 L10.5268503,7.36697752 L10.9833325,6.9652856 C10.9940344,6.95806514 10.9983381,6.95876504 10.9999034,6.9646777 L10.991185,6.86663987 C10.9259877,6.37740496 10.5070677,6 10,6 C9.48716416,6 9.06449284,6.38604019 9.00672773,6.88337887 L8.99327227,7.11662113 C8.93550716,7.61395981 8.51283584,8 8,8 C7.44771525,8 7,7.55228475 7,7 C7,5.34314575 8.34314575,4 10,4 Z"
+									id="Icon-Color"></path></g></g></svg>Help center</a>
+					</div>
+				</div>
+				<button class="menu_btn" value="LOG IN" type="button"
+					class="btn btn-primary" data-toggle="modal"
+					data-target="#LoginModal">
+					<span>LOG IN</span>
+				</button>
 
-            <button class="menu_btn" value="SIGN UP" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
-               <span>SIGN UP</span>
-            </button>
-            <button id="logoutBtn">로그아웃</button>
-         </div>
-      </div>
+				<button class="menu_btn" value="SIGN UP" class="btn btn-primary"
+					data-toggle="modal" data-target="#registerModal">
+					<span>SIGN UP</span>
+				</button>
+				<button id="logoutBtn">LOGOUT</button>
+			</div>
+		</div>
 
-   </header>
+	</header>
    <!-- MODAL -->
    <!-- LOG IN -->
    <!-- Modal Basic -->
@@ -381,42 +599,42 @@ main {
          <div data-index="0" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="brand-badge">
-                  <img src="https://cdn.bopple.app/assets/helloharry/tile-hover.svg" class="active brand_img" id="스타벅스" >
+                  <img src="./images/logo_starbucks.jpg" class="active brand_img" id="스타벅스" >
                </div>
             </div>
          </div>
          <div data-index="1" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="brand-badge ">
-                  <img src="https://cdn.bopple.app/assets/sonoma/tile-hover.svg" class="active brand_img">
+                  <img src="./images/logo_coffeebean.png" class="active brand_img" id="커피빈">
                </div>
             </div>
          </div>
          <div data-index="2" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="brand-badge ">
-                  <img src="https://cdn.bopple.app/assets/suki/tile-hover.svg" class="active brand_img">
+                  <img src="./images/logo_duckes.png" class="active brand_img" id="듁스">
                </div>
             </div>
          </div>
          <div data-index="3" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="brand-badge ">
-                  <img src="https://cdn.bopple.app/assets/mrburger/tile-hover.svg" class="active brand_img">
+                  <img src="./images/logo_ant.png" class="active brand_img" id="앤드러사이트">
                </div>
             </div>
          </div>
          <div data-index="4" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="brand-badge ">
-                  <img src="https://cdn.bopple.app/assets/madamwoo/tile-hover.svg" class="active brand_img">
+                  <img src="./images/logo_paul.png" class="active brand_img" id="폴바셋">
                </div>
             </div>
          </div>
          <div data-index="5" class="brands" tabindex="-1" aria-hidden="false" style="outline: none; width: 146px;">
             <div>
                <div class="brand-badge ">
-                  <img src="https://cdn.bopple.app/assets/belleshotchicken/tile-hover.svg" class="active brand_img">
+                  <img src="./images/logo_hollys.png" class="active brand_img">
                </div>
             </div>
          </div>
@@ -657,7 +875,7 @@ function displayMarker(locPosition, message) {
    </script>
 
    <!--  로그인 스크립트 ajax 통신  -->
-   <script>
+<script>
    console.log();
    $("#signin").on("click",function(){
       $.ajax({
@@ -673,9 +891,15 @@ function displayMarker(locPosition, message) {
            if(res1 == admin){
                location.href="./adminMain.jsp";
             }else if(res1 == client){
+            	
                $(".menu_btn").hide();
                $("#logoutBtn").show();
+               $("#dropdownMenuButton").show();
+               $("#MuiAvatar-root-id").css("visibility","visible");
                document.getElementById("loginCloseBtn").click();
+               
+            }else if(res1 == 'NotExist'){
+            	alert("일치하는 회원정보가 없습니다.");
             }else{ //bizPartner일 경우, user_id받아와서 해당 페이지로 이동하게끔
                 location.href="<%=ctxPath%>/biz/menuList.do?storeId="+res1;
              }
@@ -691,6 +915,8 @@ function displayMarker(locPosition, message) {
          success: function(){
             $(".menu_btn").show();
             $("#logoutBtn").hide();
+            $("#dropdownMenuButton").hide();
+            $("#MuiAvatar-root-id").css("visibility","hidden");
          }
       });
    });
@@ -766,12 +992,28 @@ function displayMarker(locPosition, message) {
             data:{ },
             success: function(res1){
                if(res1 == 'KeepLogin'){
-                  $(".menu_btn").hide();
-                  $("#logoutBtn").show();
+            	   $(".menu_btn").hide();
+                   $("#dropdownMenuButton").show();
+                   $("#MuiAvatar-root-id").css("visibility","visible");
+                   $("#logoutBtn").show();
+                  
                }
             }
          });
       });
+   </script>
+   <script>
+   	// My account 클릭시 My_account_profile 페이지로 이동
+   	$("#My_account_profile").click(function(){
+   		$.ajax({
+            url:"member/myPageList.do",
+            data:{ },
+            success: function(res1){
+            	location.href="./My_account_profile.jsp";
+               }
+   		});
+   	});
+   
    </script>
 
 </body>

@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 		if(cService.selectLogin(user_id, user_pw) == 1) { // 가지고온 user_id와 user_pw를 ClientVO에 저장된 정보들과 대조
 //			.selectLogin(user_id, user_pw)
 			request.getSession().setAttribute("user_id", user_id); // 이제 받아온 user_id를 user_id로 지칭하고 던질 준비
-//			out.println("<script>alert('�α��μ���')</script>");
+//			out.println("<script>alert(' α  μ   ')</script>");
 			System.out.println("Client 로그인 성공");
 			out.print("Client");
 		}else {
@@ -67,6 +67,7 @@ public class LoginServlet extends HttpServlet {
 					System.out.println("adminMain으로이동");
 					out.print("Admin");
 				}else {
+					out.print("NotExist");
 					System.out.println("일치하는 회원정보 없음."); //3가지 VO를 뒤져도 일치하는 회원정보가 없을 때
 				}
 			}

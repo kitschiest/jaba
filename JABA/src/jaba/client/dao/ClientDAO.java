@@ -79,6 +79,30 @@ public class ClientDAO {
 		}
 		return result;
 	}
+	public String returnName(Connection conn, String user_id) {
+		String sql = "select user_name from clien where user_id=?";
+		ClientVO vo = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) { 
+				vo = new ClientVO();
+				vo.setUser_name(rs.getString("user_name"));
+			} else { 
+				System.out.println("DB에 일치하는 Client 정보 없음");
+				vo = null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("sql 오류");
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return vo.getUser_name();
+	}
 
 
 }
