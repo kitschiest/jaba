@@ -357,7 +357,7 @@ main {
    border-radius: 12px;
    border: 0;
    font-weight: bold;
-   font-size: 1.5rem;
+   font-size: 18px;
 }
 
 #logoutBtn{
@@ -384,7 +384,7 @@ main {
 			<div class="dropdown">
 				<div class="menu">
 					<div class="MuiAvatar-root jss98" id="MuiAvatar-root-id"
-						style="color: rgb(255, 255, 255); background-color: rgb(0, 0, 0);">ZK</div>
+						style="color: rgb(255, 255, 255); background-color: rgb(0, 0, 0);">C</div>
 					<button
 						class="MuiButtonBase-root MuiIconButton-root jss99 logo__navigation MuiIconButton-sizeSmall"
 						tabindex="0" type="button" id="dropdownMenuButton"
@@ -583,7 +583,7 @@ main {
          </div>
 
          <div class="search-button">
-            <button  id="searchBtn">검색</button>
+            <button  id="searchBtn">search</button>
          </div>
          
       </div>

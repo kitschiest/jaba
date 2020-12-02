@@ -488,6 +488,10 @@ nav::after {
     z-index: 1299;
     */
         }
+        #store_info h1 {
+        	font-size: 150%;
+        }
+        
 
         #container_store_info {
             background-color: rgb(249, 250, 252);
@@ -552,6 +556,14 @@ background-color: rgba(219, 242, 255, 0.952);
             font-weight: 700;
             margin: 0;
         }
+        .bossFinalNotice {
+	border-top: 1px solid #89BDBB;
+	border-bottom: 1px solid #89BDBB;
+	text-align: center;
+	margin-top: 10px;
+	font-size: 100%;
+
+}
 
         .category_products {
             display: grid;
@@ -570,17 +582,21 @@ background-color: rgba(219, 242, 255, 0.952);
 
 
         .product_card {
-            position: relative;
-            display: flex;
-            border: 1px solid;
-            flex-direction: row;
-            justify-content: space-between;
-            overflow: hidden;
-            background-color: white;
-            max-height: 145px;
-            min-width: 345px;
-            /* 반응형 추가필요 */
-        }
+   position: relative;
+   display: flex;
+   border: 1px solid white;
+   flex-direction: row;
+   justify-content: space-between;
+   overflow: hidden;
+   background-color: white;
+   max-height: 145px;
+   min-width: 345px;
+   cursor: pointer;
+   /* 반응형 추가필요 */
+}
+.product_card:hover {
+   border: 1px solid rgba(132, 146, 166, .3) !important;
+}
 
         .product_card_detail {
             padding: 15px 25px 15px 15px;
@@ -686,9 +702,9 @@ background-color: rgba(219, 242, 255, 0.952);
     <!-- HEADER -->
     <header>
         <div class="biz_container" id="container_header">
-            <div class="logo">
-               <img src="<%=ctxPath%>/images/jaba_english_white.png">
-            </div>
+            <div class="logo" >
+				<a href="<%=ctxPath%>/index.jsp"><img src="<%=ctxPath%>/images/jaba_english_white.png"></a>
+			</div>
             <!-- .logo 부분 display: inline-flex로 수정하고 header_biz도 inline block 으로 -->
             <div id="header_biz">
                 
@@ -765,7 +781,7 @@ background-color: rgba(219, 242, 255, 0.952);
 										</div>
 										<div class="product_card_image">
 											<img
-												src="https://cdn.boppl.me/products/specialty_affogato_0.jpg"
+												src="<%=ctxPath %>${menuVo.menu_img}"
 												alt="Affogato">
 										</div>
 									</div>

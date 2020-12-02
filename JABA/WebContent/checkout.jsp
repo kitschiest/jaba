@@ -579,7 +579,7 @@ main {
 										</div>
 										<div class="address_tab" style="margin-top: 10px;">
 											<p>
-												가게주소<br>가게주소상세
+												${storeVo.store_name}<br>${storeVo.store_addr}
 											</p>
 										</div></td>
 								</tr>
@@ -607,7 +607,7 @@ main {
 													with Card</label>
 												<div id="card_section">
 													<input type="text" id="card_name" name="card_name"
-														placeholder="카드주인이름"><br>
+														placeholder="cardholder name"><br>
 													<div class="border-spacer"></div>
 													<input type="text" id="card_pwd" name="card_pwd"
 														placeholder="카드 번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MM/YY&nbsp;&nbsp;CVC">

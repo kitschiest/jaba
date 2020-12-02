@@ -30,6 +30,7 @@ public class PaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
@@ -46,6 +47,15 @@ public class PaymentServlet extends HttpServlet {
 //		insertPayment(String cart_id, int pay_total_price, String pay_request) 을 하려면 
 		cartService.insertPayment(cart_id, pay_total_price, pay_request);
 		
+		// REMOVE를 해야해요 
+	      // remove를 좀 해줍시다. 
+	      request.getSession().removeAttribute("cartId");
+	      request.getSession().removeAttribute("total_price");
+	      request.getSession().removeAttribute("storeVo");
+	      request.getSession().removeAttribute("cartViewList");
+	      request.getSession().removeAttribute("cartList");
+	      request.getSession().removeAttribute("cartViewVoList");
+	      
 		out.flush();
 		out.close();
 	}

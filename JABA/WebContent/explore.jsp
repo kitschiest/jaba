@@ -92,6 +92,7 @@ section {
 
 a {
 	text-decoration: none;
+	color: black;
 }
 </style>
 <!-- SECTION 2 -->
@@ -188,6 +189,10 @@ section .container .store_list_grid {
 	transition: .2s ease-in-out;
 	height: 160px;
 }
+
+#logoutBtn{
+	display:none;
+}
 </style>
 
 
@@ -203,7 +208,7 @@ section .container .store_list_grid {
 					src="<%=ctxPath%>/images/jaba_english_white.png"></a>
 			</div>
 			<div class="menu">
-				
+				<button id="logoutBtn">LOGOUT</button>
 			</div>
 		</div>
 
@@ -212,7 +217,7 @@ section .container .store_list_grid {
 	<section id="home">
 		<div class="container">
 			<h1>
-				<%=brand %><br> <br>
+				Grab, whatever you want<br> <br>
 			</h1>
 
 		</div>
@@ -272,7 +277,7 @@ section .container .store_list_grid {
 							<a href="<%=ctxPath%>/menu/explore.do?storename=${storeVO.store_name}">
 								<div class="store_card">
 									<div class="store_card_image">
-										<img src="https://cdn.boppl.me/venues/banner/4652_doughnut_time_degraves_street_banner_1.jpg">
+										<img src="<%=ctxPath%>${storeVO.store_img}">
 									</div>
 									<div class="store_card_info">
 										<div class="store_card_info_name">
@@ -299,7 +304,7 @@ section .container .store_list_grid {
 	</form>
 	</section>
 	
-<div id="map" style="width:100%;height:350px;"></div>
+<div id="map"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7e6cd41f87d7529ffb39adb770099e29&libraries=services"></script>
 <script>
@@ -456,7 +461,31 @@ function displayMarker(place) {
 		</div>
 
 	</footer>
-	
+	<script>
+	// 로그아웃 버튼 눌렀을때 버튼 hide 와 로그아웃 동작
+	   $("#logoutBtn").on("click",function(){
+      $.ajax({
+         url:"<%=ctxPath%>/client/clientLogout.do",
+         data:   {},
+         success: function(){
+            $("#logoutBtn").hide();
+         }
+      });
+   });
+
+	// 페이지 로딩되었을때 로그인이 되어있는지 확인
+	$(document).ready(function() {
+		$.ajax({
+			url : "<%=ctxPath%>/client/loginCheck.do",
+			data : {},
+			success : function(res1) {
+				if (res1 == 'KeepLogin') {
+					$("#logoutBtn").show();
+				}
+			}
+		});
+	});
+</script>
 	
 
 </body>

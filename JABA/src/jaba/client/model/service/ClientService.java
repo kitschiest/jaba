@@ -64,6 +64,49 @@ public class ClientService {
 		}
 		return result;
 	}
+	// 로그인된 회원의 vo정보를 담는 메소드
+		public ClientVO selectClientVo(String user_id) {
+			ClientVO vo = null;
+			Connection conn = getConnection();
+			ClientDAO dao = new ClientDAO();
+			try {
+				vo = dao.selectClientVo(conn, user_id);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			close(conn);
+			return vo;
+		}
+		
+		// 회원정보 update 
+		public void updateClient(String user_id, String user_name, String user_phone, int user_gender, int user_birth) {
+			int result = 0;
+			Connection conn = getConnection();
+			ClientDAO dao = new ClientDAO();
+			try {
+				result = dao.updateClient(conn, user_id, user_name, user_phone, user_gender, user_birth);
+				System.out.println("updateClient result : " + result);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			close(conn);
+		}
+		
+		
+		// 비밀번호 변경
+		public void updateClientPw(String user_id, String user_pw) {
+			int result = 0;
+			Connection conn = getConnection();
+			ClientDAO dao = new ClientDAO();
+			try {
+				result = dao.updateClientPw(conn, user_id, user_pw);
+				System.out.println("updateClientPw result : " + result);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			close(conn);
+		}
+
 	public String returnName(String user_id) {
 		String result = null;
 		try {

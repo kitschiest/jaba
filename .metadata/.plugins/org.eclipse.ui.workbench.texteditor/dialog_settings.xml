@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="searchBtn"/>
+		<item key="selection" value="bossFinalNotice"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="searchBtn"/>
-			<item value="button"/>
-			<item value="index.jsp"/>
-			<item value="avenue"/>
-			<item value="brand_img"/>
-			<item value="boardTitleInput"/>
-			<item value="text-wrap"/>
-			<item value="notice-table-body"/>
-			<item value="notice-"/>
-			<item value="bossFinal"/>
+			<item value="bossFinalNotice"/>
 			<item value="boss"/>
-			<item value="btn-add-row"/>
-			<item value="border"/>
-			<item value="notice-table-container"/>
-			<item value="modal-header"/>
+			<item value="product_car"/>
+			<item value="store_info"/>
+			<item value="btnChk"/>
+			<item value="btn"/>
+			<item value="placeholder"/>
+			<item value="header-subtitle"/>
+			<item value="header-img"/>
+			<item value="h1"/>
+			<item value="research"/>
+			<item value="h3&apos;"/>
+			<item value="h3"/>
+			<item value="logoutBtn"/>
+			<item value="insert-inputbox"/>
 		</list>
 		<list key="replacehistory">
 			<item value="td"/>
@@ -32,8 +32,8 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1146"/>
-		<item key="DIALOG_Y_ORIGIN" value="116"/>
+		<item key="DIALOG_X_ORIGIN" value="1145"/>
+		<item key="DIALOG_Y_ORIGIN" value="344"/>
 		<item key="DIALOG_WIDTH" value="294"/>
 		<item key="DIALOG_HEIGHT" value="408"/>
 		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>

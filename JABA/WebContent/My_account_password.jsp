@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String ctxPath = request.getContextPath();
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -234,7 +238,8 @@ main {
 	<header>
 		<div class="header_container">
 			<div class="logo">
-				<img src="./images/jaba_english_white.png">
+				<a href="<%=ctxPath%>/index.jsp"><img
+					src="<%=ctxPath%>/images/jaba_english_white.png"></a>
 			</div>
 			<div class="menu"></div>
 		</div>

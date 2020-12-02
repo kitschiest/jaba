@@ -70,6 +70,18 @@
                      $('div.modal').modal();
                   });
          });
+// 페이지 로딩되었을때 로그인이 되어있는지 확인
+	$(document).ready(function() {
+		$.ajax({
+			url : "<%=ctxPath%>/client/loginCheck.do",
+			data : {},
+			success : function(res1) {
+				if (res1 == 'KeepLogin') {
+					$("#logoutBtn").show();
+				}
+			}
+		});
+	});
 </script>
 <style>
 body {
@@ -178,6 +190,9 @@ a {
 
 <!-- SECTION 3 -->
 <style>
+#store_info h1{
+	font-size: 200%;
+}
 #sth {
 	width: 100%;
 }
@@ -191,10 +206,11 @@ a {
 	flex-dircetion: column;
 }
 .bossFinalNotice {
-	border: 5px solid #89BDBB;
+	border-top: 1px solid #89BDBB;
+	border-bottom: 1px solid #89BDBB;
 	text-align: center;
 	margin-top: 10px;
-	font-size: 200%;
+	font-size: 100%;
 
 }
 
@@ -1145,7 +1161,7 @@ h3 {
 }
 
 .order-container .order-details h3 {
-	padding: 0 20px;
+	
 	font-size: 19.2px;
 	font-weight: 600;
 	margin: 0;
@@ -1302,6 +1318,9 @@ h3 {
 	box-shadow: none;
 	font-weight: 600;
 }
+#logoutBtn{
+	display:none;
+}
 </style>
 
 
@@ -1311,11 +1330,11 @@ h3 {
 	<!-- HEADER -->
 	<header>
 		<div class="header_container">
-			<div class="logo">
-				<img src="<%=ctxPath%>/images/jaba_english_white.png">
+			<div class="logo" >
+				<a href="<%=ctxPath%>/index.jsp"><img src="<%=ctxPath%>/images/jaba_english_white.png"></a>
 			</div>
 			<div class="menu">
-				
+				<button id="logoutBtn">LOGOUT</button>
 				<button
 					class="MuiButtonBase-root MuiButton-root jss154 cart-select-button false MuiButton-text"
 					tabindex="0" type="button" id="cart-selector">
@@ -1417,7 +1436,7 @@ h3 {
 										</div>
 										<div class="product_card_image">
 											<img
-												src="https://cdn.boppl.me/products/specialty_affogato_0.jpg"
+												src="<%=ctxPath %>${menuVo.menu_img }"
 												alt="Affogato">
 										</div>
 									</div>
@@ -1455,7 +1474,7 @@ h3 {
 						</div>
 						<div class="header-image">
 							<img
-								src="https://cdn.boppl.me/products/5d9fa5e7a1454518ae79c056056b1612_0.jpg"
+								src="<%=ctxPath %>${menuVo.menu_img }"
 								alt="Aussie">
 						</div>
 					</div>
@@ -1700,6 +1719,8 @@ h3 {
                 // 모달부분 jstl 부분 reload 시켜주기위해서 load
                 $(".header-title").load(location.href + " .header-title");
                 $(".header-subtitle").load(location.href + " .header-subtitle");
+                $(".header-image").load(location.href + " .header-image");
+                
                 $(".modal-body").load(location.href + " .modal-body");
                 $(".modal-footer").load(location.href + " .modal-footer");
  /*                $("#custom-add-price").html(currunetMenuPrice);
@@ -1846,7 +1867,16 @@ h3 {
       function checkOutBtnFnc(){
     	  location.href="<%=ctxPath%>/checkout.jsp";
       }
-
+   // 로그아웃 버튼 눌렀을때 버튼 hide 와 로그아웃 동작
+	  $("#logoutBtn").on("click",function(){
+	      $.ajax({
+	         url:"<%=ctxPath%>/client/clientLogout.do",
+	         data:   {},
+	         success: function(){
+	            $("#logoutBtn").hide();
+	         }
+	      });
+   		});
 </script>
 </body>
 </html>

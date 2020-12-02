@@ -244,8 +244,8 @@ a {
 	<!-- HEADER -->
 	<header>
 		<div class="header_container">
-			<div class="logo">
-				<img src="<%=ctxPath%>/images/jaba_english_white.png">
+			<div class="logo" >
+				<a href="<%=ctxPath%>/index.jsp"><img src="<%=ctxPath%>/images/jaba_english_white.png"></a>
 			</div>
 			<div class="menu">
 				<button class="menu_btn" value="LOG IN">
